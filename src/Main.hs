@@ -1,5 +1,10 @@
 
 module Main where
 
+import Ctx
+
 main :: IO ()
-main = return ()     	
+main =
+  do
+    maybeUser <- readUser "."
+    print maybeUser

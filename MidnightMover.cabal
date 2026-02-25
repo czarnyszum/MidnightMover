@@ -17,7 +17,8 @@ cabal-version:       >=1.10
 
 executable MidnightMover
   main-is:             Main.hs 
---  other-modules:
+  other-modules:
+	Ctx
   build-depends:
       base
     , aeson
