@@ -12,5 +12,5 @@ mkDerivation {
     text wreq
   ];
   license = lib.licenses.mit;
-  mainProgram = "cartographer104";
+  mainProgram = "MidnightMover";
 }
