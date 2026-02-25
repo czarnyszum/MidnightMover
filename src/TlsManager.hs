@@ -5,7 +5,7 @@ module TlsManager (mkTlsManager) where
 import Network.HTTP.Client       (Manager, newManager)
 import Network.HTTP.Client.TLS   (mkManagerSettings)
 import Network.Connection        (TLSSettings (..))
-import Network.TLS (defaultSupported)
+import Network.TLS (defaultSupported, supportedExtendedMainSecret, EMSMode(..))
 
 -- ВАЖНО: временно отключаем проверку сертификата, чтобы убедиться,
 -- что дело НЕ в EMS / протоколе. Потом включим обратно.
@@ -14,7 +14,7 @@ tlsSettings = TLSSettingsSimple
   { settingDisableCertificateValidation = True
   , settingDisableSession               = False
   , settingUseServerName                = True
-  , settingClientSupported              = defaultSupported
+  , settingClientSupported              = (defaultSupported { supportedExtendedMainSecret = NoEMS } )
   }
 
 mkTlsManager :: IO Manager
