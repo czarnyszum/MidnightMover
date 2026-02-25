@@ -1,5 +1,6 @@
-{ mkDerivation, aeson, base, bytestring, http-client
-, http-client-tls, lens, lib, mtl, tagsoup, text, wreq
+{ mkDerivation, aeson, base, bytestring, crypton-connection
+, crypton-x509, filepath, http-client, http-client-tls, http-types
+, lens, lib, mtl, tagsoup, text, tls, wreq
 }:
 mkDerivation {
   pname = "MidnightMover";
@@ -8,8 +9,9 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    aeson base bytestring http-client http-client-tls lens mtl tagsoup
-    text wreq
+    aeson base bytestring crypton-connection crypton-x509 filepath
+    http-client http-client-tls http-types lens mtl tagsoup text tls
+    wreq
   ];
   license = lib.licenses.mit;
   mainProgram = "MidnightMover";

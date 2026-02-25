@@ -19,17 +19,20 @@
 
         # подставляем зависимости из hpkg
         midnightMover = hpkg.callPackage ./default.nix {
-	  mkDerivation    = hpkg.mkDerivation;
-          aeson           = hpkg.aeson;
-          base            = hpkg.base;
-          bytestring      = hpkg.bytestring;
-          http-client     = hpkg.http-client;
-          http-client-tls = hpkg.http-client-tls;
-          lens            = hpkg.lens;
-          mtl             = hpkg.mtl;
-          tagsoup         = hpkg.tagsoup;
-          text            = hpkg.text;
-          wreq            = hpkg.wreq;
+	  mkDerivation       = hpkg.mkDerivation;
+          aeson              = hpkg.aeson;
+          base               = hpkg.base;
+          bytestring         = hpkg.bytestring;
+          http-client        = hpkg.http-client;
+          http-client-tls    = hpkg.http-client-tls;
+          lens               = hpkg.lens;
+          mtl                = hpkg.mtl;
+          tagsoup            = hpkg.tagsoup;
+          text               = hpkg.text;
+          wreq               = hpkg.wreq;
+          crypton-x509       = hpkg.crypton-x509;
+	  crypton-connection = hpkg.crypton-connection;
+          tls                = hpkg.tls; 
         };
       in
       {

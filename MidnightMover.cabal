@@ -18,18 +18,23 @@ cabal-version:       >=1.10
 executable MidnightMover
   main-is:             Main.hs 
   other-modules:
+                       TlsManager
                        Ctx
   build-depends:
       base
     , aeson
     , bytestring
+    , crypton-x509
+    , crypton-connection
     , filepath
     , http-client
     , http-client-tls
+    , http-types
     , lens
     , mtl
     , tagsoup
     , text
+    , tls
     , wreq
 
   hs-source-dirs:      src
