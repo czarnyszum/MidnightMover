@@ -17,7 +17,6 @@ import Network.Connection (TLSSettings(..))
 import Network.HTTP.Client (Manager, CookieJar, createCookieJar)
 import Network.HTTP.Types.Status (statusCode)
 import Network.HTTP.Client.TLS
-import Network.TLS (defaultSupported)
 import Network.TLS.Extra.Cipher (ciphersuite_default)
 import qualified Data.X509 as X509
 
