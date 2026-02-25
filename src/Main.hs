@@ -8,3 +8,4 @@ main =
   do
     maybeUser <- readUser "."
     print maybeUser
+  

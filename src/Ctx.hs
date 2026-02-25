@@ -11,16 +11,16 @@ import System.FilePath ((</>))
 
 data User = User
   { _userLogin    :: String
-  , _userPassward :: String
+  , _userPassword :: String
   } deriving (Show)
 makeLenses ''User
 
 -- экземпляр FromJSON для User
 instance FromJSON User where
   parseJSON = withObject "User" $ \o -> do
-    _userLogin    <- o .: "login"
-    _userPassward <- o .: "password"   -- или "passward", смотри ниже
-    return User{..}
+    login    <- o .: "login"
+    password <- o .: "password"   -- или "passward", смотри ниже
+    return $ User login password
 
 -- Читает User из JSON-файла basePath/user.txt
 readUser :: String -> IO (Maybe User)
