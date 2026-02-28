@@ -1,6 +1,7 @@
-{ mkDerivation, aeson, base, blaze, bytestring, crypton-connection
-, crypton-x509, filepath, http-client, http-client-tls, http-types
-, lens, lib, mtl, tagsoup, text, tls, wreq
+{ mkDerivation, aeson, base, blaze-html, bytestring
+, crypton-connection, crypton-x509, filepath, http-client
+, http-client-tls, http-types, lens, lib, mtl, tagsoup, text, tls
+, wreq
 }:
 mkDerivation {
   pname = "MidnightMover";
@@ -9,7 +10,7 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    aeson base blaze bytestring crypton-connection crypton-x509
+    aeson base blaze-html bytestring crypton-connection crypton-x509
     filepath http-client http-client-tls http-types lens mtl tagsoup
     text tls wreq
   ];

@@ -22,7 +22,7 @@
 	  mkDerivation       = hpkg.mkDerivation;
           aeson              = hpkg.aeson;
           base               = hpkg.base;
-          blaze              = hpkg.blaze;
+          blaze-html         = hpkg.blaze-html;
           bytestring         = hpkg.bytestring;
           http-client        = hpkg.http-client;
           http-client-tls    = hpkg.http-client-tls;

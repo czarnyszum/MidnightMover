@@ -23,7 +23,7 @@ executable MidnightMover
   build-depends:
       base
     , aeson
-    , blaze
+    , blaze-html
     , bytestring
     , crypton-x509
     , crypton-connection
