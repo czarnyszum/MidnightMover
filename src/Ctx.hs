@@ -190,26 +190,32 @@ extractMessageList tags =
     hasMessageListClass attrs =
       any (\(k, v) -> k == "class"
         && "messageList" `elem` B.words (BL.toStrict v)) attrs
-
--- BL8.pack
--- BS.pack
     
 -- | Извлечь сообщения в формате (id, author, innerHtml) из блока messageList
 extractMessages
-  :: [Tag ByteString]                -- ^ Тэги внутри div.messageList
+  :: [Tag ByteString]                -- ^ Тэги внутри messageList
   -> [(ByteString, ByteString, [Tag ByteString])]   -- ^ (id, author, содержимое)
-extractMessages tags =
-  [ (msgId, author, inner)
-  | let blocks = partitions isMessageDiv tags
-  , block <- blocks
-  , (TagOpen "li" atts : inner) <- [block]
-  , Just msgId <- [lookup "id" atts]
-  , lookup "class" atts == Just "message "
-  , Just author <- [lookup "data-author" atts]
-  ]
+extractMessages [] = []
+extractMessages (tag:rest) =
+  case tag of
+    TagOpen "li" attrs
+      | hasClassMessage attrs
+      , Just msgId <- lookup "id" attrs
+      , Just author <- lookup "data-author" attrs
+        ->
+          let
+            (inner, after) = break (isLiClose) rest
+          in
+            (msgId, author, inner) : extractMessages (drop 1 after)
+    _ -> extractMessages rest
   where
-    isMessageDiv (TagOpen "li" atts) =
-      any (\(k,v) -> k == "class" && v == "message ") atts
---      && any (\(k,_) -> k == "id") atts
---      && any (\(k,_) -> k == "data-author") atts
-    isMessageDiv _ = False
+    isLiClose (TagClose "li") = True
+    isLiClose _ = False
+
+    hasClassMessage attrs =
+      case lookup"class" attrs of
+        Just cls ->
+          -- ищем "message" как отдельное слово внутри class-строки
+          -- допускаем пробел в начале/конце (обычно в HTML бывает "message " или " message")
+           "message" `elem` B.words (BL.toStrict cls)
+        Nothing -> False
