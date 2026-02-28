@@ -11,7 +11,15 @@ import qualified Data.Sequence as S
 
 import Text.HTML.TagSoup
 
-data MessageExtractor = LookingForMessageList | LookingForLiStart Int (Seq (Tag ByteString)) | LookingForLiEnd Int (Seq (Tag ByteString)) | Stop (Seq (Tag ByteString))
+-- [(ByteString, ByteString, [Tag ByteString])]   -- ^ (id, author, содержимое)
+
+type Message = (ByteString, ByteString, [Tag ByteString])
+
+data MessageExtractor =
+    LookingForMessageList
+  | LookingForLiStart Int (Seq Message)
+  | LookingForLiEnd Int (Seq Message) Message
+  | Stop (Seq Message)
 
 isOlOpen :: Tag ByteString -> Bool
 isOlOpen (TagOpen "ol" _) = True
@@ -38,7 +46,20 @@ hasMessageListClass :: [Attribute ByteString] -> Bool
 hasMessageListClass attrs = any (\(k, v) -> k == "class" && "messageList" `elem` B.words (BL.toStrict v)) attrs
 
 transMessageExtractor :: Tag ByteString -> MessageExtractor -> MessageExtractor
-transMessageExtractor = undefined
+transMessageExtractor (TagOpen "ol" _) LookingForMessageList = LookingForLiStart 0 S.empty
+transMessageExtractor _ LookingForMessageList = LookingForMessageList
+
+transMessageExtractor (TagOpen "ol" _)  (LookingForLiStart n ts) = LookingForLiStart (n + 1) ts
+transMessageExtractor (TagClose "ol" _) (LookingForLiStart 0 ts) = Stop ts
+transMessageExtractor (TagClose "ol" _) (LookingForLiStart n ts) = LookingForLiStart (n - 1) ts
+transMessageExtractor (TagOpen "li" _)  (LookingForLiStart n ts) = LookingForLiEnd n ts
+transMessageExtractor t (LookingForLiStart n ts) = LookingForLiStart n (ts S.<| t)
+
+transMessageExtractor (TagClose "ol" _) (LookingForEnd n ts) = LookingForLiEnd (n - 1) ts
+transMessageExtractor (TagClose "li" _)  (LookingForLiEnd n ts)  = LookingForLiStart n ts
+
+transMessageExtractor _ (Stop ts) = Stop ts
+
 
 -- should ignore inner ols
 -- Просто найди первый <ol class="messageList">
