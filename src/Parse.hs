@@ -1,9 +1,13 @@
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleContexts #-}
 
-module Parse (extractMessages) where
+module Parse (extractMessageList, extractMessages) where
 
-import Text.HTML.TagSoup
 import qualified Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy (ByteString)
+import qualified Data.ByteString.Char8 as B
+
+import Text.HTML.TagSoup
 
 
 -- should ignore inner ols
