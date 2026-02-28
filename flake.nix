@@ -24,6 +24,7 @@
           base               = hpkg.base;
           blaze-html         = hpkg.blaze-html;
           bytestring         = hpkg.bytestring;
+          containers         = hpkg.containers;
           http-client        = hpkg.http-client;
           http-client-tls    = hpkg.http-client-tls;
           lens               = hpkg.lens;
@@ -32,7 +33,7 @@
           text               = hpkg.text;
           wreq               = hpkg.wreq;
           crypton-x509       = hpkg.crypton-x509;
-	  crypton-connection = hpkg.crypton-connection;
+	        crypton-connection = hpkg.crypton-connection;
           tls                = hpkg.tls; 
         };
       in
