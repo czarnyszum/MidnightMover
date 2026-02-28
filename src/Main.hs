@@ -24,6 +24,7 @@ job user =
       f (x, y, _) = liftIO $ print (x, y)
     login user
     xs <- getPageMessages thread0
+    liftIO $ print (length xs)
     mapM_ f xs
     
 main :: IO ()
