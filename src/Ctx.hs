@@ -25,6 +25,7 @@ import TlsManager
 data User = User
   { _userLogin    :: String
   , _userPassword :: String
+  , _userThreads  :: [String]
   } deriving (Show)
 makeLenses ''User
 
@@ -32,8 +33,9 @@ makeLenses ''User
 instance FromJSON User where
   parseJSON = withObject "User" $ \o -> do
     login    <- o .: "login"
-    password <- o .: "password"   -- или "passward", смотри ниже
-    return $ User login password
+    password <- o .: "password"
+    threads  <- o .: "threads"
+    return $ User login password threads
 
 -- Читает User из JSON-файла basePath/user.txt
 readUser :: String -> IO (Maybe User)
@@ -48,10 +50,10 @@ loginAddr :: String
 loginAddr = "https://simsmix.ru/forum/login/login"          
 
 data Ctx = Ctx
-  { _ctxCookieJar :: CookieJar
-  , _ctxBaseUrl   :: String
-  , _ctxUser      :: Maybe User
-  , _ctxManager   :: Manager
+  { _ctxCookieJar :: CookieJar  -- cookie jar after login
+  , _ctxBaseUrl   :: String     -- base url of forum 
+  , _ctxUser      :: Maybe User -- maybe user info
+  , _ctxManager   :: Manager    -- tls manager
   }
 makeLenses ''Ctx
 
