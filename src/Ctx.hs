@@ -158,17 +158,42 @@ getPageMessages addr = do
     throwError $ NetworkError ("HTTP error: " ++ show status)
   
   let body = view responseBody response
-  -- Разбор HTML
-  let tags = parseTags body
-      -- messageList: ищем div с class="messageList"
-      messageLists = sections (~== ("<div class=messageList>" :: String)) tags
-  messageList <- case messageLists of
-                   (z:_) -> return z
-                   [] -> throwError $ ProtoError "No messageList found"
-  -- Теперь ищем потомков с нужными аттрибутами
-  let messages = extractMessages messageList 
-  return messages
 
+  -- Разбор HTML
+  let
+    tags = parseTags body
+    -- messageList: ищем ol с class="messageList"
+  case extractMessageList tags of 
+    Just messageList ->
+      do
+        liftIO . print . length $ messageList                   
+        let messages = extractMessages messageList 
+        return messages
+    Nothing -> throwError $ ProtoError "No <ol class=messageList> element found"
+
+-- Просто найди первый <ol class="messageList">
+extractMessageList :: [Tag ByteString] -> Maybe [Tag ByteString]
+extractMessageList tags =
+  case break isOlOpen tags of
+    (_, TagOpen "ol" attrs : rest) ->
+      if hasMessageListClass attrs
+      then Just (takeWhile (not . isOlClose) rest)
+      else extractMessageList rest
+    _ -> Nothing
+  where
+    isOlOpen (TagOpen "ol" _) = True
+    isOlOpen _ = False
+
+    isOlClose (TagClose "ol") = True
+    isOlClose _               = False
+
+    hasMessageListClass attrs =
+      any (\(k, v) -> k == "class"
+        && "messageList" `elem` B.words (BL.toStrict v)) attrs
+
+-- BL8.pack
+-- BS.pack
+    
 -- | Извлечь сообщения в формате (id, author, innerHtml) из блока messageList
 extractMessages
   :: [Tag ByteString]                -- ^ Тэги внутри div.messageList
@@ -177,14 +202,14 @@ extractMessages tags =
   [ (msgId, author, inner)
   | let blocks = partitions isMessageDiv tags
   , block <- blocks
-  , (TagOpen "div" atts : inner) <- [block]
+  , (TagOpen "li" atts : inner) <- [block]
   , Just msgId <- [lookup "id" atts]
-  , lookup "class" atts == Just "message"
+  , lookup "class" atts == Just "message "
   , Just author <- [lookup "data-author" atts]
   ]
   where
-    isMessageDiv (TagOpen "div" atts) =
-      any (\(k,v) -> k == "class" && v == "message") atts
+    isMessageDiv (TagOpen "li" atts) =
+      any (\(k,v) -> k == "class" && v == "message ") atts
 --      && any (\(k,_) -> k == "id") atts
 --      && any (\(k,_) -> k == "data-author") atts
     isMessageDiv _ = False
