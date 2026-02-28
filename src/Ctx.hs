@@ -9,16 +9,31 @@ import Control.Exception
 import Control.Monad.Except 
 import Control.Monad.State
 import Control.Lens
+
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
+import Data.ByteString.Lazy (ByteString)
+import qualified Data.Text as T
+import qualified Data.ByteString.Char8 as B
+
 import System.FilePath ((</>))
+
 import Network.Wreq hiding (put, statusCode, get) 
 import Network.Connection (TLSSettings(..))
 import Network.HTTP.Client (Manager, CookieJar, createCookieJar)
 import Network.HTTP.Types.Status (statusCode)
 import Network.HTTP.Client.TLS
-import Network.TLS.Extra.Cipher (ciphersuite_default)
-import qualified Data.X509 as X509
+
+import Text.HTML.TagSoup
+import Text.Blaze.Html (Html)
+import qualified Text.Blaze.Html.Renderer.Text as Blaze
+import qualified Text.Blaze.Html5 as H
+import qualified Text.Blaze.Html5.Attributes as A
+
+-- import Network.TLS.Extra.Cipher (ciphersuite_default)
+-- import qualified Data.X509 as X509
+
+
 
 import TlsManager 
 
@@ -117,3 +132,53 @@ catchLift action wrap = do
     Left err  -> throwError (wrap err)
     Right val -> return val
   
+getPageMessages
+  :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
+  => String  -- ^ Адрес страницы (относительный или полный)
+  -> m [(String, String, Html)]  -- [(msgId, author, htmlContent)]
+getPageMessages addr = do
+  ctx <- get
+  let
+    fullUrl = _addr
+    cookieJar = _ctxCookieJar ctx
+    manager = _ctxManager ctx
+    requestHeaders = [("User-Agent", "HaskellBot/1.0")]
+  
+  initReq <- liftIO $ parseRequest fullUrl
+  let req = initReq
+             { cookieJar = Just cookieJar
+             , requestHeaders = requestHeaders
+             }
+  
+  response <- liftIO $ httpLbs req manager
+  let status = statusCode (responseStatus response)
+
+  unless (status >= 200 && status < 300) $
+    throwError $ NetworkError ("HTTP error: " ++ show status)
+  
+  let body = responseBody response
+  -- Разбор HTML
+  let tags = parseTags body
+      -- messageList: ищем div с class="messageList"
+      messageLists = sections (~== ("<div class=messageList>" :: String)) tags
+  messageList <- case messageLists of
+                   (z:_) -> return z
+                   [] -> throwError $ ProtoError "No messageList found"
+  -- Теперь ищем потомков с нужными аттрибутами
+  let messages = [ (msgId, author, renderBlazeHtml inner)
+                 | TagOpen "div" atts : inner <- partitions isMessageDiv messageList
+                 , Just msgId <- [lookup "id" atts]
+                 , lookup "class" atts == Just "message"
+                 , Just author <- [lookup "data-author" atts]
+                 ]
+  return messages
+
+  where
+    isMessageDiv (TagOpen "div" atts) =
+      any (\(k,v) -> k == "class" && v == "message") atts
+      && any (\(k,_) -> k == "id") atts
+      && any (\(k,_) -> k == "data-author") atts
+    isMessageDiv _ = False
+
+    renderBlazeHtml :: [Tag ByteString] -> Html
+    renderBlazeHtml xs = H.preEscapedToHtml $ renderTags xs
