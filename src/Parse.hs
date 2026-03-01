@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Parse (extractMessageList, extractMessages) where
+module Parse (extractMessages, Message) where
 
 import qualified Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy (ByteString)
@@ -11,9 +11,11 @@ import qualified Data.Sequence as S
 
 import Text.HTML.TagSoup
 
+import Debug.Trace
+
 -- [(ByteString, ByteString, [Tag ByteString])]   -- ^ (id, author, содержимое)
 
-type Message = (ByteString, ByteString, [Tag ByteString])
+type Message = (ByteString, ByteString, Seq (Tag ByteString))
 
 data MessageExtractor =
     LookingForMessageList
@@ -21,46 +23,59 @@ data MessageExtractor =
   | LookingForLiEnd Int (Seq Message) Message
   | Stop (Seq Message)
 
-isOlOpen :: Tag ByteString -> Bool
-isOlOpen (TagOpen "ol" _) = True
-isOlOpen _ = False
+isMessage :: [Attribute ByteString] -> Maybe (ByteString, ByteString)
+isMessage attrs =
+  do
+    cls <- lookup "class" attrs
+    if "message" `elem` B.words (BL.toStrict cls)
+    then
+      do
+        msgId <- lookup "id" attrs
+        author <- lookup "data-author" attrs
+        trace ((show $ (msgId, author)) ++ "\n") $ return (msgId, author)  
+    else Nothing
 
-isOlClose :: Tag ByteString -> Bool
-isOlClose (TagClose "ol") = True
-isOlClose _               = False
-
-isLiClose :: Tag ByteString -> Bool
-isLiClose (TagClose "li") = True
-isLiClose _ = False
-
-hasClassMessage :: [Attribute ByteString] -> Bool
-hasClassMessage attrs =
-  case lookup "class" attrs of
-    Just cls ->
-      -- ищем "message" как отдельное слово внутри class-строки
-      -- допускаем пробел в начале/конце (обычно в HTML бывает "message " или " message")
-      "message" `elem` B.words (BL.toStrict cls)
-    Nothing -> False
 
 hasMessageListClass :: [Attribute ByteString] -> Bool
 hasMessageListClass attrs = any (\(k, v) -> k == "class" && "messageList" `elem` B.words (BL.toStrict v)) attrs
 
-transMessageExtractor :: Tag ByteString -> MessageExtractor -> MessageExtractor
-transMessageExtractor (TagOpen "ol" _) LookingForMessageList = LookingForLiStart 0 S.empty
-transMessageExtractor _ LookingForMessageList = LookingForMessageList
+transMessageExtractor :: MessageExtractor -> Tag ByteString -> MessageExtractor
+transMessageExtractor LookingForMessageList (TagOpen "ol" attrs) =
+  if hasMessageListClass attrs
+  then trace "MessageList start" $ LookingForLiStart 0 S.empty
+  else LookingForMessageList
+transMessageExtractor LookingForMessageList _ = LookingForMessageList
 
-transMessageExtractor (TagOpen "ol" _)  (LookingForLiStart n ts) = LookingForLiStart (n + 1) ts
-transMessageExtractor (TagClose "ol" _) (LookingForLiStart 0 ts) = Stop ts
-transMessageExtractor (TagClose "ol" _) (LookingForLiStart n ts) = LookingForLiStart (n - 1) ts
-transMessageExtractor (TagOpen "li" _)  (LookingForLiStart n ts) = LookingForLiEnd n ts
-transMessageExtractor t (LookingForLiStart n ts) = LookingForLiStart n (ts S.<| t)
+transMessageExtractor (LookingForLiStart n ts) (TagOpen "ol" _) = trace ("open ol" ++ show n) $ LookingForLiStart (n + 1) ts
+transMessageExtractor (LookingForLiStart 0 ts) (TagClose "ol")  = trace ("Stop") $ Stop ts
+transMessageExtractor (LookingForLiStart n ts) (TagClose "ol")  = trace ("close ol" ++ show n) $ LookingForLiStart (n - 1) ts
 
-transMessageExtractor (TagClose "ol" _) (LookingForEnd n ts) = LookingForLiEnd (n - 1) ts
-transMessageExtractor (TagClose "li" _)  (LookingForLiEnd n ts)  = LookingForLiStart n ts
+transMessageExtractor (LookingForLiStart n ts) (TagOpen "li" attrs) =
+  case isMessage attrs of
+    Just (msgId, author) -> LookingForLiEnd n ts (msgId, author, S.empty)
+    Nothing -> LookingForLiStart n ts
+transMessageExtractor (LookingForLiStart n ts) _ = LookingForLiStart n ts
 
-transMessageExtractor _ (Stop ts) = Stop ts
+transMessageExtractor (LookingForLiEnd n ts t) (TagOpen "ol" _) = trace ("open ol" ++ show n) $ LookingForLiEnd (n + 1) ts t
+transMessageExtractor (LookingForLiEnd n ts t) (TagClose "ol") = trace ("close ol" ++ show n) $ LookingForLiEnd (n - 1) ts t
 
+transMessageExtractor (LookingForLiEnd n ts t) (TagClose "ol") = LookingForLiEnd (n - 1) ts t
+transMessageExtractor (LookingForLiEnd n ts t) (TagClose "li") = LookingForLiStart n (ts S.|> t)
+transMessageExtractor (LookingForLiEnd n ts (m, a, xs)) x = LookingForLiEnd n ts (m, a, xs S.|> x)
+transMessageExtractor (Stop ts) _ = Stop ts
 
+extractMessages
+  :: [Tag ByteString]                               -- ^ Тэги внутри messageList
+  -> Maybe (Seq Message)   -- ^ (id, author, содержимое)
+extractMessages tags =
+  let
+    state = foldl' transMessageExtractor LookingForMessageList tags
+  in
+    case state of
+      Stop ts -> Just ts
+      _ -> Nothing
+  
+{-
 -- should ignore inner ols
 -- Просто найди первый <ol class="messageList">
 extractMessageList :: [Tag ByteString] -> Maybe [Tag ByteString]
@@ -91,3 +106,4 @@ extractMessages (tag:rest) =
             (msgId, author, inner) : extractMessages (drop 1 after)
     _ -> extractMessages rest
 
+-}

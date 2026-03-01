@@ -15,6 +15,8 @@ import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.Text as T
+import Data.Sequence (Seq)
+
 --import qualified Data.ByteString.Char8 as B
 
 import System.FilePath ((</>))
@@ -135,7 +137,7 @@ catchLift action wrap = do
 getPageMessages
   :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
   => String  -- ^ Адрес страницы (относительный или полный)
-  -> m [(ByteString, ByteString, [Tag ByteString])]  -- [(msgId, author, htmlContent)]
+  -> m (Seq Message)
 getPageMessages addr = do
   ctx <- get
   let
@@ -161,12 +163,7 @@ getPageMessages addr = do
   -- Разбор HTML
   let
     tags = parseTags body
-    -- messageList: ищем ol с class="messageList"
-  case extractMessageList tags of 
-    Just messageList ->
-      do
-        liftIO . print . length $ messageList                   
-        let messages = extractMessages messageList 
-        return messages
+  case extractMessages tags of 
+    Just messageList -> return messageList
     Nothing -> throwError $ ProtoError "No <ol class=messageList> element found"
 
