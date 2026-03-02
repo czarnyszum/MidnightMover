@@ -14,7 +14,7 @@ import Control.Lens
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
 -- import Data.ByteString.Lazy (ByteString)
-import qualified Data.Text as T
+-- import qualified Data.Text as T
 import Data.Sequence (Seq)
 
 --import qualified Data.ByteString.Char8 as B

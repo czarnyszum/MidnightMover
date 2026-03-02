@@ -6,7 +6,10 @@ import Control.Lens
 import Control.Monad.State
 import Control.Monad.Except
 
+import Data.Foldable
+
 import Ctx
+import Post
 
 type AppM = ExceptT ErrorKind (StateT Ctx IO)
 
@@ -19,7 +22,14 @@ job user =
     let
       threads = view userThreads user
       thread0 = threads !! 0
-      f (x, y, _) = liftIO $ print (x, y)
+      pr x = "line:" ++ (show x) ++ "\n" 
+      f (x, y, z) =
+        do
+          liftIO $ print (x, y)
+          case extractPost z of
+            Just p  -> liftIO $ putStrLn $ concatMap pr (toList p)
+            Nothing -> liftIO $ putStrLn "No post"
+          
     login user
     xs <- getPageMessages thread0
     liftIO $ print (length xs)
