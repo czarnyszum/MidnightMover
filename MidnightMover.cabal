@@ -19,6 +19,7 @@ executable MidnightMover
   main-is:             Main.hs 
   other-modules:
                        Parse
+                       Post
                        TlsManager
                        Ctx
   build-depends:
