@@ -6,8 +6,6 @@ import Control.Lens
 import Control.Monad.State
 import Control.Monad.Except
 
-import Network.HTTP.Client (createCookieJar)
-
 import Ctx
 
 type AppM = ExceptT ErrorKind (StateT Ctx IO)
@@ -36,6 +34,6 @@ main = do
       do
         
         ctx <- emptyCtx
-        (res, finalCtx) <- runAppM (job u) ctx
+        (res, _) <- runAppM (job u) ctx
         putStrLn $ "Result: " ++ show res
         putStrLn $ "Success"

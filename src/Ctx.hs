@@ -13,7 +13,7 @@ import Control.Lens
 
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
-import Data.ByteString.Lazy (ByteString)
+-- import Data.ByteString.Lazy (ByteString)
 import qualified Data.Text as T
 import Data.Sequence (Seq)
 
@@ -22,10 +22,8 @@ import Data.Sequence (Seq)
 import System.FilePath ((</>))
 
 import Network.Wreq hiding (put, statusCode, get) 
-import Network.Connection (TLSSettings(..))
 import Network.HTTP.Client (Manager, CookieJar, cookieJar, createCookieJar, requestHeaders, parseRequest, httpLbs)
 import Network.HTTP.Types.Status (statusCode)
-import Network.HTTP.Client.TLS
 
 import Text.HTML.TagSoup
 --import Text.Blaze.Html (Html)
@@ -142,14 +140,14 @@ getPageMessages addr = do
   ctx <- get
   let
     fullUrl = addr
-    cookieJar = _ctxCookieJar ctx
+    cks = _ctxCookieJar ctx
     manager = _ctxManager ctx
-    requestHeaders = [("User-Agent", "MidnightMover/0.0")]
+    rqHd = [("User-Agent", "MidnightMover/0.0")]
   
   initReq <- liftIO $ parseRequest fullUrl
   let req = initReq
-             { cookieJar = Just cookieJar
-             , requestHeaders = requestHeaders
+             { cookieJar = Just cks
+             , requestHeaders = rqHd
              }
   
   response <- liftIO $ httpLbs req manager
