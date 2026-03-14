@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Post (Post, extractPost) where
+module Post (Post, extractPost, showB) where
 
 import Data.ByteString.Lazy (ByteString)
 import Data.Sequence (Seq)

@@ -175,18 +175,29 @@ getPageMessages addr = do
     Just messageList -> return messageList
     Nothing -> throwError $ ProtoError "No <ol class=messageList> element found"
 
+savePost :: (MonadIO m) => String -> Post -> m ()
+savePost prefix p =
+  do
+    let
+      pr x = "line:" ++ (show x) ++ "\n" 
+      ps = concatMap pr (toList p)
+      nm = prefix ++ ".txt"
+    liftIO $ writeFile nm ps
+
 move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
 move user =
   do
     let
       threads = view userThreads user
       thread0 = threads !! 0
-      pr x = "line:" ++ (show x) ++ "\n" 
       f (x, y, z) =
         do
           liftIO $ print (x, y)
           case extractPost z of
-            Just p  -> liftIO $ putStrLn $ concatMap pr (toList p)
+            Just p  ->
+              do
+                savePost (showB x) p
+                liftIO $ putStrLn $ "Post out"
             Nothing -> liftIO $ putStrLn "No post"
           
     login user

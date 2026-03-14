@@ -2,6 +2,7 @@
 
 result
 user.txt
+post-*.txt
 
 # Haskell
 
