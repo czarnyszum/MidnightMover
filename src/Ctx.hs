@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveGeneric   #-}
 {-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
@@ -11,12 +12,14 @@ import Control.Monad.Except
 import Control.Monad.State
 import Control.Lens
 
-import Data.Aeson
-import qualified Data.ByteString.Lazy as BL
 -- import Data.ByteString.Lazy (ByteString)
 -- import qualified Data.Text as T
+import Data.Aeson
+import qualified Data.ByteString.Lazy as BL
+import Data.Foldable
 import Data.Sequence (Seq)
 
+import GHC.Generics (Generic)
 --import qualified Data.ByteString.Char8 as B
 
 import System.FilePath ((</>))
@@ -35,12 +38,18 @@ import Text.HTML.TagSoup
 -- import qualified Data.X509 as X509
 
 import Parse
+import Post
 import TlsManager 
+
+
+data Output = OutputFile | OutputBunker deriving (Eq, Ord, Show, Generic)
+instance FromJSON Output
 
 data User = User
   { _userLogin    :: String
   , _userPassword :: String
   , _userThreads  :: [String]
+  , _userOutput   :: Output
   } deriving (Show)
 makeLenses ''User
 
@@ -50,7 +59,8 @@ instance FromJSON User where
     login    <- o .: "login"
     password <- o .: "password"
     threads  <- o .: "threads"
-    return $ User login password threads
+    output   <- o .: "output"
+    return $ User login password threads output
 
 -- Читает User из JSON-файла basePath/user.txt
 readUser :: String -> IO (Maybe User)
@@ -165,3 +175,21 @@ getPageMessages addr = do
     Just messageList -> return messageList
     Nothing -> throwError $ ProtoError "No <ol class=messageList> element found"
 
+move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
+move user =
+  do
+    let
+      threads = view userThreads user
+      thread0 = threads !! 0
+      pr x = "line:" ++ (show x) ++ "\n" 
+      f (x, y, z) =
+        do
+          liftIO $ print (x, y)
+          case extractPost z of
+            Just p  -> liftIO $ putStrLn $ concatMap pr (toList p)
+            Nothing -> liftIO $ putStrLn "No post"
+          
+    login user
+    xs <- getPageMessages thread0
+    liftIO $ print (length xs)
+    mapM_ f xs
