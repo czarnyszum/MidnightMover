@@ -11,7 +11,7 @@ import qualified Data.Sequence as S
 
 import Text.HTML.TagSoup
 
-import Debug.Trace
+-- import Debug.Trace
 
 -- [(ByteString, ByteString, [Tag ByteString])]   -- ^ (id, author, содержимое)
 
@@ -32,7 +32,7 @@ isMessage attrs =
       do
         msgId <- lookup "id" attrs
         author <- lookup "data-author" attrs
-        trace ((show $ (msgId, author)) ++ "\n") $ return (msgId, author)  
+        return (msgId, author)  
     else Nothing
 
 
@@ -42,13 +42,13 @@ hasMessageListClass attrs = any (\(k, v) -> k == "class" && "messageList" `elem`
 trans :: MessageExtractor -> Tag ByteString -> MessageExtractor
 trans LookingForMessageList (TagOpen "ol" attrs) =
   if hasMessageListClass attrs
-  then trace "MessageList start" $ LookingForLiStart 0 S.empty
+  then LookingForLiStart 0 S.empty
   else LookingForMessageList
 trans LookingForMessageList _ = LookingForMessageList
 
-trans (LookingForLiStart n ts) (TagOpen "ol" _) = trace ("open ol" ++ show n) $ LookingForLiStart (n + 1) ts
-trans (LookingForLiStart 0 ts) (TagClose "ol")  = trace ("Stop") $ Stop ts
-trans (LookingForLiStart n ts) (TagClose "ol")  = trace ("close ol" ++ show n) $ LookingForLiStart (n - 1) ts
+trans (LookingForLiStart n ts) (TagOpen "ol" _) = LookingForLiStart (n + 1) ts
+trans (LookingForLiStart 0 ts) (TagClose "ol")  = Stop ts
+trans (LookingForLiStart n ts) (TagClose "ol")  = LookingForLiStart (n - 1) ts
 
 trans (LookingForLiStart n ts) (TagOpen "li" attrs) =
   case isMessage attrs of
@@ -56,8 +56,8 @@ trans (LookingForLiStart n ts) (TagOpen "li" attrs) =
     Nothing -> LookingForLiStart n ts
 trans (LookingForLiStart n ts) _ = LookingForLiStart n ts
 
-trans (LookingForLiEnd n ts t) (TagOpen "ol" _) = trace ("open ol" ++ show n) $ LookingForLiEnd (n + 1) ts t
-trans (LookingForLiEnd n ts t) (TagClose "ol") = trace ("close ol" ++ show n) $ LookingForLiEnd (n - 1) ts t
+trans (LookingForLiEnd n ts t) (TagOpen "ol" _) = LookingForLiEnd (n + 1) ts t
+trans (LookingForLiEnd n ts t) (TagClose "ol") = LookingForLiEnd (n - 1) ts t
 
 trans (LookingForLiEnd n ts t) (TagClose "ol") = LookingForLiEnd (n - 1) ts t
 trans (LookingForLiEnd n ts t) (TagClose "li") = LookingForLiStart n (ts S.|> t)

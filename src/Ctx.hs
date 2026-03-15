@@ -16,7 +16,6 @@ import Control.Lens
 -- import qualified Data.Text as T
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
-import Data.Foldable
 import Data.Sequence (Seq)
 
 import GHC.Generics (Generic)
@@ -174,15 +173,6 @@ getPageMessages addr = do
   case extractMessages tags of 
     Just messageList -> return messageList
     Nothing -> throwError $ ProtoError "No <ol class=messageList> element found"
-
-savePost :: (MonadIO m) => String -> Post -> m ()
-savePost prefix p =
-  do
-    let
-      pr x = "line:" ++ (show x) ++ "\n" 
-      ps = concatMap pr (toList p)
-      nm = prefix ++ ".txt"
-    liftIO $ writeFile nm ps
 
 move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
 move user =
