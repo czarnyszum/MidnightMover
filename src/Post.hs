@@ -34,11 +34,12 @@ instance Show PostElement where
 
 data SpolierExtractor =
   LookingForSpoilerTitle
-  | LookingForSpolier
-  | StopSpolier
+  | ExtractSpoilerTitle
+  | LookingForSpolier ByteString
+  | StopSpolier ByteString
 
 isSpolierExtracted :: SpolierExtractor -> Maybe (ByteString, Seq PostElement)
-isSpolierExtracted StopSpolier = undefined
+isSpolierExtracted (StopSpolier title) = Just (title, undefined)
 isSpolierExtracted _ = Nothing
 
 data PostExtractor =
@@ -72,7 +73,8 @@ isSpoilerStart attrs =
     if "bbCodeSpoilerContainer" `elem` B.words (BL.toStrict cls)
     then return ()
     else mzero 
-    
+
+
 --  ToggleTriggerAnchor bbCodeSpoilerContainer
 
 -- SpoilerTarget bbCodeSpoilerText
@@ -82,9 +84,21 @@ analyseImage attrs = isBBCodeImage attrs
 
 -- bbCodeImage LbImage
 
+extractSpoilerTitle :: [Attribute ByteString] -> Bool
+extractSpoilerTitle attrs =
+  case lookup "class" attrs of
+    Just cls -> "SpoilerTitle" `elem` B.words (BL.toStrict cls)
+    Nothing  -> False
+      
 strans :: SpolierExtractor -> Tag ByteString -> SpolierExtractor
-strans = undefined
-
+strans LookingForSpoilerTitle (TagOpen "span" attrs) =
+  if extractSpoilerTitle attrs
+  then ExtractSpoilerTitle
+  else LookingForSpoilerTitle
+strans LookingForSpoilerTitle _ = LookingForSpoilerTitle
+strans ExtractSpoilerTitle (TagText x) = LookingForSpolier x
+strans ExtractSpoilerTitle _ = ExtractSpoilerTitle
+  
 trans :: PostExtractor -> Tag ByteString -> PostExtractor
 trans (Spoiler xs mach) tag =
   let
