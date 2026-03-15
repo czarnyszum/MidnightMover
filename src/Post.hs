@@ -31,15 +31,16 @@ instance Show PostElement where
   show (PostImage src) = "Img[" ++ (showB src) ++ "]" 
   show (PostLine l) = showB l
   show PostLineBreak = "\n"
+  show (PostSpoiler title content) = "Spolier[" ++ showB title ++ "][" ++ (concatMap show (toList content)) ++ "]"
 
 data SpolierExtractor =
   LookingForSpoilerTitle
   | ExtractSpoilerTitle
-  | LookingForSpolier ByteString
-  | StopSpolier ByteString
+  | ExtractingSpolier ByteString Int PostExtractor
+  | StopSpolier ByteString (Seq PostElement)
 
 isSpolierExtracted :: SpolierExtractor -> Maybe (ByteString, Seq PostElement)
-isSpolierExtracted (StopSpolier title) = Just (title, undefined)
+isSpolierExtracted (StopSpolier title content) = Just (title, content)
 isSpolierExtracted _ = Nothing
 
 data PostExtractor =
@@ -96,8 +97,19 @@ strans LookingForSpoilerTitle (TagOpen "span" attrs) =
   then ExtractSpoilerTitle
   else LookingForSpoilerTitle
 strans LookingForSpoilerTitle _ = LookingForSpoilerTitle
-strans ExtractSpoilerTitle (TagText x) = LookingForSpolier x
-strans ExtractSpoilerTitle _ = ExtractSpoilerTitle
+strans ExtractSpoilerTitle (TagText x) = ExtractingSpolier x 0 (LookingForLines S.empty)
+strans ExtractSpoilerTitle _ = ExtractSpoilerTitle 
+strans (ExtractingSpolier title divs mach) (TagOpen "div" attrs) =
+  ExtractingSpolier title (divs + 1) (trans mach (TagOpen "div" attrs)) 
+strans (ExtractingSpolier title 0 mach) (TagClose "div") =
+  case mach of
+    LookingForLines xs -> StopSpolier title xs
+    Stop xs            -> StopSpolier title xs
+    _                  -> StopSpolier title S.empty -- error state
+strans (ExtractingSpolier title divs mach) (TagClose "div") =
+  ExtractingSpolier title (divs - 1) (trans mach (TagClose "div")) 
+strans (ExtractingSpolier title divs mach) tag = ExtractingSpolier title divs (trans mach tag)
+strans (StopSpolier title xs) _ = StopSpolier title xs
   
 trans :: PostExtractor -> Tag ByteString -> PostExtractor
 trans (Spoiler xs mach) tag =
