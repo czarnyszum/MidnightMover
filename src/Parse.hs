@@ -9,13 +9,21 @@ import qualified Data.ByteString.Char8 as B
 import Data.Sequence (Seq)
 import qualified Data.Sequence as S
 
-import Text.HTML.TagSoup
+import Text.XML.Cursor
 
 -- import Debug.Trace
 
 -- [(ByteString, ByteString, [Tag ByteString])]   -- ^ (id, author, содержимое)
 
-type Message = (ByteString, ByteString, Seq (Tag ByteString))
+type Message = (ByteString, ByteString)
+
+extractMessages
+  :: Cursor                                -- ^ Тэги внутри messageList
+  -> Maybe (Seq Message)   -- ^ (id, author, содержимое)
+extractMessages cursor = undefined
+
+
+{-
 
 data MessageExtractor =
     LookingForMessageList
@@ -64,16 +72,7 @@ trans (LookingForLiEnd n ts t) (TagClose "li") = LookingForLiStart n (ts S.|> t)
 trans (LookingForLiEnd n ts (m, a, xs)) x = LookingForLiEnd n ts (m, a, xs S.|> x)
 trans (Stop ts) _ = Stop ts
 
-extractMessages
-  :: [Tag ByteString]                               -- ^ Тэги внутри messageList
-  -> Maybe (Seq Message)   -- ^ (id, author, содержимое)
-extractMessages tags =
-  let
-    state = foldl' trans LookingForMessageList tags
-  in
-    case state of
-      Stop ts -> Just ts
-      _ -> Nothing
+-}
   
 {-
 -- should ignore inner ols

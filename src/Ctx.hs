@@ -27,7 +27,10 @@ import Network.Wreq hiding (put, statusCode, get)
 import Network.HTTP.Client (Manager, CookieJar, cookieJar, createCookieJar, requestHeaders, parseRequest, httpLbs)
 import Network.HTTP.Types.Status (statusCode)
 
-import Text.HTML.TagSoup
+import Text.HTML.DOM
+import Text.XML.Cursor
+
+-- import Text.HTML.TagSoup
 --import Text.Blaze.Html (Html)
 --import qualified Text.Blaze.Html.Renderer.Text as Blaze
 --import qualified Text.Blaze.Html5 as H
@@ -37,7 +40,7 @@ import Text.HTML.TagSoup
 -- import qualified Data.X509 as X509
 
 import Parse
-import Post
+-- import Post
 import TlsManager 
 
 
@@ -171,13 +174,14 @@ getPageMessages addr = do
 
   -- Разбор HTML
   let
-    tags = parseTags body
-  case extractMessages tags of 
-    Just messageList -> return messageList
-    Nothing -> throwError $ ProtoError "No <ol class=messageList> element found"
-
+    doc = parseLBS body
+    cursor = fromDocument doc
+  undefined
+  
 move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
-move user =
+move user = undefined
+
+{-  
   do
     let
       threads = view userThreads user
@@ -204,3 +208,4 @@ move user =
     xs <- getPageMessages thread0
     liftIO $ print (length xs)
     mapM_ f xs
+-}

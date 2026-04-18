@@ -34,9 +34,10 @@ executable MidnightMover
     , http-client
     , http-client-tls
     , http-types
+    , html-conduit
     , lens
     , mtl
-    , tagsoup
+    , xml-conduit
     , text
     , tls
     , wreq

@@ -24,12 +24,12 @@
           base               = hpkg.base;
           blaze-html         = hpkg.blaze-html;
           bytestring         = hpkg.bytestring;
-          containers         = hpkg.containers;
+          html-conduit       = hpkg.html-conduit;
+          xml-conduit        = hpkg.xml-conduit;
           http-client        = hpkg.http-client;
           http-client-tls    = hpkg.http-client-tls;
           lens               = hpkg.lens;
           mtl                = hpkg.mtl;
-          tagsoup            = hpkg.tagsoup;
           text               = hpkg.text;
           wreq               = hpkg.wreq;
           crypton-x509       = hpkg.crypton-x509;

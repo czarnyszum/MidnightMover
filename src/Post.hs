@@ -16,7 +16,7 @@ import qualified Data.Text.Lazy.Encoding as T
 import Data.Either (isRight)
 import Data.Foldable
 
-import Text.HTML.TagSoup
+import Text.XML.Cursor
 
 data Alignment = Unaligned | Centered deriving (Show)
 
@@ -34,6 +34,22 @@ instance Show PostElement where
   show (PostLine a l) = "Text-" ++ show a ++ "-[" ++ showB l ++ "]"
   show PostLineBreak = ""
   show (PostSpoiler title content) = "Spolier[" ++ showB title ++ "][" ++ (concatMap show (toList content)) ++ "]"
+
+type Post = Seq PostElement
+
+savePost :: (MonadIO m) => String -> Post -> m ()
+savePost prefix p =
+  do
+    let
+      ps = concatMap show (toList p)
+      nm = prefix ++ ".txt"
+    liftIO $ writeFile nm ps
+
+extractPost :: Cursor -> Maybe Post
+extractPost = undefined
+
+
+{-
 
 data SpolierExtractor =
   LookingForSpoilerTitle
@@ -136,22 +152,5 @@ trans (LookingForLines xs) (TagText x) = LookingForLines xs
 trans (LookingForLines xs) (TagClose "article") = Stop xs                                         
 trans s _ = s
 
-type Post = Seq PostElement
 
-extractPost :: Seq (Tag ByteString) -> Maybe Post
-extractPost tags =
-  let
-    state = foldl' trans LookingForArticle tags
-  in
-    case state of
-      Stop xs -> Just xs
-      _ -> Nothing  
-
-savePost :: (MonadIO m) => String -> Post -> m ()
-savePost prefix p =
-  do
-    let
-      ps = concatMap show (toList p)
-      nm = prefix ++ ".txt"
-    liftIO $ writeFile nm ps
-
+-}
