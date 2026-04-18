@@ -48,6 +48,7 @@ data User = User
   { _userLogin    :: String
   , _userPassword :: String
   , _userThreads  :: [String]
+  , _userFilter   :: [String]
   , _userOutput   :: Output
   } deriving (Show)
 makeLenses ''User
@@ -55,11 +56,12 @@ makeLenses ''User
 -- экземпляр FromJSON для User
 instance FromJSON User where
   parseJSON = withObject "User" $ \o -> do
-    login    <- o .: "login"
-    password <- o .: "password"
-    threads  <- o .: "threads"
-    output   <- o .: "output"
-    return $ User login password threads output
+    login      <- o .: "login"
+    password   <- o .: "password"
+    threads    <- o .: "threads"
+    output     <- o .: "output"
+    users      <- o .: "userFilter"
+    return $ User login password threads users output
 
 -- Читает User из JSON-файла basePath/user.txt
 readUser :: String -> IO (Maybe User)
@@ -182,12 +184,20 @@ move user =
       thread0 = threads !! 0
       f (x, y, z) =
         do
+          let
+            username = showB y
           liftIO $ print (x, y)
           case extractPost z of
             Just p  ->
-              do
-                savePost (showB x) p
-                liftIO $ putStrLn $ "Post out"
+              if username `elem` (view userFilter user)
+              then
+                do
+                  let
+                    filename = username ++ "-" ++ showB x
+                  savePost filename p
+                  liftIO $ putStrLn $ username ++ " post out"
+               else
+                liftIO $ putStrLn $ username ++ " post pass"
             Nothing -> liftIO $ putStrLn "No post"
           
     login user

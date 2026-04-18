@@ -18,9 +18,11 @@ import Data.Foldable
 
 import Text.HTML.TagSoup
 
+data Alignment = Unaligned | Centered deriving (Show)
+
 data PostElement =
   PostImage ByteString
-  | PostLine ByteString
+  | PostLine Alignment ByteString
   | PostLineBreak
   | PostSpoiler ByteString (Seq PostElement)
 
@@ -29,8 +31,8 @@ showB = T.unpack . T.decodeUtf8
 
 instance Show PostElement where
   show (PostImage src) = "Img[" ++ (showB src) ++ "]" 
-  show (PostLine l) = showB l
-  show PostLineBreak = "\n"
+  show (PostLine a l) = "Text-" ++ show a ++ "-[" ++ showB l ++ "]"
+  show PostLineBreak = ""
   show (PostSpoiler title content) = "Spolier[" ++ showB title ++ "][" ++ (concatMap show (toList content)) ++ "]"
 
 data SpolierExtractor =
