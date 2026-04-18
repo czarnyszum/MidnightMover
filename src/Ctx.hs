@@ -16,7 +16,7 @@ import Control.Lens
 -- import qualified Data.Text as T
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
-import Data.Sequence (Seq)
+-- import Data.Sequence (Seq)
 
 import GHC.Generics (Generic)
 --import qualified Data.ByteString.Char8 as B
@@ -149,7 +149,7 @@ catchLift action wrap = do
 getPageMessages
   :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
   => String  -- ^ Адрес страницы (относительный или полный)
-  -> m (Seq Message)
+  -> m [Message]
 getPageMessages addr = do
   ctx <- get
   let
@@ -176,10 +176,19 @@ getPageMessages addr = do
   let
     doc = parseLBS body
     cursor = fromDocument doc
-  undefined
+  return (extractMessages cursor)
   
 move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
-move user = undefined
+move user =
+  do
+    let
+      threads = view userThreads user
+      thread0 = threads !! 0
+      pr (x, y, _) = liftIO . print $ (x, y)
+    login user
+    xs <- getPageMessages thread0
+
+    mapM_ pr xs  
 
 {-  
   do

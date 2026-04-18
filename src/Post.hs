@@ -3,17 +3,17 @@
 
 module Post (Post, extractPost, savePost, showB) where
 
-import Control.Monad
+-- import Control.Monad
 import Control.Monad.IO.Class
 
 import Data.ByteString.Lazy (ByteString)
 import Data.Sequence (Seq)
-import qualified Data.ByteString.Char8 as B
-import qualified Data.ByteString.Lazy as BL
-import qualified Data.Sequence as S
+-- import qualified Data.ByteString.Char8 as B
+-- import qualified Data.ByteString.Lazy as BL
+-- import qualified Data.Sequence as S
 import qualified Data.Text.Lazy as T
 import qualified Data.Text.Lazy.Encoding as T
-import Data.Either (isRight)
+-- import Data.Either (isRight)
 import Data.Foldable
 
 import Text.XML.Cursor
@@ -33,7 +33,7 @@ instance Show PostElement where
   show (PostImage src) = "Img[" ++ (showB src) ++ "]" 
   show (PostLine a l) = "Text-" ++ show a ++ "-[" ++ showB l ++ "]"
   show PostLineBreak = ""
-  show (PostSpoiler title content) = "Spolier[" ++ showB title ++ "][" ++ (concatMap show (toList content)) ++ "]"
+  show (PostSpoiler title body) = "Spolier[" ++ showB title ++ "][" ++ (concatMap show (toList body)) ++ "]"
 
 type Post = Seq PostElement
 

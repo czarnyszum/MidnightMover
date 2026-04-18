@@ -7,21 +7,43 @@ import qualified Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy (ByteString)
 import qualified Data.ByteString.Char8 as B
 import Data.Sequence (Seq)
-import qualified Data.Sequence as S
+import qualified Data.Map as M
+import Data.Text (Text)
+import qualified Data.Text as T
 
+-- import qualified Data.Sequence as S
+
+import Text.XML
 import Text.XML.Cursor
 
--- import Debug.Trace
+import Debug.Trace
 
 -- [(ByteString, ByteString, [Tag ByteString])]   -- ^ (id, author, содержимое)
 
-type Message = (ByteString, ByteString)
+type Message = (Text, Text, Cursor)
 
-extractMessages
-  :: Cursor                                -- ^ Тэги внутри messageList
-  -> Maybe (Seq Message)   -- ^ (id, author, содержимое)
-extractMessages cursor = undefined
+attrIs :: Text -> Text -> Cursor -> [Cursor]
+attrIs attr val c = [c | Just val == getAttr (Name attr Nothing Nothing) c]
 
+isMessage :: Cursor -> [Message]
+isMessage c =
+  case (getAttr "class" c, getAttr "id" c, getAttr "data-author" c) of
+    (Just cls, Just msgId, Just msgAuthor) -> [(msgId, msgAuthor, c)] -- | "message " `elem` T.words cls
+    (_, _, _) -> []
+
+getAttr :: Name -> Cursor -> Maybe Text
+getAttr attrName c =
+  case node c of
+    NodeElement el -> M.lookup attrName (elementAttributes el)
+    _ -> Nothing
+
+extractMessages :: Cursor -> [Message]
+extractMessages cursor =
+  let
+    messageList = cursor $// element "ol" >=> (attrIs "id" "messageList")
+    messageCursors = messageList >>= child >>= element "li" 
+  in
+    concatMap isMessage messageCursors 
 
 {-
 
