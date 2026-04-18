@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Parse (extractMessages, Message) where
+module Parse (extractMessages, Message, getAttr) where
 
 import qualified Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy (ByteString)
@@ -27,9 +27,9 @@ attrIs attr val c = [c | Just val == getAttr (Name attr Nothing Nothing) c]
 
 isMessage :: Cursor -> [Message]
 isMessage c =
-  case (getAttr "class" c, getAttr "id" c, getAttr "data-author" c) of
-    (Just cls, Just msgId, Just msgAuthor) -> [(msgId, msgAuthor, c)] -- | "message " `elem` T.words cls
-    (_, _, _) -> []
+  case (getAttr "id" c, getAttr "data-author" c) of
+    (Just msgId, Just msgAuthor) -> [(msgId, msgAuthor, c)] -- | "message " `elem` T.words cls
+    (_, _) -> []
 
 getAttr :: Name -> Cursor -> Maybe Text
 getAttr attrName c =

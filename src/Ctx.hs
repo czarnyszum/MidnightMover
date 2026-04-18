@@ -16,6 +16,7 @@ import Control.Lens
 -- import qualified Data.Text as T
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
+import qualified Data.Text as T
 -- import Data.Sequence (Seq)
 
 import GHC.Generics (Generic)
@@ -40,7 +41,7 @@ import Text.XML.Cursor
 -- import qualified Data.X509 as X509
 
 import Parse
--- import Post
+import Post
 import TlsManager 
 
 
@@ -70,8 +71,8 @@ instance FromJSON User where
 readUser :: String -> IO (Maybe User)
 readUser basePath = do
   let path = basePath </> "user.txt"
-  content <- BL.readFile path
-  case eitherDecode content of
+  c <- BL.readFile path
+  case eitherDecode c of
     Left _err   -> return Nothing
     Right user  -> return (Just user)
 
@@ -155,7 +156,7 @@ getPageMessages addr = do
   let
     fullUrl = addr
     cks = _ctxCookieJar ctx
-    manager = _ctxManager ctx
+    mgr = _ctxManager ctx
     rqHd = [("User-Agent", "MidnightMover/0.0")]
   
   initReq <- liftIO $ parseRequest fullUrl
@@ -164,7 +165,7 @@ getPageMessages addr = do
              , requestHeaders = rqHd
              }
   
-  response <- liftIO $ httpLbs req manager
+  response <- liftIO $ httpLbs req mgr
   let status = statusCode (view responseStatus response)
 
   unless (status >= 200 && status < 300) $
@@ -184,7 +185,23 @@ move user =
     let
       threads = view userThreads user
       thread0 = threads !! 0
-      pr (x, y, _) = liftIO . print $ (x, y)
+      pr (x, y, c) =
+        do
+          let
+            username = T.unpack y
+            post = extractPost c
+          if null post
+          then return ()
+          else 
+           if username `elem` (view userFilter user)
+           then
+               do
+                let
+                  filename = T.unpack x ++ "-" ++  username
+                savePost filename post
+                liftIO $ putStrLn $ username ++ " post out"
+           else
+               liftIO $ putStrLn $ username ++ " post pass"
     login user
     xs <- getPageMessages thread0
 

@@ -1,41 +1,42 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Post (Post, extractPost, savePost, showB) where
+module Post (Post, extractPost, savePost) where
 
 -- import Control.Monad
 import Control.Monad.IO.Class
 
-import Data.ByteString.Lazy (ByteString)
-import Data.Sequence (Seq)
+-- import Data.ByteString.Lazy (ByteString)
+-- import Data.Sequence (Seq)
 -- import qualified Data.ByteString.Char8 as B
 -- import qualified Data.ByteString.Lazy as BL
 -- import qualified Data.Sequence as S
-import qualified Data.Text.Lazy as T
-import qualified Data.Text.Lazy.Encoding as T
+import Data.Text (Text)
+import qualified Data.Text as T
+-- import qualified Data.Text.Lazy.Encoding as T
 -- import Data.Either (isRight)
 import Data.Foldable
 
+import Text.XML hiding (writeFile)
 import Text.XML.Cursor
 
-data Alignment = Unaligned | Centered deriving (Show)
+import Parse (getAttr)
+
+-- data Alignment = Unaligned | Centered deriving (Show)
 
 data PostElement =
-  PostImage ByteString
-  | PostLine Alignment ByteString
+  PostImage Text
+  | PostLine Text
   | PostLineBreak
-  | PostSpoiler ByteString (Seq PostElement)
-
-showB :: ByteString -> String
-showB = T.unpack . T.decodeUtf8
+  | PostSpoiler Text [PostElement]
 
 instance Show PostElement where
-  show (PostImage src) = "Img[" ++ (showB src) ++ "]" 
-  show (PostLine a l) = "Text-" ++ show a ++ "-[" ++ showB l ++ "]"
+  show (PostImage src) = "Img[" ++ (T.unpack src) ++ "]" 
+  show (PostLine l) = "Line[" ++ T.unpack l ++ "]"
   show PostLineBreak = ""
-  show (PostSpoiler title body) = "Spolier[" ++ showB title ++ "][" ++ (concatMap show (toList body)) ++ "]"
+  show (PostSpoiler title body) = "Spolier[" ++ T.unpack title ++ "][" ++ (concatMap show (toList body)) ++ "]"
 
-type Post = Seq PostElement
+type Post = [PostElement]
 
 savePost :: (MonadIO m) => String -> Post -> m ()
 savePost prefix p =
@@ -45,10 +46,39 @@ savePost prefix p =
       nm = prefix ++ ".txt"
     liftIO $ writeFile nm ps
 
-extractPost :: Cursor -> Maybe Post
-extractPost = undefined
+extractPost :: Cursor -> Post
+extractPost c = concatMap extractNode (child c)
 
+extractNode :: Cursor -> Post
+extractNode c =
+  case node c of
+    NodeContent text -> extractText text
+    NodeElement el -> extractElement el c
+    _ -> []
 
+extractText :: Text -> Post
+extractText txt =
+  let
+    trimmed = T.strip txt
+  in
+    if T.null trimmed
+    then []
+    else [PostLine trimmed]
+
+extractElement :: Element -> Cursor -> Post
+extractElement el c
+  | tag == "br" = [PostLineBreak]
+  | tag == "img" = extractImage c
+-- | tag == "div" && hasClass "bbCodeSpoilerContainer" = extractSpoiler c
+  | otherwise = extractPost c
+  where
+    tag = nameLocalName (elementName el)
+    
+extractImage :: Cursor -> Post
+extractImage c =                 
+    case getAttr "src" c of
+      Just src -> [PostImage src]
+      _ -> []
 {-
 
 data SpolierExtractor =
