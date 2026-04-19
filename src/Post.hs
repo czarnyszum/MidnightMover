@@ -20,7 +20,7 @@ import Data.Foldable
 import Text.XML hiding (writeFile)
 import Text.XML.Cursor
 
-import Parse (getAttr)
+import Parse (getAttr, hasClass)
 
 -- data Alignment = Unaligned | Centered deriving (Show)
 
@@ -33,8 +33,8 @@ data PostElement =
 instance Show PostElement where
   show (PostImage src) = "Img[" ++ (T.unpack src) ++ "]" 
   show (PostLine l) = "Line[" ++ T.unpack l ++ "]"
-  show PostLineBreak = ""
-  show (PostSpoiler title body) = "Spolier[" ++ T.unpack title ++ "][" ++ (concatMap show (toList body)) ++ "]"
+  show PostLineBreak = "\n"
+  show (PostSpoiler title body) = "Spoiler[" ++ T.unpack title ++ "]\n[" ++ (concatMap show (toList body)) ++ "]"
 
 type Post = [PostElement]
 
@@ -43,7 +43,7 @@ savePost prefix p =
   do
     let
       ps = concatMap show (toList p)
-      nm = prefix ++ ".txt"
+      nm = "./posts/" ++ prefix ++ ".txt"
     liftIO $ writeFile nm ps
 
 extractPost :: Cursor -> Post
@@ -69,7 +69,7 @@ extractElement :: Element -> Cursor -> Post
 extractElement el c
   | tag == "br" = [PostLineBreak]
   | tag == "img" = extractImage c
--- | tag == "div" && hasClass "bbCodeSpoilerContainer" = extractSpoiler c
+  | tag == "div" && hasClass "bbCodeSpoilerContainer" c = extractSpoiler c
   | otherwise = extractPost c
   where
     tag = nameLocalName (elementName el)
@@ -79,22 +79,46 @@ extractImage c =
     case getAttr "src" c of
       Just src -> [PostImage src]
       _ -> []
+
+extractSpoiler :: Cursor -> Post
+extractSpoiler c =
+  let
+    title = exractSpoilerTitle c
+    cont = exractSpoilerContent c
+  in
+    [PostSpoiler title cont]
+
+exractSpoilerTitle :: Cursor -> Text
+exractSpoilerTitle c =
+  let
+    titleTexts = c $/ element "span" >=> (\s -> [s | hasClass "SpoilerTitle" s]) &/ content
+   in
+    T.strip (T.concat titleTexts)
+    
+exractSpoilerContent :: Cursor -> Post
+exractSpoilerContent c =
+  let
+    cs = c $// check (hasClass "bbCodeSpoilerText") 
+  in
+    case cs of
+      c' : _ -> extractPost c'
+      [] -> []
 {-
 
-data SpolierExtractor =
+data SpoilerExtractor =
   LookingForSpoilerTitle
   | ExtractSpoilerTitle
-  | ExtractingSpolier ByteString Int PostExtractor
-  | StopSpolier ByteString (Seq PostElement)
+  | ExtractingSpoiler ByteString Int PostExtractor
+  | StopSpoiler ByteString (Seq PostElement)
 
-isSpolierExtracted :: SpolierExtractor -> Maybe (ByteString, Seq PostElement)
-isSpolierExtracted (StopSpolier title content) = Just (title, content)
-isSpolierExtracted _ = Nothing
+isSpoilerExtracted :: SpoilerExtractor -> Maybe (ByteString, Seq PostElement)
+isSpoilerExtracted (StopSpoiler title content) = Just (title, content)
+isSpoilerExtracted _ = Nothing
 
 data PostExtractor =
   LookingForArticle
   | LookingForLines (Seq PostElement)
-  | Spoiler (Seq PostElement) SpolierExtractor
+  | Spoiler (Seq PostElement) SpoilerExtractor
   | Stop (Seq PostElement)
 
 --  bbCodeSpoilerText
@@ -139,32 +163,32 @@ extractSpoilerTitle attrs =
     Just cls -> "SpoilerTitle" `elem` B.words (BL.toStrict cls)
     Nothing  -> False
       
-strans :: SpolierExtractor -> Tag ByteString -> SpolierExtractor
+strans :: SpoilerExtractor -> Tag ByteString -> SpoilerExtractor
 strans LookingForSpoilerTitle (TagOpen "span" attrs) =
   if extractSpoilerTitle attrs
   then ExtractSpoilerTitle
   else LookingForSpoilerTitle
 strans LookingForSpoilerTitle _ = LookingForSpoilerTitle
-strans ExtractSpoilerTitle (TagText x) = ExtractingSpolier x 0 (LookingForLines S.empty)
+strans ExtractSpoilerTitle (TagText x) = ExtractingSpoiler x 0 (LookingForLines S.empty)
 strans ExtractSpoilerTitle _ = ExtractSpoilerTitle 
-strans (ExtractingSpolier title divs mach) (TagOpen "div" attrs) =
-  ExtractingSpolier title (divs + 1) (trans mach (TagOpen "div" attrs)) 
-strans (ExtractingSpolier title 0 mach) (TagClose "div") =
+strans (ExtractingSpoiler title divs mach) (TagOpen "div" attrs) =
+  ExtractingSpoiler title (divs + 1) (trans mach (TagOpen "div" attrs)) 
+strans (ExtractingSpoiler title 0 mach) (TagClose "div") =
   case mach of
-    LookingForLines xs -> StopSpolier title xs
-    Stop xs            -> StopSpolier title xs
-    _                  -> StopSpolier title S.empty -- error state
-strans (ExtractingSpolier title divs mach) (TagClose "div") =
-  ExtractingSpolier title (divs - 1) (trans mach (TagClose "div")) 
-strans (ExtractingSpolier title divs mach) tag = ExtractingSpolier title divs (trans mach tag)
-strans (StopSpolier title xs) _ = StopSpolier title xs
+    LookingForLines xs -> StopSpoiler title xs
+    Stop xs            -> StopSpoiler title xs
+    _                  -> StopSpoiler title S.empty -- error state
+strans (ExtractingSpoiler title divs mach) (TagClose "div") =
+  ExtractingSpoiler title (divs - 1) (trans mach (TagClose "div")) 
+strans (ExtractingSpoiler title divs mach) tag = ExtractingSpoiler title divs (trans mach tag)
+strans (StopSpoiler title xs) _ = StopSpoiler title xs
   
 trans :: PostExtractor -> Tag ByteString -> PostExtractor
 trans (Spoiler xs mach) tag =
   let
     mach' = strans mach tag
   in
-    case isSpolierExtracted mach' of
+    case isSpoilerExtracted mach' of
       Just (title, spoiler) -> LookingForLines (xs S.|> PostSpoiler title spoiler)
       Nothing -> Spoiler xs mach'
 trans LookingForArticle (TagOpen "article" _) = LookingForLines S.empty
