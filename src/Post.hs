@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Post (Post, extractPost, savePost, exractPageNumber) where
+module Post (Post, isValidPost, extractPost, savePost, exractPageNumber) where
 
 -- import Control.Monad
 import Control.Monad.IO.Class
@@ -26,19 +26,58 @@ import Parse (getAttr, hasClass, hasStyle)
 
 -- data Alignment = Unaligned | Centered deriving (Show)
 
+data Format = FormatI | FormatB | FormatU | FormatS
+
+instance Show Format where
+  show FormatI = "I"
+  show FormatB = "B"
+  show FormatU = "U"
+  show FormatS = "S"
+
 data PostElement =
-  PostImage Text
+  PostImageGlobal Text
+  | PostLink Text
+  | PostImageLocal Text
   | PostCentered [PostElement]
   | PostLine Text
   | PostLineBreak
+  | PostFormated Format [PostElement]
+  | PostDice Text Text
   | PostSpoiler Text [PostElement]
 
+postValidator :: (Bool, Bool, Bool) -> PostElement -> (Bool, Bool, Bool)
+postValidator (bs, bi, bd) (PostFormated _ post) =
+  let
+    (cs, ci, cd) = isValidPost post
+  in  
+    (cs || bs, ci || bi, cd || bd)                            
+postValidator (bs, bi, bd) (PostImageGlobal _)= (bs, True, bd) 
+postValidator (bs, bi, bd) (PostCentered ps) =
+  let
+    (cs, ci, cd) = isValidPost ps 
+  in  
+    (cs || bs, ci || bi, cd || bd)
+postValidator (bs, bi, bd) (PostDice _ _) = (bs, bi, True)
+postValidator  (_, bi, bd) (PostSpoiler _ ps) =
+  let
+    (_, ci, cd) = isValidPost ps
+  in
+    (True, ci || bi, cd || bd)
+postValidator v _ = v
+
+isValidPost :: Post -> (Bool, Bool, Bool)
+isValidPost = foldl postValidator (False, False, False)
+
 instance Show PostElement where
-  show (PostImage src) = "Img[" ++ (T.unpack src) ++ "]" 
-  show (PostLine l) = "Line[" ++ T.unpack l ++ "]"
+  show (PostImageGlobal src) = "ImgGlobal[" ++ (T.unpack src) ++ "]" 
+  show (PostImageLocal src) = "ImgLocal[" ++ (T.unpack src) ++ "]" 
+  show (PostLine l) = T.unpack l ++ " "
   show PostLineBreak = "\n"
-  show (PostCentered post) = "CenteredStart:\n" ++ (concatMap show post) ++ "CenteredEnd\n" 
+  show (PostCentered post) = "Сenter:\n" ++ (concatMap show post) ++ "CenterEnd\n" 
   show (PostSpoiler title body) = "Spoiler[" ++ T.unpack title ++ "]\n[" ++ (concatMap show body) ++ "]"
+  show (PostDice value full) = "Dice[" ++ (T.unpack full) ++ ": " ++ (T.unpack value) ++ "]"
+  show (PostFormated f post) = "Format" ++ show f ++ "[" ++ (concatMap show post)
+  show (PostLink src) = "Link[" ++ (T.unpack src) ++ "]"
 
 type Post = [PostElement]
 
@@ -71,18 +110,45 @@ extractText txt =
 
 extractElement :: Element -> Cursor -> Post
 extractElement el c
+  | tag == "a" = extractLink c
   | tag == "br" = [PostLineBreak]
+  | tag == "i" = [PostFormated FormatI (extractPost c)]
+  | tag == "b" = [PostFormated FormatB (extractPost c)]
+  | tag == "u" = [PostFormated FormatU (extractPost c)]
+  | tag == "s" = [PostFormated FormatS (extractPost c)]
   | tag == "img" = extractImage c
   | tag == "div" && hasClass "bbCodeSpoilerContainer" c = extractSpoiler c
   | tag == "div" && hasStyle "text-align: center" c = [PostCentered (extractPost c)]
+  | tag == "div" && hasClass "dice_outer" c = extractDice c
   | otherwise = extractPost c
   where
     tag = nameLocalName (elementName el)
+
+extractLink :: Cursor -> Post
+extractLink c =
+  case getAttr "href" c of
+    Just src -> [PostLink src]
+    Nothing ->  [PostLink "!Не удалось извлечь адрес ссылки!"]
+
+extractDiceText :: Cursor -> Text
+extractDiceText c =
+  case c $// element "i" of
+    (i : _) -> T.concat (i $// content)
+    _ -> "!тэг i не найден!"
+
+extractDiceValue :: Cursor -> Text
+extractDiceValue c = T.concat (c $// element "span" >=> check (hasClass "dice_number") >=> child >=> content)
+
+extractDice :: Cursor -> Post
+extractDice c = [PostDice (extractDiceValue c) (extractDiceText c)]
     
 extractImage :: Cursor -> Post
 extractImage c =                 
     case getAttr "src" c of
-      Just src -> [PostImage src]
+      Just src ->
+        if "http" `T.isPrefixOf` src
+        then [PostImageGlobal src]
+        else [PostImageLocal src]
       _ -> []
 
 extractSpoiler :: Cursor -> Post
@@ -101,8 +167,8 @@ exractPageNumber c =
     case els of
       (e : _) ->
         do
-          last <- getAttr "data-last" e
-          readMaybe (T.unpack last)
+          la <- getAttr "data-last" e
+          readMaybe (T.unpack la)
       [] -> Nothing
 
 exractSpoilerTitle :: Cursor -> Text
@@ -122,108 +188,3 @@ exractSpoilerContent c =
     case cs of
       c' : _ -> extractPost c'
       [] -> []
-{-
-
-data SpoilerExtractor =
-  LookingForSpoilerTitle
-  | ExtractSpoilerTitle
-  | ExtractingSpoiler ByteString Int PostExtractor
-  | StopSpoiler ByteString (Seq PostElement)
-
-isSpoilerExtracted :: SpoilerExtractor -> Maybe (ByteString, Seq PostElement)
-isSpoilerExtracted (StopSpoiler title content) = Just (title, content)
-isSpoilerExtracted _ = Nothing
-
-data PostExtractor =
-  LookingForArticle
-  | LookingForLines (Seq PostElement)
-  | Spoiler (Seq PostElement) SpoilerExtractor
-  | Stop (Seq PostElement)
-
---  bbCodeSpoilerText
-
-valid :: BL.ByteString -> Bool
-valid bs =
-    not (BL.null bs)
-    && isValidUtf8 bs
-
-isValidUtf8 :: BL.ByteString -> Bool
-isValidUtf8 = isRight . T.decodeUtf8'
-
-isBBCodeImage :: [Attribute ByteString] -> Maybe PostElement
-isBBCodeImage attrs =
-  do
-    cls <- lookup "class" attrs
-    if "bbCodeImage" `elem` B.words (BL.toStrict cls)
-    then fmap PostImage $ lookup "src" attrs
-    else Nothing
-
-isSpoilerStart :: [Attribute ByteString] -> Maybe ()
-isSpoilerStart attrs =
-  do
-    cls <- lookup "class" attrs
-    if "bbCodeSpoilerContainer" `elem` B.words (BL.toStrict cls)
-    then return ()
-    else mzero 
-
-
---  ToggleTriggerAnchor bbCodeSpoilerContainer
-
--- SpoilerTarget bbCodeSpoilerText
-
-analyseImage :: [Attribute ByteString] -> Maybe PostElement
-analyseImage attrs = isBBCodeImage attrs
-
--- bbCodeImage LbImage
-
-extractSpoilerTitle :: [Attribute ByteString] -> Bool
-extractSpoilerTitle attrs =
-  case lookup "class" attrs of
-    Just cls -> "SpoilerTitle" `elem` B.words (BL.toStrict cls)
-    Nothing  -> False
-      
-strans :: SpoilerExtractor -> Tag ByteString -> SpoilerExtractor
-strans LookingForSpoilerTitle (TagOpen "span" attrs) =
-  if extractSpoilerTitle attrs
-  then ExtractSpoilerTitle
-  else LookingForSpoilerTitle
-strans LookingForSpoilerTitle _ = LookingForSpoilerTitle
-strans ExtractSpoilerTitle (TagText x) = ExtractingSpoiler x 0 (LookingForLines S.empty)
-strans ExtractSpoilerTitle _ = ExtractSpoilerTitle 
-strans (ExtractingSpoiler title divs mach) (TagOpen "div" attrs) =
-  ExtractingSpoiler title (divs + 1) (trans mach (TagOpen "div" attrs)) 
-strans (ExtractingSpoiler title 0 mach) (TagClose "div") =
-  case mach of
-    LookingForLines xs -> StopSpoiler title xs
-    Stop xs            -> StopSpoiler title xs
-    _                  -> StopSpoiler title S.empty -- error state
-strans (ExtractingSpoiler title divs mach) (TagClose "div") =
-  ExtractingSpoiler title (divs - 1) (trans mach (TagClose "div")) 
-strans (ExtractingSpoiler title divs mach) tag = ExtractingSpoiler title divs (trans mach tag)
-strans (StopSpoiler title xs) _ = StopSpoiler title xs
-  
-trans :: PostExtractor -> Tag ByteString -> PostExtractor
-trans (Spoiler xs mach) tag =
-  let
-    mach' = strans mach tag
-  in
-    case isSpoilerExtracted mach' of
-      Just (title, spoiler) -> LookingForLines (xs S.|> PostSpoiler title spoiler)
-      Nothing -> Spoiler xs mach'
-trans LookingForArticle (TagOpen "article" _) = LookingForLines S.empty
-trans (LookingForLines xs) (TagOpen "br" _) = LookingForLines (xs S.|> PostLineBreak)
-trans (LookingForLines xs) (TagOpen "img" attrs) =
-  case analyseImage attrs of
-    Just x -> LookingForLines (xs S.|> x)
-    Nothing -> LookingForLines xs
-trans (LookingForLines xs) (TagOpen "div" attrs) =
-  case isSpoilerStart attrs of
-    Just _ -> Spoiler xs LookingForSpoilerTitle
-    Nothing -> LookingForLines xs
-trans (LookingForLines xs) (TagText x) | valid x = LookingForLines (xs S.|> PostLine x)
-trans (LookingForLines xs) (TagText x) = LookingForLines xs
-trans (LookingForLines xs) (TagClose "article") = Stop xs                                         
-trans s _ = s
-
-
--}

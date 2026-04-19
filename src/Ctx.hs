@@ -147,11 +147,11 @@ catchLift action wrap = do
     Left err  -> throwError (wrap err)
     Right val -> return val
   
-getPageMessages
+getPageCursor
   :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
   => String  -- ^ Адрес страницы (относительный или полный)
-  -> m [Message]
-getPageMessages addr = do
+  -> m Cursor
+getPageCursor addr = do
   ctx <- get
   let
     fullUrl = addr
@@ -171,69 +171,60 @@ getPageMessages addr = do
   unless (status >= 200 && status < 300) $
     throwError $ NetworkError ("HTTP error: " ++ show status)
   
-  let body = view responseBody response
-
-  -- Разбор HTML
   let
-    doc = parseLBS body
-    cursor = fromDocument doc
-    maybePageNumber = exractPageNumber cursor   
-  liftIO $ print maybePageNumber 
-  return (extractMessages cursor)
-  
+    body = view responseBody response
+    doc  = parseLBS body
+  return (fromDocument doc)
+
+processMessage :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> Message -> m ()
+processMessage user (p, u, c) =
+  do
+    let
+      postname = T.unpack p
+      username = T.unpack u
+      filename = postname ++ "-" ++  username      
+    if username `elem` (view userFilter user)
+    then
+      do
+        let
+          post = extractPost c
+          (bs, bi, bd) = isValidPost post
+        if bd || (bs && bi)
+        then
+          do 
+            savePost filename post
+            liftIO $ putStrLn $ filename ++ " выводим"
+        else
+          liftIO $ putStrLn $ filename ++ " пропускаем, это коментарий"
+    else
+      liftIO $ putStrLn $ filename ++ " пропускаем, не тот автор"
+
+
+processPage :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> String -> m ()
+processPage user addr =
+  do
+    liftIO $ putStrLn $ "Loading: " ++ addr
+    cursor <- getPageCursor addr
+    let
+      messages = extractMessages cursor
+    mapM_ (processMessage user) messages
+    
 move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
 move user =
   do
     let
       threads = view userThreads user
       thread0 = threads !! 0
-      pr (x, y, c) =
-        do
-          let
-            username = T.unpack y
-            post = extractPost c
-          if null post
-          then return ()
-          else 
-           if username `elem` (view userFilter user)
-           then
-               do
-                let
-                  filename = T.unpack x ++ "-" ++  username
-                savePost filename post
-                liftIO $ putStrLn $ username ++ " post out"
-           else
-               liftIO $ putStrLn $ username ++ " post pass"
     login user
-    xs <- getPageMessages thread0
-
-    mapM_ pr xs  
-
-{-  
-  do
+    cursor <- getPageCursor thread0
     let
-      threads = view userThreads user
-      thread0 = threads !! 0
-      f (x, y, z) =
-        do
-          let
-            username = showB y
-          liftIO $ print (x, y)
-          case extractPost z of
-            Just p  ->
-              if username `elem` (view userFilter user)
-              then
-                do
-                  let
-                    filename = username ++ "-" ++ showB x
-                  savePost filename p
-                  liftIO $ putStrLn $ username ++ " post out"
-               else
-                liftIO $ putStrLn $ username ++ " post pass"
-            Nothing -> liftIO $ putStrLn "No post"
-          
-    login user
-    xs <- getPageMessages thread0
-    liftIO $ print (length xs)
-    mapM_ f xs
--}
+      maybePageNumber = exractPageNumber cursor    
+    case maybePageNumber of
+     Just n ->
+       do
+        let
+          pager y x = y ++ "page-" ++ (show x)
+          pages = thread0 : map (pager thread0) ([2 .. 10] ++ [250 .. 255]) -- 2 .. n
+        liftIO . putStrLn $ "Total: " ++ (show n)
+        mapM_ (processPage user) pages
+     Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"
