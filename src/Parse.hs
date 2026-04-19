@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Parse (extractMessages, Message, getAttr, hasClass) where
+module Parse (extractMessages, Message, getAttr, hasClass, hasStyle) where
 
 import qualified Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy (ByteString)
@@ -31,6 +31,12 @@ getAttr attrName c =
     NodeElement el -> M.lookup attrName (elementAttributes el)
     _ -> Nothing
 
+hasStyle :: Text -> Cursor -> Bool
+hasStyle st c =
+  case getAttr "style" c of
+    Just styles -> styles == st -- problematic  
+    Nothing -> False
+
 hasClass :: Text -> Cursor -> Bool
 hasClass cls c =
   case getAttr "class" c of
@@ -40,14 +46,20 @@ hasClass cls c =
 isMessage :: Cursor -> [Message]
 isMessage c =
   case (getAttr "id" c, getAttr "data-author" c) of
-    (Just msgId, Just msgAuthor) -> [(msgId, msgAuthor, c)] -- | "message " `elem` T.words cls
+    (Just msgId, Just msgAuthor) ->
+      let
+        cs = c $// check (hasClass "messageContent")
+      in   
+        case cs of
+          c' : _ -> [(msgId, msgAuthor, c')] -- | "message " `elem` T.words cls
+          [] -> []
     (_, _) -> []
 
 extractMessages :: Cursor -> [Message]
 extractMessages cursor =
   let
     messageList = cursor $// element "ol" >=> (attrIs "id" "messageList")
-    messageCursors = messageList >>= child >>= element "li" 
+    messageCursors = messageList >>= child >>= element "li"
   in
     concatMap isMessage messageCursors 
 

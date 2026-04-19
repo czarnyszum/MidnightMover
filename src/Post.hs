@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Post (Post, extractPost, savePost) where
+module Post (Post, extractPost, savePost, exractPageNumber) where
 
 -- import Control.Monad
 import Control.Monad.IO.Class
@@ -13,19 +13,22 @@ import Control.Monad.IO.Class
 -- import qualified Data.Sequence as S
 import Data.Text (Text)
 import qualified Data.Text as T
+import Text.Read (readMaybe)
+
 -- import qualified Data.Text.Lazy.Encoding as T
 -- import Data.Either (isRight)
-import Data.Foldable
+-- import Data.Foldable
 
 import Text.XML hiding (writeFile)
 import Text.XML.Cursor
 
-import Parse (getAttr, hasClass)
+import Parse (getAttr, hasClass, hasStyle)
 
 -- data Alignment = Unaligned | Centered deriving (Show)
 
 data PostElement =
   PostImage Text
+  | PostCentered [PostElement]
   | PostLine Text
   | PostLineBreak
   | PostSpoiler Text [PostElement]
@@ -34,7 +37,8 @@ instance Show PostElement where
   show (PostImage src) = "Img[" ++ (T.unpack src) ++ "]" 
   show (PostLine l) = "Line[" ++ T.unpack l ++ "]"
   show PostLineBreak = "\n"
-  show (PostSpoiler title body) = "Spoiler[" ++ T.unpack title ++ "]\n[" ++ (concatMap show (toList body)) ++ "]"
+  show (PostCentered post) = "CenteredStart:\n" ++ (concatMap show post) ++ "CenteredEnd\n" 
+  show (PostSpoiler title body) = "Spoiler[" ++ T.unpack title ++ "]\n[" ++ (concatMap show body) ++ "]"
 
 type Post = [PostElement]
 
@@ -42,7 +46,7 @@ savePost :: (MonadIO m) => String -> Post -> m ()
 savePost prefix p =
   do
     let
-      ps = concatMap show (toList p)
+      ps = concatMap show p
       nm = "./posts/" ++ prefix ++ ".txt"
     liftIO $ writeFile nm ps
 
@@ -70,6 +74,7 @@ extractElement el c
   | tag == "br" = [PostLineBreak]
   | tag == "img" = extractImage c
   | tag == "div" && hasClass "bbCodeSpoilerContainer" c = extractSpoiler c
+  | tag == "div" && hasStyle "text-align: center" c = [PostCentered (extractPost c)]
   | otherwise = extractPost c
   where
     tag = nameLocalName (elementName el)
@@ -87,6 +92,18 @@ extractSpoiler c =
     cont = exractSpoilerContent c
   in
     [PostSpoiler title cont]
+
+exractPageNumber :: Cursor -> Maybe Int
+exractPageNumber c =
+  let
+    els = c $// element "div" &/ check (hasClass "PageNav")
+  in
+    case els of
+      (e : _) ->
+        do
+          last <- getAttr "data-last" e
+          readMaybe (T.unpack last)
+      [] -> Nothing
 
 exractSpoilerTitle :: Cursor -> Text
 exractSpoilerTitle c =

@@ -177,6 +177,8 @@ getPageMessages addr = do
   let
     doc = parseLBS body
     cursor = fromDocument doc
+    maybePageNumber = exractPageNumber cursor   
+  liftIO $ print maybePageNumber 
   return (extractMessages cursor)
   
 move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
