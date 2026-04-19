@@ -91,9 +91,11 @@ extractSpoiler c =
 exractSpoilerTitle :: Cursor -> Text
 exractSpoilerTitle c =
   let
-    titleTexts = c $/ element "span" >=> (\s -> [s | hasClass "SpoilerTitle" s]) &/ content
-   in
-    T.strip (T.concat titleTexts)
+     spans = c $// element "span" &/ check (hasClass "SpoilerTitle") 
+  in
+    case spans of
+      span : _ -> T.strip (T.concat (span $/ content))
+      [] -> "Спойлер"
     
 exractSpoilerContent :: Cursor -> Post
 exractSpoilerContent c =
