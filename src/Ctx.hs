@@ -10,13 +10,15 @@ import Control.Exception
 import Control.Monad
 import Control.Monad.Except 
 import Control.Monad.State
-import Control.Lens
+import Control.Lens hiding (element)
 
 -- import Data.ByteString.Lazy (ByteString)
 -- import qualified Data.Text as T
 import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
+import Data.Text (Text)
 import qualified Data.Text as T
+import qualified Data.Text.Encoding as T
 -- import Data.Sequence (Seq)
 import Data.Time
 
@@ -92,6 +94,7 @@ data ErrorKind
   = NetworkError String        -- проблемы с сетью / HTTP
   | LoginFailed String         -- логин не удался (не 2xx, редирект на /login, и т.п.)
   | ProtoError String          -- неожиданный ответ
+  | TokenError
   deriving (Show, Eq)
 
 emptyCtx :: IO Ctx
@@ -107,8 +110,39 @@ emptyCtx =
         }
     return ctx
 
+extractXFToken :: (MonadError ErrorKind m) => Cursor -> m Text
+extractXFToken c =
+  case c $// element "input" >=> attributeIs "name" "_xfToken" >=> attribute "value" of
+    (t : _) -> return t
+    _ -> throwError TokenError
+    
+  
+getXFToken :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m Text
+getXFToken u =
+  do
+    ctx <- get
+    let
+      cks = _ctxCookieJar ctx
+      mgr = _ctxManager ctx
+      rqHd = [("User-Agent", "MidnightMover/0.0")]
+  
+    initReq <- liftIO $ parseRequest loginAddr     
+    let req = initReq  { requestHeaders = rqHd }
+    response <- liftIO $ httpLbs req mgr
+    let
+      cj = response ^. responseCookieJar
+      body = view responseBody response
+      doc  = parseLBS body
+      cursor = fromDocument doc
+    put $ ctx & ctxCookieJar .~ cj
+    extractXFToken cursor
+
 login :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
 login user = do
+
+  token <- getXFToken user
+  liftIO $ print token
+    
   ctx <- get
   let cj0   = ctx ^. ctxCookieJar
       mgr   = ctx ^. ctxManager
@@ -121,7 +155,7 @@ login user = do
         , "register"     := ("0" :: String)
         , "password"     := (user ^. userPassword)
         , "cookie_check" := ("1" :: String)
-        , "_xfToken"     := (""  :: String)
+        , "_xfToken"     := (T.unpack token)
         , "redirect"     := ("/forum/" :: String)
         ]
 
@@ -131,13 +165,22 @@ login user = do
   let status = r ^. responseStatus . to statusCode
       cj1    = r ^. responseCookieJar
 
-  liftIO $ print cj1
+  liftIO $ BL.writeFile "response" (r ^. responseBody)  -- (T.decodeUtf8 ($ r ^. responseBody))
  
   if status >= 200 && status < 300
     then do
       put $ ctx & ctxCookieJar .~ cj1
                 & ctxUser      .~ Just user
       liftIO $ putStrLn "Login succeeded."
+ {-
+      let
+        body = view responseBody r
+        doc  = parseLBS body
+        cursor = fromDocument doc
+      token' <- extractXFToken cursor
+      
+      liftIO $ putStrLn $ "Token: " ++ (T.unpack token')
+-}
     else do
       liftIO $ putStrLn $ "Login failed, HTTP status: " ++ show status
       throwError $ LoginFailed ("HTTP status " ++ show status)
@@ -168,17 +211,20 @@ getPageCursor addr = do
              , requestHeaders = rqHd
              }
 
-  liftIO $ print req
-  
-  response <- liftIO $ httpLbs req mgr
-  let status = statusCode (view responseStatus response)
-  let (newJar, _) = updateCookieJar response req <$> liftIO getCurrentTime <*> pure cks
-  put $ ctx & ctxCookieJar .~ newJar
+  liftIO $ print (cookieJar req)
 
+  response <- liftIO $ httpLbs req mgr
+  
+  now <- liftIO getCurrentTime
+  let (newJar, _) = updateCookieJar response req now cks
+
+  let status = statusCode (view responseStatus response)
   
   unless (status >= 200 && status < 300) $
     throwError $ NetworkError ("HTTP error: " ++ show status)
-  
+
+  put $ ctx & ctxCookieJar .~ newJar
+
   let
     body = view responseBody response
     doc  = parseLBS body
@@ -232,7 +278,7 @@ move user =
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          pages = thread0 : map (pager thread0) [2] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
+          pages = thread0 : map (pager thread0) [507] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
         liftIO . putStrLn $ "Total: " ++ (show n)
         mapM_ (processPage user) pages
      Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"
