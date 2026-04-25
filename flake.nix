@@ -35,6 +35,7 @@
           crypton-x509       = hpkg.crypton-x509;
 	        crypton-connection = hpkg.crypton-connection;
           tls                = hpkg.tls; 
+          time               = hpkg.time; 
         };
       in
       {

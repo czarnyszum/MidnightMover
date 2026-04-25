@@ -18,6 +18,7 @@ import Data.Aeson
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.Text as T
 -- import Data.Sequence (Seq)
+import Data.Time
 
 import GHC.Generics (Generic)
 --import qualified Data.ByteString.Char8 as B
@@ -25,7 +26,7 @@ import GHC.Generics (Generic)
 import System.FilePath ((</>))
 
 import Network.Wreq hiding (put, statusCode, get) 
-import Network.HTTP.Client (Manager, CookieJar, cookieJar, createCookieJar, requestHeaders, parseRequest, httpLbs)
+import Network.HTTP.Client (Manager, CookieJar, cookieJar, createCookieJar, requestHeaders, parseRequest, httpLbs, updateCookieJar)
 import Network.HTTP.Types.Status (statusCode)
 
 import Text.HTML.DOM
@@ -121,7 +122,7 @@ login user = do
         , "password"     := (user ^. userPassword)
         , "cookie_check" := ("1" :: String)
         , "_xfToken"     := (""  :: String)
-        , "redirect"     := (ctx ^. ctxBaseUrl)
+        , "redirect"     := ("/forum/" :: String)
         ]
 
   r <- liftIO (postWith opts0 loginAddr formParams)
@@ -130,6 +131,8 @@ login user = do
   let status = r ^. responseStatus . to statusCode
       cj1    = r ^. responseCookieJar
 
+  liftIO $ print cj1
+ 
   if status >= 200 && status < 300
     then do
       put $ ctx & ctxCookieJar .~ cj1
@@ -164,10 +167,15 @@ getPageCursor addr = do
              { cookieJar = Just cks
              , requestHeaders = rqHd
              }
+
+  liftIO $ print req
   
   response <- liftIO $ httpLbs req mgr
   let status = statusCode (view responseStatus response)
+  let (newJar, _) = updateCookieJar response req <$> liftIO getCurrentTime <*> pure cks
+  put $ ctx & ctxCookieJar .~ newJar
 
+  
   unless (status >= 200 && status < 300) $
     throwError $ NetworkError ("HTTP error: " ++ show status)
   
@@ -224,7 +232,7 @@ move user =
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          pages = thread0 : map (pager thread0) ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
+          pages = thread0 : map (pager thread0) [2] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
         liftIO . putStrLn $ "Total: " ++ (show n)
         mapM_ (processPage user) pages
      Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"

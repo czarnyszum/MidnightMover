@@ -39,6 +39,7 @@ executable MidnightMover
     , mtl
     , xml-conduit
     , text
+    , time
     , tls
     , wreq
 
