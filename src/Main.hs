@@ -7,6 +7,7 @@ import Control.Monad.State
 import Control.Monad.Except
 
 import Ctx
+import Bunker
 
 type AppM = ExceptT ErrorKind (StateT Ctx IO)
 
@@ -22,8 +23,16 @@ main = do
       do
         
         ctx <- emptyCtx
+        case u ^. userOutput of
+          OutputFile ->
+            do
+              (res, _) <- runAppM (move u) ctx
+              putStrLn $ "Result: " ++ show res
+          OutputBunker login password ->
+            do
+              print (login, password)
+              _ <- runAppM (loginBunker login password) ctx
+              return ()
         putStrLn "End"  
         
-        --(res, _) <- runAppM (move u) ctx
-        --putStrLn $ "Result: " ++ show res
-        --putStrLn $ "Success"
+        

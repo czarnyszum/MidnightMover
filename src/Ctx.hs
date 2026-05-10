@@ -91,7 +91,8 @@ data Ctx = Ctx
 makeLenses ''Ctx
 
 data ErrorKind
-  = NetworkError String        -- проблемы с сетью / HTTP
+  = NetworkError String        -- проблемы с сетью
+  | HttpError String           -- проблемы с HTTP  
   | LoginFailed String         -- логин не удался (не 2xx, редирект на /login, и т.п.)
   | ProtoError String          -- неожиданный ответ
   | TokenError

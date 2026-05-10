@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Parse (extractMessages, Message, getAttr, hasClass, hasStyle) where
+module Parse (extractMessages, Message, getAttr, hasClass, hasStyle, attrIs) where
 
 import qualified Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy (ByteString)

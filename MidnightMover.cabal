@@ -31,6 +31,7 @@ executable MidnightMover
     , containers
     , crypton-x509
     , crypton-connection
+    , encoding
     , filepath
     , http-client
     , http-client-tls
