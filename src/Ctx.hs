@@ -48,7 +48,7 @@ import Post
 import TlsManager 
 
 
-data Output = OutputFile | OutputBunker deriving (Eq, Ord, Show, Generic)
+data Output = OutputFile | OutputBunker String String deriving (Eq, Ord, Show, Generic)
 instance FromJSON Output
 
 data User = User
@@ -278,7 +278,7 @@ move user =
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          pages = thread0 : map (pager thread0) [507] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
+          pages = thread0 : map (pager thread0) [141, 502, 503, 505, 507, 518, 522, 532] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
         liftIO . putStrLn $ "Total: " ++ (show n)
         mapM_ (processPage user) pages
      Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"

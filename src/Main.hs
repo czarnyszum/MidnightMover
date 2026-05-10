@@ -22,6 +22,8 @@ main = do
       do
         
         ctx <- emptyCtx
-        (res, _) <- runAppM (move u) ctx
-        putStrLn $ "Result: " ++ show res
-        putStrLn $ "Success"
+        putStrLn "End"  
+        
+        --(res, _) <- runAppM (move u) ctx
+        --putStrLn $ "Result: " ++ show res
+        --putStrLn $ "Success"

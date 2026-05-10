@@ -19,8 +19,8 @@
 	<title>SimsMix форум</title>
 	
 	<noscript><style>.JsOnly, .jsOnly { display: none !important; }</style></noscript>
-	<link rel="stylesheet" href="css.php?css=xenforo,form,public&amp;style=1&amp;dir=LTR&amp;d=1777141732" />
-	<link rel="stylesheet" href="css.php?css=GoToTop_purecss,andy_todaysbirthdays,bbm_buttons,bookmarks_tab,node_category,node_forum,node_list,notices,panel_scroller,sidebar_social,thread_list_simple&amp;style=1&amp;dir=LTR&amp;d=1777141732" />
+	<link rel="stylesheet" href="css.php?css=xenforo,form,public&amp;style=1&amp;dir=LTR&amp;d=1777180299" />
+	<link rel="stylesheet" href="css.php?css=GoToTop_purecss,andy_todaysbirthdays,bbm_buttons,bookmarks_tab,node_category,node_forum,node_list,notices,panel_scroller,sidebar_social,thread_list_simple&amp;style=1&amp;dir=LTR&amp;d=1777180299" />
 	
 	
 
@@ -1009,7 +1009,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425788/" title="Сто восемьдесят седьмой патч для базовой игры 1.122.205.1030 (ПК) / 1.122.205.1230 (Mac)">Сто восемьдесят седьмой патч для базовой игры 1.122.205.1030 (ПК) / 1.122.205.1230 (Mac)</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/zzz-danaya.31/" class="username" dir="auto">Zzz-Danaya</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1776980967" data-diff="161466" data-datestring="24 апр 2026" data-timestring="00:49">24 апр 2026 в 00:49</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1776980967" data-diff="200066" data-datestring="24 апр 2026" data-timestring="00:49">24 апр 2026 в 00:49</abbr>
 				</span>
 			
 		</div>
@@ -2007,7 +2007,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425752/" title="Фермерша ищет мужа - Регина Алиено (Завершен)">Фермерша ищет мужа - Регина Алиено (Завершен)</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/sirenia.13221/" class="username" dir="auto">Sirenia</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1776883218" data-diff="259215" data-datestring="22 апр 2026" data-timestring="21:40">22 апр 2026 в 21:40</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1776883218" data-diff="297815" data-datestring="22 апр 2026" data-timestring="21:40">22 апр 2026 в 21:40</abbr>
 				</span>
 			
 		</div>
@@ -2096,7 +2096,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425806/" title="All My Wishes: Нильсен. Включите северное сияние!">All My Wishes: Нильсен. Включите северное сияние!</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/ihelen.655/" class="username" dir="auto">ihelen</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777117837" data-diff="24596" data-datestring="25 апр 2026" data-timestring="14:50">25 апр 2026 в 14:50</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777117837" data-diff="63196" data-datestring="25 апр 2026" data-timestring="14:50">25 апр 2026 в 14:50</abbr>
 				</span>
 			
 		</div>
@@ -2185,7 +2185,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425804/" title="Алиса в стране чудес">Алиса в стране чудес</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/krokozjabra.2554/" class="username" dir="auto">Крокозябра</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777099738" data-diff="42695" data-datestring="25 апр 2026" data-timestring="09:48">25 апр 2026 в 09:48</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777099738" data-diff="81295" data-datestring="25 апр 2026" data-timestring="09:48">25 апр 2026 в 09:48</abbr>
 				</span>
 			
 		</div>
@@ -2276,7 +2276,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>179</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>74.735</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>74.741</dd></dl>
 				
 			</div>
 			
@@ -2289,10 +2289,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425815/" title="Happy Ever After">Happy Ever After</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425829/" title="Цивилизация X">Цивилизация X</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/octavo.1557/" class="username" dir="auto">octavo</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777141732" data-diff="701" data-datestring="25 апр 2026" data-timestring="21:28">25 апр 2026 в 21:28</abbr>
+					<span class="lastThreadUser"><a href="members/felelya.11032/" class="username" dir="auto">felelya</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777180299" data-diff="734" data-datestring="26 апр 2026" data-timestring="08:11">26 апр 2026 в 08:11</abbr>
 				</span>
 			
 		</div>
@@ -2325,7 +2325,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>21</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>4.263</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>4.264</dd></dl>
 				
 			</div>
 			
@@ -2338,10 +2338,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425801/" title="Инь-янчики">Инь-янчики</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425817/" title="Инь-янчики">Инь-янчики</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/rusja.1442/" class="username" dir="auto">Руся</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777045348" data-diff="97085" data-datestring="24 апр 2026" data-timestring="18:42">24 апр 2026 в 18:42</abbr>
+					<span class="lastThreadUser"><a href="members/loveless.705/" class="username" dir="auto">loveless</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777142874" data-diff="38159" data-datestring="25 апр 2026" data-timestring="21:47">25 апр 2026 в 21:47</abbr>
 				</span>
 			
 		</div>
@@ -3077,7 +3077,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>772</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>43.738</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>43.745</dd></dl>
 				
 			</div>
 			
@@ -3142,10 +3142,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425670/" title="Скриншот апреля &quot;Весеннее обострение&quot;">Скриншот апреля &quot;Весеннее обострение&quot;</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425826/" title="Стихии. Хуманизация. Апрель  2026">Стихии. Хуманизация. Апрель  2026</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/alanna2202.668/" class="username" dir="auto">Alanna2202</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1776617782" data-diff="524651" data-datestring="19 апр 2026" data-timestring="19:56">19 апр 2026 в 19:56</abbr>
+					<span class="lastThreadUser"><a href="members/aurelija.37341/" class="username" dir="auto">aurelija</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777150957" data-diff="30076" data-datestring="26 апр 2026" data-timestring="00:02">26 апр 2026 в 00:02</abbr>
 				</span>
 			
 		</div>
@@ -3292,7 +3292,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425778/" title="Обновления текущих версий модов и хакнутых предметов">Обновления текущих версий модов и хакнутых предметов</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/nnnnatali.12583/" class="username" dir="auto">NNNNatali</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1776948878" data-diff="193555" data-datestring="23 апр 2026" data-timestring="15:54">23 апр 2026 в 15:54</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1776948878" data-diff="232155" data-datestring="23 апр 2026" data-timestring="15:54">23 апр 2026 в 15:54</abbr>
 				</span>
 			
 		</div>
@@ -3458,7 +3458,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425813/" title="Контроль опций игры, исправление багов">Контроль опций игры, исправление багов</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/trofy.1014/" class="username" dir="auto">Trofy</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777139752" data-diff="2681" data-datestring="25 апр 2026" data-timestring="20:55">25 апр 2026 в 20:55</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777139752" data-diff="41281" data-datestring="25 апр 2026" data-timestring="20:55">25 апр 2026 в 20:55</abbr>
 				</span>
 			
 		</div>
@@ -4224,7 +4224,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/425807/" title="Следы невиданных зверей">Следы невиданных зверей</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/lora.37/" class="username" dir="auto">Lora</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777120423" data-diff="22010" data-datestring="25 апр 2026" data-timestring="15:33">25 апр 2026 в 15:33</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1777120423" data-diff="60610" data-datestring="25 апр 2026" data-timestring="15:33">25 апр 2026 в 15:33</abbr>
 				</span>
 			
 		</div>
@@ -4485,34 +4485,7 @@ $(document).ready(function() {
 						<li>
 						
 							<a href="members/apelsinka.961/" dir="auto"
-								class="username">apelsinka</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/manjaschaja.7876/" dir="auto"
-								class="username">Манящая</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/margin.43/" dir="auto"
-								class="username">margin</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/octavo.1557/" dir="auto"
-								class="username">octavo</a>
+								class="username">apelsinka</a>
 						
 						</li>
 					
@@ -4522,7 +4495,7 @@ $(document).ready(function() {
 		
 		
 		<div class="footnote">
-			Всего: 544 (пользователей: 6, гостей: 367, роботов: 171)
+			Всего: 622 (пользователей: 2, гостей: 432, роботов: 188)
 		</div>
 	</div>
 </div>
@@ -4536,6 +4509,150 @@ $(document).ready(function() {
 					
 
 <ul>
+
+	<li id="thread-4044" class="threadListItem" data-author="felelya">
+
+		<a href="members/felelya.11032/" class="avatar Av11032s" data-avatarhtml="true"><img src="data/avatars/s/11/11032.jpg?1568836232" width="48" height="48" alt="felelya" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/civilizacija-x.4044/unread"><span class="prefix prefixPrimary">TS4 Мир:</span> Цивилизация X</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: felelya, <abbr class="DateTime" data-time="1777180299" data-diff="734" data-datestring="26 апр 2026" data-timestring="08:11">26 апр 2026 в 08:11</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-5442" class="threadListItem" data-author="Психотронный киви">
+
+		<a href="members/psixotronnyj-kivi.6047/" class="avatar Av6047s" data-avatarhtml="true"><img src="data/avatars/s/6/6047.jpg?1716312566" width="48" height="48" alt="Психотронный киви" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/posledstvija-spontannogo-vdoxnovenija.5442/unread"><span class="prefix prefixPrimary">TS4 Мир:</span> Последствия спонтанного вдохновения</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: Психотронный киви, <abbr class="DateTime" data-time="1777161798" data-diff="19235" data-datestring="26 апр 2026" data-timestring="03:03">26 апр 2026 в 03:03</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-894" class="threadListItem" data-author="octavo">
+
+		<a href="members/octavo.1557/" class="avatar Av1557s" data-avatarhtml="true"><img src="data/avatars/s/1/1557.jpg?1641985585" width="48" height="48" alt="octavo" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/mir-kleo-perezagruzka.894/unread"><span class="prefix prefixPrimary">TS4 Мир:</span> Мир Клео. Перезагрузка</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: octavo, <abbr class="DateTime" data-time="1777151512" data-diff="29521" data-datestring="26 апр 2026" data-timestring="00:11">26 апр 2026 в 00:11</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-6721" class="threadListItem" data-author="aurelija">
+
+		<a href="members/aurelija.37341/" class="avatar Av37341s" data-avatarhtml="true"><img src="data/avatars/s/37/37341.jpg?1634326359" width="48" height="48" alt="aurelija" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/stixii-xumanizacija-aprel-2026.6721/unread"><span class="prefix prefixSkyBlue">Конкурсы симс-моделей</span> Стихии. Хуманизация. Апрель  2026</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: aurelija, <abbr class="DateTime" data-time="1777150957" data-diff="30076" data-datestring="26 апр 2026" data-timestring="00:02">26 апр 2026 в 00:02</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/konkursy-sim-modelej.86/" class="forumLink">Конкурсы сим-моделей</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-6723" class="threadListItem" data-author="aurelija">
+
+		<a href="members/aurelija.37341/" class="avatar Av37341s" data-avatarhtml="true"><img src="data/avatars/s/37/37341.jpg?1634326359" width="48" height="48" alt="aurelija" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/skrinshot-aprelja-vesennee-obostrenie.6723/unread"><span class="prefix prefixSkyBlue">Арт-конкурсы</span> Скриншот апреля &quot;Весеннее обострение&quot;</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: aurelija, <abbr class="DateTime" data-time="1777150523" data-diff="30510" data-datestring="25 апр 2026" data-timestring="23:55">25 апр 2026 в 23:55</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/art-konkursy.85/" class="forumLink">Арт-конкурсы</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-2119" class="threadListItem" data-author="loveless">
+
+		<a href="members/loveless.705/" class="avatar Av705s" data-avatarhtml="true"><img src="data/avatars/s/0/705.jpg?1502573251" width="48" height="48" alt="loveless" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/in-janchiki.2119/unread"><span class="prefix prefixSkyBlue">Sims-арт</span> Инь-янчики</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: loveless, <abbr class="DateTime" data-time="1777142874" data-diff="38159" data-datestring="25 апр 2026" data-timestring="21:47">25 апр 2026 в 21:47</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/sims-art.68/" class="forumLink">Sims-арт</a>
+			</div>
+		</div>
+	</li>
 
 	<li id="thread-4019" class="threadListItem" data-author="octavo">
 
@@ -4552,31 +4669,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: octavo, <abbr class="DateTime" data-time="1777141732" data-diff="701" data-datestring="25 апр 2026" data-timestring="21:28">25 апр 2026 в 21:28</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-5442" class="threadListItem" data-author="octavo">
-
-		<a href="members/octavo.1557/" class="avatar Av1557s" data-avatarhtml="true"><img src="data/avatars/s/1/1557.jpg?1641985585" width="48" height="48" alt="octavo" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/posledstvija-spontannogo-vdoxnovenija.5442/unread"><span class="prefix prefixPrimary">TS4 Мир:</span> Последствия спонтанного вдохновения</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: octavo, <abbr class="DateTime" data-time="1777141122" data-diff="1311" data-datestring="25 апр 2026" data-timestring="21:18">25 апр 2026 в 21:18</abbr>
+				Последнее: octavo, <abbr class="DateTime" data-time="1777141732" data-diff="39301" data-datestring="25 апр 2026" data-timestring="21:28">25 апр 2026 в 21:28</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4600,7 +4693,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Trofy, <abbr class="DateTime" data-time="1777139752" data-diff="2681" data-datestring="25 апр 2026" data-timestring="20:55">25 апр 2026 в 20:55</abbr>
+				Последнее: Trofy, <abbr class="DateTime" data-time="1777139752" data-diff="41281" data-datestring="25 апр 2026" data-timestring="20:55">25 апр 2026 в 20:55</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4624,7 +4717,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Trofy, <abbr class="DateTime" data-time="1777139358" data-diff="3075" data-datestring="25 апр 2026" data-timestring="20:49">25 апр 2026 в 20:49</abbr>
+				Последнее: Trofy, <abbr class="DateTime" data-time="1777139358" data-diff="41675" data-datestring="25 апр 2026" data-timestring="20:49">25 апр 2026 в 20:49</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4648,7 +4741,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Leaselmary, <abbr class="DateTime" data-time="1777136684" data-diff="5749" data-datestring="25 апр 2026" data-timestring="20:04">25 апр 2026 в 20:04</abbr>
+				Последнее: Leaselmary, <abbr class="DateTime" data-time="1777136684" data-diff="44349" data-datestring="25 апр 2026" data-timestring="20:04">25 апр 2026 в 20:04</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4672,7 +4765,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Lora, <abbr class="DateTime" data-time="1777120423" data-diff="22010" data-datestring="25 апр 2026" data-timestring="15:33">25 апр 2026 в 15:33</abbr>
+				Последнее: Lora, <abbr class="DateTime" data-time="1777120423" data-diff="60610" data-datestring="25 апр 2026" data-timestring="15:33">25 апр 2026 в 15:33</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4696,7 +4789,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: ihelen, <abbr class="DateTime" data-time="1777117837" data-diff="24596" data-datestring="25 апр 2026" data-timestring="14:50">25 апр 2026 в 14:50</abbr>
+				Последнее: ihelen, <abbr class="DateTime" data-time="1777117837" data-diff="63196" data-datestring="25 апр 2026" data-timestring="14:50">25 апр 2026 в 14:50</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4720,35 +4813,11 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Крокозябра, <abbr class="DateTime" data-time="1777099738" data-diff="42695" data-datestring="25 апр 2026" data-timestring="09:48">25 апр 2026 в 09:48</abbr>
+				Последнее: Крокозябра, <abbr class="DateTime" data-time="1777099738" data-diff="81295" data-datestring="25 апр 2026" data-timestring="09:48">25 апр 2026 в 09:48</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
 				<a href="forums/the-sims-4-challenges-drugie-ispytanija.38/" class="forumLink">The Sims 4: Challenges - Другие испытания</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-2119" class="threadListItem" data-author="Руся">
-
-		<a href="members/rusja.1442/" class="avatar Av1442s" data-avatarhtml="true"><img src="data/avatars/s/1/1442.jpg?1707977396" width="48" height="48" alt="Руся" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/in-janchiki.2119/unread"><span class="prefix prefixSkyBlue">Sims-арт</span> Инь-янчики</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Руся, <abbr class="DateTime" data-time="1777045348" data-diff="97085" data-datestring="24 апр 2026" data-timestring="18:42">24 апр 2026 в 18:42</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/sims-art.68/" class="forumLink">Sims-арт</a>
 			</div>
 		</div>
 	</li>
@@ -4768,7 +4837,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Ruby89, <abbr class="DateTime" data-time="1777041128" data-diff="101305" data-datestring="24 апр 2026" data-timestring="17:32">24 апр 2026 в 17:32</abbr>
+				Последнее: Ruby89, <abbr class="DateTime" data-time="1777041128" data-diff="139905" data-datestring="24 апр 2026" data-timestring="17:32">24 апр 2026 в 17:32</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4792,107 +4861,11 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: TanyaJ, <abbr class="DateTime" data-time="1777022720" data-diff="119713" data-datestring="24 апр 2026" data-timestring="12:25">24 апр 2026 в 12:25</abbr>
+				Последнее: TanyaJ, <abbr class="DateTime" data-time="1777022720" data-diff="158313" data-datestring="24 апр 2026" data-timestring="12:25">24 апр 2026 в 12:25</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
 				<a href="forums/the-sims-4-challenges-apokalipsis.148/" class="forumLink">The Sims 4: Challenges - Апокалипсис</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-6716" class="threadListItem" data-author="Zzz-Danaya">
-
-		<a href="members/zzz-danaya.31/" class="avatar Av31s" data-avatarhtml="true"><img src="data/avatars/s/0/31.jpg?1762503520" width="48" height="48" alt="Zzz-Danaya" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/sto-vosemdesjat-sedmoj-patch-dlja-bazovoj-igry-1-122-205-1030-pk-1-122-205-1230-mac.6716/unread">Сто восемьдесят седьмой патч для базовой игры 1.122.205.1030 (ПК) / 1.122.205.1230 (Mac)</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Zzz-Danaya, <abbr class="DateTime" data-time="1776980967" data-diff="161466" data-datestring="24 апр 2026" data-timestring="00:49">24 апр 2026 в 00:49</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/the-sims-4-oficialnye-patchi-i-besplatnye-obnovlenija-kontenta.27/" class="forumLink">The Sims 4: Официальные патчи и бесплатные обновления контента</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-3257" class="threadListItem" data-author="ihelen">
-
-		<a href="members/ihelen.655/" class="avatar Av655s" data-avatarhtml="true"><img src="data/avatars/s/0/655.jpg?1488037199" width="48" height="48" alt="ihelen" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/paralives-novyj-simuljator-zhizni.3257/unread">Paralives - новый симулятор жизни</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: ihelen, <abbr class="DateTime" data-time="1776976420" data-diff="166013" data-datestring="23 апр 2026" data-timestring="23:33">23 апр 2026 в 23:33</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/boltalka.34/" class="forumLink">Болталка</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-5943" class="threadListItem" data-author="Рейнис">
-
-		<a href="members/rejnis.35361/" class="avatar Av35361s" data-avatarhtml="true"><img src="data/avatars/s/35/35361.jpg?1629648536" width="48" height="48" alt="Рейнис" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/okkultnaja-dinastija-rassekrechennye-semejnye-arxivy.5943/unread"><span class="prefix prefixSkyBlue">TS4: Challenge</span> Оккультная династия. Рассекреченные семейные архивы</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Рейнис, <abbr class="DateTime" data-time="1776973898" data-diff="168535" data-datestring="23 апр 2026" data-timestring="22:51">23 апр 2026 в 22:51</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/the-sims-4-challenges-drugie-ispytanija.38/" class="forumLink">The Sims 4: Challenges - Другие испытания</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-482" class="threadListItem" data-author="NNNNatali">
-
-		<a href="members/nnnnatali.12583/" class="avatar Av12583s" data-avatarhtml="true"><img src="data/avatars/s/12/12583.jpg?1577881337" width="48" height="48" alt="NNNNatali" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/obnovlenija-tekuschix-versij-modov-i-xaknutyx-predmetov.482/unread"><span class="prefix prefixSkyBlue">TS4: Моды и хаки</span> Обновления текущих версий модов и хакнутых предметов</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: NNNNatali, <abbr class="DateTime" data-time="1776948878" data-diff="193555" data-datestring="23 апр 2026" data-timestring="15:54">23 апр 2026 в 15:54</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/the-sims-4-obekty-i-mody-izmenjajuschie-igru.22/" class="forumLink">The Sims 4: Объекты и моды, изменяющие игру</a>
 			</div>
 		</div>
 	</li>
@@ -4912,11 +4885,11 @@ $(document).ready(function() {
 					<dl class="discussionCount"><dt>Темы:</dt>
 						<dd>4.007</dd></dl>
 					<dl class="messageCount"><dt>Сообщения:</dt>
-						<dd>406.914</dd></dl>
+						<dd>406.928</dd></dl>
 					<dl class="memberCount"><dt>Пользователи:</dt>
-						<dd>23.697</dd></dl>
+						<dd>23.699</dd></dl>
 					<dl><dt>Новый пользователь:</dt>
-						<dd><a href="members/krimsonqueen.61703/" class="username" dir="auto">KrimsonQueen</a></dd></dl>
+						<dd><a href="members/svetabec.61709/" class="username" dir="auto">СветаБец</a></dd></dl>
 					<!-- slot: forum_stats_extra -->
 				</div>
 			</div>
@@ -4930,8 +4903,12 @@ $(document).ready(function() {
             <h3>Именинники</h3>
             <ol>
             
-                <li><a href="members/serafima.731/"
-			class="username">serafima</a>
+                <li><a href="members/minvik.60056/"
+			class="username">minvik</a>,
+</li>
+            
+                <li><a href="members/_kate_rina_r.58598/"
+			class="username">_Kate_rina_r</a>
 </li>
             
             </ol>
@@ -5043,7 +5020,7 @@ $(document).ready(function() {
 					</div>
 					<ul class="secondaryContent blockLinksList">
 					
-						<li><a href="forums/-/mark-read?date=1777142433" class="OverlayTrigger">Отметить разделы прочитанными</a></li>
+						<li><a href="forums/-/mark-read?date=1777181033" class="OverlayTrigger">Отметить разделы прочитанными</a></li>
 						<li><a href="search/?type=post">Поиск сообщений</a></li>
 						
 							<li><a href="watched/forums">Отслеживаемые разделы</a></li>
@@ -5222,12 +5199,12 @@ $(document).ready(function() {
 						<form action="account/toggle-visibility" method="post" class="AutoValidator visibilityForm">
 							<label><input type="checkbox" name="visible" value="1" class="SubmitOnChange"  checked="checked" />
 								Показывать онлайн-статус</label>
-							<input type="hidden" name="_xfToken" value="961,1777142433,6057442032c4c9e0bfbca1c187c8501d8d24279b" />
+							<input type="hidden" name="_xfToken" value="961,1777181033,a81997ef0373effac7cb9fe695a55b2d921d37df" />
 						</form>
 					</li>
 				</ul>
 				<ul class="col2 blockLinksList">
-					<li><a href="logout/?_xfToken=961%2C1777142433%2C6057442032c4c9e0bfbca1c187c8501d8d24279b" class="LogOut">Выход</a></li>
+					<li><a href="logout/?_xfToken=961%2C1777181033%2Ca81997ef0373effac7cb9fe695a55b2d921d37df" class="LogOut">Выход</a></li>
 				</ul>
 			</div>
 			
@@ -5236,7 +5213,7 @@ $(document).ready(function() {
 					<div class="submitUnit">
 						<span id="visMenuSEdCount" title="Осталось символов"></span>
 						<input type="submit" class="button primary MenuCloser" value="Отправить" />
-						<input type="hidden" name="_xfToken" value="961,1777142433,6057442032c4c9e0bfbca1c187c8501d8d24279b" />
+						<input type="hidden" name="_xfToken" value="961,1777181033,a81997ef0373effac7cb9fe695a55b2d921d37df" />
 						<input type="hidden" name="return" value="1" /> 
 					</div>
 				</form>
@@ -5400,7 +5377,7 @@ $(document).ready(function() {
 				
 			</div>
 			
-			<input type="hidden" name="_xfToken" value="961,1777142433,6057442032c4c9e0bfbca1c187c8501d8d24279b" />
+			<input type="hidden" name="_xfToken" value="961,1777181033,a81997ef0373effac7cb9fe695a55b2d921d37df" />
 		</form>		
 	</fieldset>
 	
@@ -5516,9 +5493,9 @@ jQuery.extend(true, XenForo,
 	visitor: { user_id: 961 },
 	serverTimeInfo:
 	{
-		now: 1777142433,
-		today: 1777064400,
-		todayDow: 6
+		now: 1777181033,
+		today: 1777150800,
+		todayDow: 0
 	},
 	_lightBoxUniversal: "0",
 	_enableOverlays: "1",
@@ -5539,7 +5516,7 @@ jQuery.extend(true, XenForo,
 	_ignoredUsers: [],
 	_loadedScripts: {"node_list":true,"node_category":true,"node_forum":true,"sidebar_social":true,"thread_list_simple":true,"andy_todaysbirthdays":true,"bbm_buttons":true,"notices":true,"panel_scroller":true,"bookmarks_tab":true,"GoToTop_purecss":true,"js\/brivium\/CustomNodeStyle\/custom_node.js?_v=51f0ae65":true,"js\/sedo\/gototop\/xen.ui.totop.js?_v=51f0ae65":true},
 	_cookieConfig: { path: "/", domain: "", prefix: "xf_"},
-	_csrfToken: "961,1777142433,6057442032c4c9e0bfbca1c187c8501d8d24279b",
+	_csrfToken: "961,1777181033,a81997ef0373effac7cb9fe695a55b2d921d37df",
 	_csrfRefreshUrl: "login/csrf-token-refresh",
 	_jsVersion: "51f0ae65",
 	_noRtnProtect: false,

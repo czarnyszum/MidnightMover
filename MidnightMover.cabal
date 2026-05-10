@@ -22,6 +22,7 @@ executable MidnightMover
                        Post
                        TlsManager
                        Ctx
+                       Bunker
   build-depends:
       base
     , aeson
