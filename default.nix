@@ -1,7 +1,7 @@
 { mkDerivation, aeson, base, blaze-html, bytestring, containers
 , crypton-connection, crypton-x509, encoding, filepath
 , html-conduit, http-client, http-client-tls, http-types, lens, lib
-, mtl, text, time, tls, wreq, xml-conduit
+, mtl, process, text, time, tls, wreq, xml-conduit
 }:
 mkDerivation {
   pname = "MidnightMover";
@@ -12,7 +12,8 @@ mkDerivation {
   executableHaskellDepends = [
     aeson base blaze-html bytestring containers crypton-connection
     crypton-x509 encoding filepath html-conduit http-client
-    http-client-tls http-types lens mtl text time tls wreq xml-conduit
+    http-client-tls http-types lens mtl process text time tls wreq
+    xml-conduit
   ];
   license = lib.licenses.mit;
   mainProgram = "MidnightMover";

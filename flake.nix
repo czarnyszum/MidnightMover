@@ -31,6 +31,7 @@
           http-client-tls    = hpkg.http-client-tls;
           lens               = hpkg.lens;
           mtl                = hpkg.mtl;
+          process            = hpkg.process;
           text               = hpkg.text;
           wreq               = hpkg.wreq;
           crypton-x509       = hpkg.crypton-x509;

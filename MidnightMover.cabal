@@ -39,6 +39,7 @@ executable MidnightMover
     , html-conduit
     , lens
     , mtl
+    , process
     , xml-conduit
     , text
     , time

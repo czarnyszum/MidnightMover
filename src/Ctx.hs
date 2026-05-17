@@ -92,6 +92,7 @@ makeLenses ''Ctx
 
 data ErrorKind
   = NetworkError String        -- проблемы с сетью
+  | BunkerScript String
   | HttpError String           -- проблемы с HTTP  
   | LoginFailed String         -- логин не удался (не 2xx, редирект на /login, и т.п.)
   | ProtoError String          -- неожиданный ответ
@@ -102,6 +103,7 @@ emptyCtx :: IO Ctx
 emptyCtx =
   do
     mng <- mkTlsManager
+        
     let
       ctx = Ctx
         { _ctxCookieJar = createCookieJar []
