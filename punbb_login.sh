@@ -12,6 +12,7 @@ fi
 BASE_URL="https://gamestories.clanboard.ru"
 LOGIN_PAGE="$BASE_URL/login.php"
 LOGIN_POST="$BASE_URL/login.php?action=in"
+INDEX_PAGE="$BASE_URL/index.php"
 
 COOKIE_JAR=$(mktemp)
 TEMP_FILE=$(mktemp)
@@ -30,7 +31,7 @@ REFERER=$(grep -oP 'name="referer"\s+value="\K[^"]+' "$TEMP_FILE" | head -1)
 FORM_SENT="${FORM_SENT:-1}"
 REFERER="${REFERER:-/}"
 
-# Step 2: POST login credentials
+# Step 2: POST login credentials 
 curl -k -L -b "$COOKIE_JAR" -c "$COOKIE_JAR" -s \
     -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36" \
     -H "Content-Type: application/x-www-form-urlencoded" \
@@ -40,8 +41,13 @@ curl -k -L -b "$COOKIE_JAR" -c "$COOKIE_JAR" -s \
     --data-urlencode "form_sent=$FORM_SENT" \
     --data-urlencode "referer=$REFERER" \
     --data-urlencode "savepassword=1" \
-    --data-urlencode "login=Login" \
+    --data-urlencode "login=Войти" \
     "$LOGIN_POST" -o /dev/null
 
-# Step 3: Output the final cookie jar (Netscape format) to stdout
+# Step 3: GET index page to obtain any additional cookies (e.g., after login redirects)  
+curl -k -L -v -b "$COOKIE_JAR" -c "$COOKIE_JAR" -s \
+    -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36" \
+    "$INDEX_PAGE" -o curl_index.html
+
+# Step 4: Output the final cookie jar (Netscape format) to stdout
 cat "$COOKIE_JAR"
