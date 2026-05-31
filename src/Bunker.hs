@@ -4,6 +4,229 @@
 
 module Bunker (loginBunker) where
 
+import Control.Concurrent
+import Control.Lens hiding (element)
+import Control.Monad
+import Control.Monad.Except
+import Control.Monad.State
+import Control.Monad.IO.Class
+
+import Data.Text (Text)
+import qualified Data.Text as T
+import qualified Data.Text.IO as T
+
+import Test.WebDriver
+import Test.WebDriver.Commands
+import Test.WebDriver.Config
+
+import Ctx
+
+-- | Default WebDriver configuration using ChromeDriver
+punbbConfig :: WDConfig
+punbbConfig = defaultConfig
+  { wdHost = "localhost"
+  , wdPort = 4444
+  }
+
+savePageAsHtml :: FilePath -> WD ()
+savePageAsHtml filePath = do
+  pageSource <- getSource
+  liftIO $ T.writeFile filePath pageSource
+
+-- | Login to PunBB forum
+-- Takes base URL, username and password
+loginPunBB :: Text -> Text -> Text -> WD ()
+loginPunBB baseUrl username password = do
+  -- Navigate to login page
+  openPage $ T.unpack baseUrl <> "/login.php"
+  
+  -- Wait for and fill in username field
+  usernameField <- findElem (ById "fld1")
+  clearInput usernameField
+  sendKeys username usernameField
+  
+  -- Fill in password field
+  passwordField <- findElem (ById "fld2")
+  clearInput passwordField
+  sendKeys password passwordField
+  
+  -- Submit the login form
+  submitBtn <- findElem (ByName "login")
+  click submitBtn
+  
+  -- Wait for redirect after login
+  liftIO $ threadDelay 2000000 -- 2 second delay
+
+
+{-
+
+
+-- | Extract token value from hidden input within a div
+-- PunBB's process_form() appends hidden inputs to formkey and formetc divs
+getTokenFromDiv :: Text -> WD (Text, Text)
+getTokenFromDiv divId = do
+  -- Find the div containing the token
+  tokenDiv <- findElem (ById $ T.unpack divId)
+  
+  -- Find the hidden input inside the div
+  -- process_form() appends an <input type="hidden"> to these divs
+  hiddenInput <- findElemFrom tokenDiv (ByTag "input")
+  
+  -- Get both name and value attributes of the hidden input
+  tokenName <- attr hiddenInput "name"
+  tokenValue <- attr hiddenInput "value"
+  
+  case (tokenName, tokenValue) of
+    (Just n, Just v) -> return (n, v)
+    _ -> fail $ "Could not find token in div: " <> T.unpack divId
+
+-- | Trigger process_form() by attempting to submit, then capture tokens
+-- We need to execute process_form() to populate the hidden fields
+triggerProcessForm :: WD ()
+triggerProcessForm = do
+  -- Execute process_form via JavaScript to populate hidden fields
+  -- without actually submitting the form
+  executeJS [] 
+    "var form = document.getElementById('post');\
+    \process_form(form);" :: WD ()
+
+-- | Get both security tokens after triggering process_form
+getSecurityTokens :: WD ((Text, Text), (Text, Text))
+getSecurityTokens = do
+  -- Trigger process_form to populate the hidden divs
+  triggerProcessForm
+  
+  -- Small delay to ensure DOM is updated
+  liftIO $ threadDelay 500000 -- 0.5 second delay
+  
+  -- Extract tokens from both divs
+  formkeyToken <- getTokenFromDiv "formkey"
+  formetcToken <- getTokenFromDiv "formetc"
+  
+  return (formkeyToken, formetcToken)
+
+-- | Post a message to a PunBB thread
+-- Takes base URL, thread ID, and message content
+postMessage :: Text -> Int -> Text -> WD ()
+postMessage baseUrl threadId message = do
+  -- Navigate to the post reply page
+  openPage $ T.unpack baseUrl <> "/post.php?tid=" <> show threadId
+  
+  -- Wait for page to load
+  liftIO $ threadDelay 1000000 -- 1 second delay
+  
+  -- Find and fill in the message textarea
+  -- PunBB uses 'req_message' as the textarea name
+  messageArea <- findElem (ByName "req_message")
+  clearInput messageArea
+  sendKeys message messageArea
+  
+  -- Trigger process_form to populate security tokens
+  -- We call it via JS before clicking submit
+  triggerProcessForm
+  
+  -- Small delay for token population
+  liftIO $ threadDelay 500000
+  
+  -- Verify tokens were populated (optional but useful for debugging)
+  (formkeyName, formkeyVal) <- getTokenFromDiv "formkey"
+  (formetcName, formetcVal) <- getTokenFromDiv "formetc"
+  
+  liftIO $ putStrLn $ "FormKey token - Name: " <> T.unpack formkeyName 
+                    <> ", Value: " <> T.unpack formkeyVal
+  liftIO $ putStrLn $ "Formetc token - Name: " <> T.unpack formetcName 
+                    <> ", Value: " <> T.unpack formetcVal
+  
+  -- Now click the submit button
+
+-- The onsubmit handler will call process_form again, but tokens are already set
+  submitBtn <- findElem (ByName "submit")
+  click submitBtn
+  
+  -- Wait for post to complete
+  liftIO $ threadDelay 2000000 -- 2 second delay
+
+-- | Alternative: Submit form entirely via JavaScript
+-- Useful if the normal submit flow has issues
+postMessageViaJS :: Text -> Int -> Text -> WD ()
+postMessageViaJS baseUrl threadId message = do
+  openPage $ T.unpack baseUrl <> "/post.php?tid=" <> show threadId
+  liftIO $ threadDelay 1000000
+  
+  -- Fill message via JavaScript to avoid any input issues
+  executeJS [JSArg message] 
+    "document.getElementsByName('req_message')[0].value = arguments[0];" :: WD ()
+  
+  -- Trigger process_form to set security tokens
+  triggerProcessForm
+  liftIO $ threadDelay 500000
+  
+  -- Submit form via JavaScript
+  executeJS []
+    "var form = document.getElementById('post');\
+    \form.submit();" :: WD ()
+  
+  liftIO $ threadDelay 2000000
+
+-- | Complete bot session: login and post a message
+runPunBBBot :: Text -- ^ Base URL (e.g., "http://forum.example.com")
+            -> Text -- ^ Username
+            -> Text -- ^ Password  
+            -> Int -- ^ Thread ID
+            -> Text -- ^ Message to post
+            -> IO ()
+runPunBBBot baseUrl username password threadId message = do
+  runSession punbbConfig $ do
+    -- Login first
+    loginPunBB baseUrl username password
+    
+    -- Post the message
+    postMessage baseUrl threadId message
+    
+    -- Close the session
+    closeSession
+
+-- | Run multiple posts in a single session
+runPunBBBotMultiple :: Text -- ^ Base URL
+                    -> Text -- ^ Username
+                    -> Text -- ^ Password
+                    -> [(Int, Text)] -- ^ List of (threadId, message) pairs
+                    -> IO ()
+runPunBBBotMultiple baseUrl username password posts = do
+  runSession punbbConfig $ do
+    loginPunBB baseUrl username password
+    
+    mapM_ (\(tid, msg) -> do
+      postMessage baseUrl tid msg
+      liftIO $ threadDelay 1000000 -- 1 second between posts
+      ) posts
+    
+    closeSession
+-}
+
+
+bunkerUrl :: String
+bunkerUrl = "https://gamestories.clanboard.ru"
+
+loginBunker
+    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
+    => String -> String -> m ()
+loginBunker login password =
+  do
+    liftIO $ runSession punbbConfig $ do
+
+      loginPunBB  (T.pack bunkerUrl) (T.pack login) (T.pack password)    
+      savePageAsHtml "test_login.html"
+      closeSession
+
+  
+    return ()
+
+
+{- 
+
+module Bunker (loginBunker) where
+
 import Control.Exception (bracket, try, SomeException)
 import Control.Lens hiding (element)
 import Control.Monad
@@ -33,9 +256,8 @@ import System.IO (hPutStrLn, stderr)
 import System.Process (readProcessWithExitCode)
 
 
-import Ctx
 import Token
-
+ 
 -- | Constants
 userAgent :: B.ByteString
 userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36" -- "MidnightMover/0.0"
@@ -261,296 +483,5 @@ loginBunker login password =
     r <- tokenTest
     return ()
 
-{-
-    
-    cks <- loginAndGetCookies login password
-    liftIO $ print cks
-    modify (\s -> s & ctxCookieJar .~ cks)
-    verifyLogin
-    postReply login 22 "Slow down, back off\nTell him you don't pay the price"
-
--}
-
-{-
-
-import Control.Exception (try, SomeException)
-import Control.Lens hiding (element)
-import Control.Monad
-import Control.Monad.Except
-import Control.Monad.State
-
-import Data.Encoding (encodeStrictByteString)
-import Data.Encoding.CP1251
-
-import Data.List (intersperse)
-import Data.Text (Text)
-import           Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString as B 
-import qualified Data.ByteString.Char8 as BC
-import qualified Data.ByteString.Lazy as BL
-import qualified Data.Text as T
-import qualified Data.Text.Encoding as TE
-
-
-import Network.HTTP.Client
-import Network.HTTP.Types.Header (hReferer, hContentType, HeaderName)
-import Network.HTTP.Types.Method (methodPost)
-import Network.HTTP.Types.Status (statusIsSuccessful)
-import Network.HTTP.Types.URI (urlEncode)
-
-import Text.HTML.DOM (parseLBS)
-import Text.XML.Cursor (fromDocument)
-
-import Ctx
--- import Parse
-
--- | Constants
-userAgent :: B.ByteString
-userAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0" -- "MidnightMover/0.0"
-
-loginUrl :: String
-loginUrl = "https://gamestories.clanboard.ru/login.php"
-
-
-encodeWindows1251 :: String -> B.ByteString
-encodeWindows1251 = encodeStrictByteString CP1251
-
--- | Execute an HTTP request, update the cookie jar in the state,
---   and return the response.  Throws 'ErrorKind' on failure.
-httpRequest
-    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => Request         -- ^ base request (method, url, etc.)
-    -> [(HeaderName, B.ByteString)] -- ^ extra headers
-    -> Maybe RequestBody   -- ^ optional request body
-    -> m (Response ByteString)
-httpRequest baseReq extraHeaders mBody = do
-    ctx <- get
-    let
-        mgr = _ctxManager ctx
-        cj  = _ctxCookieJar ctx
-
-        -- Add headers and cookie jar to the request
-        reqWithHeaders = baseReq
-            {  
-              requestHeaders = extraHeadersStd ++ extraHeaders
-            , cookieJar = Just cj
-            }
-        extraHeadersStd = [ ("User-Agent", userAgent), ("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") ]
-
-        reqFinal = case mBody of
-            Nothing -> reqWithHeaders
-            Just body -> reqWithHeaders { requestBody = body }
-
-    do
-      liftIO $ print cj
-      
-      result <- liftIO $ try (httpLbs reqFinal mgr) :: MonadIO m => m (Either SomeException (Response ByteString))
-      case result of
-        Left err -> throwError (HttpError (show err))
-        Right resp -> do
-          let
-            newCj = responseCookieJar resp
-            -- Update state with new cookie jar
-          modify (\s -> s & ctxCookieJar .~ newCj)
-
-          -- Optionally log status
-          let
-            status = responseStatus resp
-          liftIO $ print status    
-          when (not (statusIsSuccessful status)) $
-            throwError (HttpError (show status))
-          return resp
-
--- | Convenience for GET requests
-httpGet
-    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => String                -- ^ URL
-    -> [(HeaderName, B.ByteString)]    -- ^ extra headers
-    -> m (Response ByteString)
-httpGet url extraHeaders = do
-    req <- liftIO $ parseRequest url
-    httpRequest req extraHeaders Nothing
-
--- | Convenience for POST application/x-www-form-urlencoded
-httpPostForm
-    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => String                       -- ^ URL
-    -> [(HeaderName, B.ByteString)] -- ^ extra headers
-    -> [(String, String)]           -- ^ form fields
-    -> m (Response ByteString)
-httpPostForm url extraHeaders fields = do
-    req0 <- liftIO $ parseRequest url
-    let req = req0
-            { method = methodPost
-            , redirectCount = 0
-            , checkResponse = \_ _ -> return ()
-            , requestHeaders = (hContentType, "application/x-www-form-urlencoded") : extraHeaders
-            }
-        body = formUrlEncodedBody fields
-    httpRequest req [] (Just body)
-  where
-    formUrlEncodedBody :: [(String, String)] -> RequestBody
-    formUrlEncodedBody fields = 
-      let toCp1251 = encodeWindows1251  -- defined above
-          encField (name, value) = 
-            BC.concat [ urlEncode True (toCp1251 name)
-                      , "="
-                      , urlEncode True (toCp1251 value) ]
-          bodyBS = BC.intercalate "&" (map encField fields)
-      in RequestBodyLBS (BL.fromStrict bodyBS)
-
--- | Get initial cookies by visiting the login page.
-getInitialCookies
-    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => m ()
-getInitialCookies = do
-    _ <- httpGet loginUrl []  -- response body discarded, only cookie jar updated
-    return ()
-
--- | Perform the login POST.
-doLogin
-    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => String -> String -> m ()
-doLogin login password = do
-    let referer = TE.encodeUtf8 . T.pack $ loginUrl -- ++ "?action=in"
-        fields =
-            [ ("form_sent", "1")
-            , ("redirect_url", "/")      -- empty, as in the HTML (index.php)
-            , ("req_username", login)
-            , ("req_password", password)
-            , ("login", "Войти")        -- submit button name & value
-            ]
-            
-        extraHeaders = [(hReferer, referer), ("Origin", "https://gamestories.clanboard.ru")]
-
-    resp <- httpPostForm (loginUrl ++ "?action=in") extraHeaders fields
-
-    -- Optional: check response for success indicator (e.g., "Welcome" text)
-    let body = responseBody resp
-    liftIO $ BL.writeFile "login_debug.html" body  -- keep for debugging, but could be removed
-    -- You could parse the page to confirm login success and throw an error if not.
-
--- | Verify login by accessing the index page and checking status/content.
-verifyLogin
-    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => m ()
-verifyLogin = do
-    resp <- httpGet indexUrl []
-    liftIO $ BL.writeFile "index.html" (responseBody resp)
-    let status = responseStatus resp
-    unless (statusIsSuccessful status) $
-        throwError (HttpError ("Index page returned " ++ show status))
-    -- Optionally parse the response for a "logout" link or username.
-    return ()
-
--- | Main login function.
-loginBunker
-    :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => String -> String -> m ()
-loginBunker login password = do
-    getInitialCookies
-    doLogin login password
-    verifyLogin
-     -- If all passes, login is successful.
-
--}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{-
-
-{-# LANGUAGE OverloadedStrings #-}
-
-import Control.Exception (bracket)
-import Data.ByteString.Char8 (ByteString, pack, unpack)
-import Data.Char (isSpace)
-import Data.List (splitWhen)
-import Data.Maybe (catMaybes)
-import Data.Time.Clock.POSIX (posixSecondsToUTCTime)
-import Data.Time.Format.ISO8601 (iso8601ParseM)
-import Data.Cookie (Cookie(..), SetCookie(..), defaultCookie)
-import Network.HTTP.Client (CookieJar, createCookieJar, destroyCookieJar)
-import Network.HTTP.Client.TLS (getGlobalManager)
-import System.Exit (ExitCode(..))
-import System.IO (hPutStrLn, stderr)
-import System.Process (readProcessWithExitCode)
-
--- | Parse a single line of a Netscape cookie file.
---   Format: domain\tflag\tpath\tsecure\texpiry\tname\tvalue
---   flag : TRUE/FALSE (whether to send to all subdomains)
---   secure : TRUE/FALSE (whether cookie requires HTTPS)
-parseNetscapeLine :: String -> Maybe Cookie
-parseNetscapeLine line =
-    case filter (not . null) $ splitWhen (== '\t') line of
-        [domain, _, path, secure, expiry, name, value] -> do
-            let domain' = if head domain == '.' then domain else '.' ++ domain  -- ensure leading dot for domain match
-                secure' = map toLower secure == "true"
-                path'   = if null path then "/" else path
-                expirySeconds :: Maybe Integer
-                expirySeconds = case reads expiry of
-                    [(n, "")] -> Just n
-                    _         -> Nothing
-                -- Convert expiry (Unix timestamp) to UTCTime if > 0
-                expiryTime = posixSecondsToUTCTime . fromInteger <$> expirySeconds
-            pure Cookie
-                { cookie_name   = name
-                , cookie_value  = value
-                , cookie_domain = domain'
-                , cookie_path   = path'
-                , cookie_expiry = expiryTime
-                , cookie_secure = secure'
-                , cookie_http_only = False          -- Netscape format does not store HttpOnly
-                }
-        _ -> Nothing
-
--- | Parse the whole Netscape cookie file content.
-parseNetscapeCookies :: String -> [Cookie]
-parseNetscapeCookies = catMaybes . map parseNetscapeLine . filter (not . isComment) . lines
-  where
-    isComment ('#':_) = True
-    isComment ""      = True
-    isComment _       = False
-
--- | Execute the bash login script and build a CookieJar.
---   The script must be executable and located in the current directory.
-loginAndGetCookies :: String -> String -> IO CookieJar
-loginAndGetCookies username password = do
-    let script = "./punbb_login.sh"
-        args   = [username, password]
-
-    (exitCode, stdout, stderrOutput) <- readProcessWithExitCode script args ""
-
-    case exitCode of
-        ExitFailure code -> fail $ "Login script failed with exit code " ++ show code ++ ": " ++ stderrOutput
-        ExitSuccess      -> do
-            let cookies = parseNetscapeCookies stdout
-            if null cookies
-                then fail "No cookies were returned by the login script."
-                else do
-                    -- http-client expects a CookieJar; create it from the list
-                    -- Note: createCookieJar sorts and merges cookies internally.
-                    pure $ createCookieJar cookies
-
--- Example usage (inside an IO action, e.g. main):
--- main :: IO ()
--- main = do
---     manager <- getGlobalManager
---     cookieJar <- loginAndGetCookies "my_username" "my_password"
---     -- Now you can use 'cookieJar' with http-client requests (e.g., with a cookie jar manager)
---     -- e.g. let request = ... ; response <- httpLbs (applyCookies cookieJar request) manager
---     return ()
 
 -}

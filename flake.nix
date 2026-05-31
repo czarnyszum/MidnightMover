@@ -34,6 +34,7 @@
           process            = hpkg.process;
           text               = hpkg.text;
           wreq               = hpkg.wreq;
+          webdriver          = hpkg.webdriver;
           crypton-x509       = hpkg.crypton-x509;
 	        crypton-connection = hpkg.crypton-connection;
           tls                = hpkg.tls; 

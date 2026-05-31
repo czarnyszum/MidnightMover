@@ -22,7 +22,6 @@ executable MidnightMover
                        Post
                        TlsManager
                        Ctx
-                       Token
                        Bunker
   build-depends:
       base
@@ -45,6 +44,7 @@ executable MidnightMover
     , text
     , time
     , tls
+    , webdriver
     , wreq
 
   hs-source-dirs:      src
