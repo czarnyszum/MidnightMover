@@ -57,16 +57,12 @@ loginPunBB baseUrl username password = do
   -- Wait for redirect after login
   liftIO $ threadDelay 2000000 -- 2 second delay
 
-
-{-
-
-
 -- | Extract token value from hidden input within a div
 -- PunBB's process_form() appends hidden inputs to formkey and formetc divs
 getTokenFromDiv :: Text -> WD (Text, Text)
 getTokenFromDiv divId = do
   -- Find the div containing the token
-  tokenDiv <- findElem (ById $ T.unpack divId)
+  tokenDiv <- findElem (ById divId) -- (ById $ T.unpack divId)
   
   -- Find the hidden input inside the div
   -- process_form() appends an <input type="hidden"> to these divs
@@ -78,7 +74,7 @@ getTokenFromDiv divId = do
   
   case (tokenName, tokenValue) of
     (Just n, Just v) -> return (n, v)
-    _ -> fail $ "Could not find token in div: " <> T.unpack divId
+    _ -> error $ "Could not find token in div: " <> T.unpack divId
 
 -- | Trigger process_form() by attempting to submit, then capture tokens
 -- We need to execute process_form() to populate the hidden fields
@@ -104,7 +100,7 @@ getSecurityTokens = do
   formetcToken <- getTokenFromDiv "formetc"
   
   return (formkeyToken, formetcToken)
-
+ 
 -- | Post a message to a PunBB thread
 -- Takes base URL, thread ID, and message content
 postMessage :: Text -> Int -> Text -> WD ()
@@ -145,6 +141,12 @@ postMessage baseUrl threadId message = do
   
   -- Wait for post to complete
   liftIO $ threadDelay 2000000 -- 2 second delay
+
+
+
+{-
+
+
 
 -- | Alternative: Submit form entirely via JavaScript
 -- Useful if the normal submit flow has issues
@@ -213,10 +215,14 @@ loginBunker
     => String -> String -> m ()
 loginBunker login password =
   do
+    let
+      base = T.pack bunkerUrl
     liftIO $ runSession punbbConfig $ do
 
-      loginPunBB  (T.pack bunkerUrl) (T.pack login) (T.pack password)    
-      savePageAsHtml "test_login.html"
+      loginPunBB base (T.pack login) (T.pack password)    
+      postMessage base 22 "Hey you - come on!\nI show you something\nThere is what it takes for you\nMmh, you better follow me" 
+
+      -- savePageAsHtml "test_login.html"
       closeSession
 
   
