@@ -258,7 +258,8 @@ loginBunker
     => String -> String -> m ()
 loginBunker login password =
   do
-    tokenTest
+    r <- tokenTest
+    return ()
 
 {-
     
