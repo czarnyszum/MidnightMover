@@ -103,17 +103,20 @@ toBBCMap :: Post -> Text
 toBBCMap ps = T.concat $ map toBBC ps
 toBBC :: PostElement -> Text
 toBBC (PostImageGlobal src) = T.concat ["[img]", src, "[/img]"] 
-toBBC (PostImageLocal src) = T.concat ["[img]", src, "[/img]"]
-toBBC (PostColor col post) = undefined -- let x = toBBC post in T.concat ["[img]", x, "[/img]"]
+toBBC (PostImageLocal src) = src
+toBBC (PostColor col post) = let x = toBBCMap post in T.concat ["[color=", col, "]", x, "[/img]"]
 toBBC (PostLine l) = l
 toBBC PostLineBreak = "\n"
 toBBC (PostQuote author post) = let x = toBBCMap post in T.concat ["[quote=", author, "]", x, "[/quote]"] 
 toBBC (PostCentered post) = let x = toBBCMap post in T.concat ["[align=center]", x, "[/align]"]
 toBBC (PostSpoiler title body) = let x = toBBCMap body in T.concat [ "[hide=", title, "]", x, "[/hide]"]
 toBBC (PostDice value full) = T.concat [full, ": ", value]
-toBBC (PostFormated f post) = undefined
-toBBC (PostLink src text) = undefined
-toBBC (PostYouTube src)= undefined
+toBBC (PostFormated FormatI post) = let x = toBBCMap post in T.concat ["[i]", x, "[/i]"]
+toBBC (PostFormated FormatB post) = let x = toBBCMap post in T.concat ["[b]", x, "[/b]"]
+toBBC (PostFormated FormatU post) = let x = toBBCMap post in T.concat ["[u]", x, "[/u]"]
+toBBC (PostFormated FormatS post) = let x = toBBCMap post in T.concat ["[s]", x, "[/s]"]
+toBBC (PostLink src text) = T.concat ["[url=", src, "]", text, "[/url]"]
+toBBC (PostYouTube src) = T.concat ["[video]", src, "[/video]"]
    
  
 type Post = [PostElement]
@@ -122,9 +125,21 @@ savePost :: (MonadIO m) => String -> Post -> m ()
 savePost prefix p =
   do
     let
+      ps = T.unpack . toBBCMap $ p
+      nm = "./posts/" ++ prefix ++ ".txt"
+    liftIO $ writeFile nm ps
+
+{-
+savePost :: (MonadIO m) => String -> Post -> m ()
+savePost prefix p =
+  do
+    let
       ps = concatMap show p
       nm = "./posts/" ++ prefix ++ ".txt"
     liftIO $ writeFile nm ps
+-}
+
+
 
 extractPost :: Cursor -> Post
 extractPost c = concatMap extractNode (child c)
@@ -199,20 +214,10 @@ extractYouTube c =
       Just src -> [PostYouTube src]
       Nothing ->  [PostYouTube "!Не удалось извлечь адрес ссылки!"]
 
-
-{-    
-extractYouTube :: Cursor -> Post
-extractYouTube c =
-  case c $// element "a" >=> check (hasClass "ytmVideoInfoVideoTitle") of
-    (l : _) ->
-      case getAttr "href" l of
-        Just src -> [PostYouTube src]
-        Nothing ->  [PostYouTube "!Не удалось извлечь адрес ссылки!"]
-    [] ->  [PostYouTube "!Не удалось извлечь адрес ссылки!"]
--}
 extractDiceText :: Cursor -> Text
 extractDiceText c =
   case c $// element "i" of
+    (i0 : i1 : []) -> T.concat [T.concat (i0 $// content), T.concat (i1 $// content)]
     (i : _) -> T.concat (i $// content)
     _ -> "!тэг i не найден!"
 
@@ -228,7 +233,10 @@ extractImage c =
       Just src ->
         if "http" `T.isPrefixOf` src
         then [PostImageGlobal src]
-        else [PostImageLocal src]
+        else
+          case getAttr "alt" c of
+            Just ty -> [PostImageLocal ty]
+            Nothing -> [PostImageLocal src]
       _ -> []
 
 extractSpoiler :: Cursor -> Post
