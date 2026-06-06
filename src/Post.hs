@@ -79,6 +79,43 @@ instance Show PostElement where
   show (PostLink src text) = "Link[" ++  (T.unpack text) ++ ": " ++ (T.unpack src) ++ "]"
   show (PostYouTube src)= "YouTube[" ++ (T.unpack src) ++ "]"
 
+{-
+[color=black][/color]
+[color=silver][/color]
+[color=gray][/color]
+[color=white][/color]
+[color=maroon][/color]
+[color=red][/color]
+[color=purple][/color]
+[color=fuchsia][/color]
+[color=green][/color]
+[color=lime][/color]
+[color=olive][/color]
+[color=yellow][/color]
+[color=navy][/color]
+[color=blue][/color]
+[color=teal][/color]
+[color=aqua][/color]
+#xxyyzz
+-}
+
+toBBCMap :: Post -> Text
+toBBCMap ps = T.concat $ map toBBC ps
+toBBC :: PostElement -> Text
+toBBC (PostImageGlobal src) = T.concat ["[img]", src, "[/img]"] 
+toBBC (PostImageLocal src) = T.concat ["[img]", src, "[/img]"]
+toBBC (PostColor col post) = undefined -- let x = toBBC post in T.concat ["[img]", x, "[/img]"]
+toBBC (PostLine l) = l
+toBBC PostLineBreak = "\n"
+toBBC (PostQuote author post) = let x = toBBCMap post in T.concat ["[quote=", author, "]", x, "[/quote]"] 
+toBBC (PostCentered post) = let x = toBBCMap post in T.concat ["[align=center]", x, "[/align]"]
+toBBC (PostSpoiler title body) = let x = toBBCMap body in T.concat [ "[hide=", title, "]", x, "[/hide]"]
+toBBC (PostDice value full) = T.concat [full, ": ", value]
+toBBC (PostFormated f post) = undefined
+toBBC (PostLink src text) = undefined
+toBBC (PostYouTube src)= undefined
+   
+ 
 type Post = [PostElement]
 
 savePost :: (MonadIO m) => String -> Post -> m ()
