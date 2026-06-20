@@ -19,8 +19,8 @@
 	<title>SimsMix форум</title>
 	
 	<noscript><style>.JsOnly, .jsOnly { display: none !important; }</style></noscript>
-	<link rel="stylesheet" href="css.php?css=xenforo,form,public&amp;style=1&amp;dir=LTR&amp;d=1780768218" />
-	<link rel="stylesheet" href="css.php?css=GoToTop_purecss,andy_todaysbirthdays,bbm_buttons,bookmarks_tab,node_category,node_forum,node_list,notices,panel_scroller,sidebar_social,thread_list_simple&amp;style=1&amp;dir=LTR&amp;d=1780768218" />
+	<link rel="stylesheet" href="css.php?css=xenforo,form,public&amp;style=1&amp;dir=LTR&amp;d=1781264023" />
+	<link rel="stylesheet" href="css.php?css=GoToTop_purecss,andy_todaysbirthdays,bbm_buttons,bookmarks_tab,node_category,node_forum,node_list,notices,panel_scroller,sidebar_social,thread_list_simple&amp;style=1&amp;dir=LTR&amp;d=1781264023" />
 	
 	
 
@@ -612,7 +612,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>184</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>18.638</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>18.642</dd></dl>
 				
 			</div>
 			
@@ -917,10 +917,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427310/" title="События, испытания и сценарии в The Sims 4">События, испытания и сценарии в The Sims 4</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427508/" title="События, испытания и сценарии в The Sims 4">События, испытания и сценарии в The Sims 4</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/zaj.15069/" class="username" dir="auto">Зай</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780602816" data-diff="166000" data-datestring="4 июн 2026" data-timestring="22:53">4 июн 2026 в 22:53</abbr>
+					<span class="lastThreadUser"><a href="members/krokozjabra.2554/" class="username" dir="auto">Крокозябра</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781116835" data-diff="151403" data-datestring="10 июн 2026" data-timestring="21:40">10 июн 2026 в 21:40</abbr>
 				</span>
 			
 		</div>
@@ -1009,7 +1009,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427141/" title="Сто девяносто первый патч для базовой игры 1.124.54.1030 (ПК) / 1.124.54.1230 (Mac)">Сто девяносто первый патч для базовой игры 1.124.54.1030 (ПК) / 1.124.54.1230 (Mac)</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/felelya.11032/" class="username" dir="auto">felelya</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780328950" data-diff="439866" data-datestring="1 июн 2026" data-timestring="18:49">1 июн 2026 в 18:49</abbr>
+					<span class="DateTime muted lastThreadDate" data-latest="Последнее: " title="1 июн 2026 в 18:49">1 июн 2026</span>
 				</span>
 			
 		</div>
@@ -1951,7 +1951,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>68</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>5.624</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>5.644</dd></dl>
 				
 			</div>
 			
@@ -2004,10 +2004,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427384/" title="Хныкающая Крэйзи-психушка">Хныкающая Крэйзи-психушка</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427493/" title="Хныкающая Крэйзи-психушка">Хныкающая Крэйзи-психушка</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/ihelen.655/" class="username" dir="auto">ihelen</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780767281" data-diff="1535" data-datestring="6 июн 2026" data-timestring="20:34">6 июн 2026 в 20:34</abbr>
+					<span class="lastThreadUser"><a href="members/alanna2202.668/" class="username" dir="auto">Alanna2202</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781030532" data-diff="237706" data-datestring="9 июн 2026" data-timestring="21:42">9 июн 2026 в 21:42</abbr>
 				</span>
 			
 		</div>
@@ -2040,7 +2040,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>42</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>9.763</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>9.791</dd></dl>
 				
 			</div>
 			
@@ -2093,10 +2093,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427359/" title="Василий Пшеничка: любовь и... помидоры.">Василий Пшеничка: любовь и... помидоры.</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427528/" title="Василий Пшеничка: любовь и... помидоры.">Василий Пшеничка: любовь и... помидоры.</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/alanna2202.668/" class="username" dir="auto">Alanna2202</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780740417" data-diff="28399" data-datestring="6 июн 2026" data-timestring="13:06">6 июн 2026 в 13:06</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781174217" data-diff="94021" data-datestring="11 июн 2026" data-timestring="13:36">11 июн 2026 в 13:36</abbr>
 				</span>
 			
 		</div>
@@ -2128,8 +2128,8 @@ $(document).ready(function() {
 			
 
 			<div class="nodeStats pairsInline">
-				<dl><dt>Темы:</dt> <dd>108</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>50.822</dd></dl>
+				<dl><dt>Темы:</dt> <dd>109</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>50.868</dd></dl>
 				
 			</div>
 			
@@ -2182,10 +2182,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427380/" title="Правила и обсуждение ультраэкстремального апокалипсиса">Правила и обсуждение ультраэкстремального апокалипсиса</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427536/" title="Правила и обсуждение ультраэкстремального апокалипсиса">Правила и обсуждение ультраэкстремального апокалипсиса</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/simanni.48953/" class="username" dir="auto">Simanni</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780764220" data-diff="4596" data-datestring="6 июн 2026" data-timestring="19:43">6 июн 2026 в 19:43</abbr>
+					<span class="lastThreadUser"><a href="members/pippin_spb.1104/" class="username" dir="auto">Pippin_spb</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781244070" data-diff="24168" data-datestring="12 июн 2026" data-timestring="09:01">12 июн 2026 в 09:01</abbr>
 				</span>
 			
 		</div>
@@ -2276,7 +2276,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>179</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>74.914</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>74.941</dd></dl>
 				
 			</div>
 			
@@ -2289,10 +2289,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427381/" title="Интерактивный проект &quot;Рандомный Ньюкрест&quot;">Интерактивный проект &quot;Рандомный Ньюкрест&quot;</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427540/" title="Цивилизация X">Цивилизация X</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/29715000.91/" class="username" dir="auto">29715000</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780766461" data-diff="2355" data-datestring="6 июн 2026" data-timestring="20:21">6 июн 2026 в 20:21</abbr>
+					<span class="lastThreadUser"><a href="members/felelya.11032/" class="username" dir="auto">felelya</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781256931" data-diff="11307" data-datestring="12 июн 2026" data-timestring="12:35">12 июн 2026 в 12:35</abbr>
 				</span>
 			
 		</div>
@@ -2423,7 +2423,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>10</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>9.877</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>9.879</dd></dl>
 				
 			</div>
 			
@@ -2436,10 +2436,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427316/" title="Старые и новые семьи в The Sims (семья Гот и все-все-все!)">Старые и новые семьи в The Sims (семья Гот и все-все-все!)</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427449/" title="Забавные истории и смешные картинки">Забавные истории и смешные картинки</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/zaj.15069/" class="username" dir="auto">Зай</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780650952" data-diff="117864" data-datestring="5 июн 2026" data-timestring="12:15">5 июн 2026 в 12:15</abbr>
+					<span class="lastThreadUser"><a href="members/ihelen.655/" class="username" dir="auto">ihelen</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780905008" data-diff="363230" data-datestring="8 июн 2026" data-timestring="10:50">8 июн 2026 в 10:50</abbr>
 				</span>
 			
 		</div>
@@ -2472,7 +2472,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>25</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>1.695</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>1.697</dd></dl>
 				
 			</div>
 			
@@ -2485,10 +2485,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427385/" title="Челлендж: Линия крови">Челлендж: Линия крови</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427418/" title="Челлендж: Линия крови">Челлендж: Линия крови</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/oksiniya.4146/" class="username" dir="auto">Oksiniya</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780768217" data-diff="599" data-datestring="6 июн 2026" data-timestring="20:50">6 июн 2026 в 20:50</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780823155" data-diff="445083" data-datestring="7 июн 2026" data-timestring="12:05">7 июн 2026 в 12:05</abbr>
 				</span>
 			
 		</div>
@@ -3044,7 +3044,7 @@ $(document).ready(function() {
 				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427203/" title="Вопросы по строительству и дизайну в The Sims 4">Вопросы по строительству и дизайну в The Sims 4</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/tajin.23971/" class="username" dir="auto">Тайин</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780414615" data-diff="354201" data-datestring="2 июн 2026" data-timestring="18:36">2 июн 2026 в 18:36</abbr>
+					<span class="DateTime muted lastThreadDate" data-latest="Последнее: " title="2 июн 2026 в 18:36">2 июн 2026</span>
 				</span>
 			
 		</div>
@@ -3077,7 +3077,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>786</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>43.963</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>43.970</dd></dl>
 				
 			</div>
 			
@@ -3142,10 +3142,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427370/" title="Июньский монохром - 2026.">Июньский монохром - 2026.</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427495/" title="Скриншот июня-августа &quot;Наше лето&quot;">Скриншот июня-августа &quot;Наше лето&quot;</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/talita.3661/" class="username" dir="auto">Talita</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780748858" data-diff="19958" data-datestring="6 июн 2026" data-timestring="15:27">6 июн 2026 в 15:27</abbr>
+					<span class="lastThreadUser"><a href="members/ihelen.655/" class="username" dir="auto">ihelen</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781035609" data-diff="232629" data-datestring="9 июн 2026" data-timestring="23:06">9 июн 2026 в 23:06</abbr>
 				</span>
 			
 		</div>
@@ -3236,7 +3236,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>321</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>20.663</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>20.669</dd></dl>
 				
 			</div>
 			
@@ -3289,10 +3289,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427249/" title="Поиск модов и хакнутых предметов для Sims 4, обсуждение их работы, вопросы и т.д.">Поиск модов и хакнутых предметов для Sims 4, обсуждение их работы, вопросы и т.д.</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427531/" title="Контроль опций игры, исправление багов">Контроль опций игры, исправление багов</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/shiraki.2299/" class="username" dir="auto">Shiraki</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780498223" data-diff="270593" data-datestring="3 июн 2026" data-timestring="17:50">3 июн 2026 в 17:50</abbr>
+					<span class="lastThreadUser"><a href="members/nnnnatali.12583/" class="username" dir="auto">NNNNatali</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781176012" data-diff="92226" data-datestring="11 июн 2026" data-timestring="14:06">11 июн 2026 в 14:06</abbr>
 				</span>
 			
 		</div>
@@ -3802,8 +3802,8 @@ $(document).ready(function() {
 			
 
 			<div class="nodeStats pairsInline">
-				<dl><dt>Темы:</dt> <dd>3</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>506</dd></dl>
+				<dl><dt>Темы:</dt> <dd>4</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>520</dd></dl>
 				
 			</div>
 			
@@ -3816,10 +3816,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427382/" title="Картинки из игры">Картинки из игры</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427541/" title="Paralives - ранний доступ (обсуждение и информация)">Paralives - ранний доступ (обсуждение и информация)</a></span>
 				<span class="lastThreadMeta">
-					<span class="lastThreadUser"><a href="members/ihelen.655/" class="username" dir="auto">ihelen</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780766645" data-diff="2171" data-datestring="6 июн 2026" data-timestring="20:24">6 июн 2026 в 20:24</abbr>
+					<span class="lastThreadUser"><a href="members/aproshkina.833/" class="username" dir="auto">aproshkina</a>,</span>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781264022" data-diff="4216" data-datestring="12 июн 2026" data-timestring="14:33">12 июн 2026 в 14:33</abbr>
 				</span>
 			
 		</div>
@@ -4257,7 +4257,7 @@ $(document).ready(function() {
 
 			<div class="nodeStats pairsInline">
 				<dl><dt>Темы:</dt> <dd>30</dd></dl>
-				<dl><dt>Сообщения:</dt> <dd>20.677</dd></dl>
+				<dl><dt>Сообщения:</dt> <dd>20.678</dd></dl>
 				
 			</div>
 			
@@ -4270,10 +4270,10 @@ $(document).ready(function() {
 
 		<div class="nodeLastPost secondaryContent">
 			
-				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427328/" title="Следы невиданных зверей">Следы невиданных зверей</a></span>
+				<span class="lastThreadTitle"><span>Последнее:</span> <a href="posts/427534/" title="Хочешь поздравить - не сдерживайся!">Хочешь поздравить - не сдерживайся!</a></span>
 				<span class="lastThreadMeta">
 					<span class="lastThreadUser"><a href="members/alanna2202.668/" class="username" dir="auto">Alanna2202</a>,</span>
-					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1780676094" data-diff="92722" data-datestring="5 июн 2026" data-timestring="19:14">5 июн 2026 в 19:14</abbr>
+					<abbr class="DateTime muted lastThreadDate" data-latest="Последнее: " data-time="1781241224" data-diff="27014" data-datestring="12 июн 2026" data-timestring="08:13">12 июн 2026 в 08:13</abbr>
 				</span>
 			
 		</div>
@@ -4533,24 +4533,6 @@ $(document).ready(function() {
 					
 						<li>
 						
-							<a href="members/ateh.934/" dir="auto"
-								class="username">Ateh</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/alanna2202.668/" dir="auto"
-								class="username">Alanna2202</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
 							<a href="members/apelsinka.961/" dir="auto"
 								class="username">apelsinka</a>,
 						
@@ -4560,44 +4542,8 @@ $(document).ready(function() {
 					
 						<li>
 						
-							<a href="members/jamesrhype.56702/" dir="auto"
-								class="username">Jamesrhype</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/jamesboype.54586/" dir="auto"
-								class="username">JamesBoype</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/oksiniya.4146/" dir="auto"
-								class="username">Oksiniya</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/ruby89.2691/" dir="auto"
-								class="username">Ruby89</a>,
-						
-						</li>
-					
-				
-					
-						<li>
-						
-							<a href="members/camys.41798/" dir="auto"
-								class="username">camys</a>,
+							<a href="members/jamesloyal.57497/" dir="auto"
+								class="username">Jamesloyal</a>,
 						
 						</li>
 					
@@ -4614,8 +4560,35 @@ $(document).ready(function() {
 					
 						<li>
 						
-							<a href="members/jamesgeogy.57764/" dir="auto"
-								class="username">JamesGeogy</a>
+							<a href="members/joshuafut.54304/" dir="auto"
+								class="username">Joshuafut</a>,
+						
+						</li>
+					
+				
+					
+						<li>
+						
+							<a href="members/moonghostly.28/" dir="auto"
+								class="username">moonghostly</a>,
+						
+						</li>
+					
+				
+					
+						<li>
+						
+							<a href="members/podchacha.912/" dir="auto"
+								class="username">podchacha</a>,
+						
+						</li>
+					
+				
+					
+						<li>
+						
+							<a href="members/morri.848/" dir="auto"
+								class="username">morri</a>
 						
 						</li>
 					
@@ -4625,7 +4598,7 @@ $(document).ready(function() {
 		
 		
 		<div class="footnote">
-			Всего: 375 (пользователей: 14, гостей: 331, роботов: 30)
+			Всего: 393 (пользователей: 9, гостей: 348, роботов: 36)
 		</div>
 	</div>
 </div>
@@ -4640,50 +4613,170 @@ $(document).ready(function() {
 
 <ul>
 
-	<li id="thread-5005" class="threadListItem" data-author="Oksiniya">
+	<li id="thread-6743" class="threadListItem" data-author="aproshkina">
 
-		<a href="members/oksiniya.4146/" class="avatar Av4146s" data-avatarhtml="true"><img src="data/avatars/s/4/4146.jpg?1726340005" width="48" height="48" alt="Oksiniya" /></a>
+		<a href="members/aproshkina.833/" class="avatar Av833s" data-avatarhtml="true"><img src="data/avatars/s/0/833.jpg?1525269516" width="48" height="48" alt="aproshkina" /></a>
 		
 		<div class="messageInfo">
 			
 			<div class="messageContent">
 				<div class="title">
 				
-					<a href="threads/chellendzh-linija-krovi.5005/unread"><span class="prefix prefixPrimary">Видео</span> Челлендж: Линия крови</a>
+					<a href="threads/paralives-rannij-dostup-obsuzhdenie-i-informacija.6743/unread"><span class="prefix prefixGreen">Paralives</span> Paralives - ранний доступ (обсуждение и информация)</a>
 				
 				</div>
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Oksiniya, <abbr class="DateTime" data-time="1780768217" data-diff="599" data-datestring="6 июн 2026" data-timestring="20:50">6 июн 2026 в 20:50</abbr>
+				Последнее: aproshkina, <abbr class="DateTime" data-time="1781264022" data-diff="4216" data-datestring="12 июн 2026" data-timestring="14:33">12 июн 2026 в 14:33</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
-				<a href="forums/videoformat-letsplei-i-videochelendzhi.163/" class="forumLink">Видеоформат, летсплеи и видеочеленджи</a>
+				<a href="forums/paralives.177/" class="forumLink">Paralives</a>
 			</div>
 		</div>
 	</li>
 
-	<li id="thread-6754" class="threadListItem" data-author="ihelen">
+	<li id="thread-4044" class="threadListItem" data-author="felelya">
 
-		<a href="members/ihelen.655/" class="avatar Av655s" data-avatarhtml="true"><img src="data/avatars/s/0/655.jpg?1488037199" width="48" height="48" alt="ihelen" /></a>
+		<a href="members/felelya.11032/" class="avatar Av11032s" data-avatarhtml="true"><img src="data/avatars/s/11/11032.jpg?1568836232" width="48" height="48" alt="felelya" /></a>
 		
 		<div class="messageInfo">
 			
 			<div class="messageContent">
 				<div class="title">
 				
-					<a href="threads/xnykajuschaja-krehjzi-psixushka.6754/unread"><span class="prefix prefixSkyBlue">TS2: Challenge</span> Хныкающая Крэйзи-психушка</a>
+					<a href="threads/civilizacija-x.4044/unread"><span class="prefix prefixPrimary">TS4 Мир:</span> Цивилизация X</a>
 				
 				</div>
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: ihelen, <abbr class="DateTime" data-time="1780767281" data-diff="1535" data-datestring="6 июн 2026" data-timestring="20:34">6 июн 2026 в 20:34</abbr>
+				Последнее: felelya, <abbr class="DateTime" data-time="1781256931" data-diff="11307" data-datestring="12 июн 2026" data-timestring="12:35">12 июн 2026 в 12:35</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
-				<a href="forums/the-sims-2-challenges-drugie-ispytanija.44/" class="forumLink">The Sims 2: Challenges - Другие испытания</a>
+				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-4424" class="threadListItem" data-author="Leaselmary">
+
+		<a href="members/leaselmary.860/" class="avatar Av860s" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_female_s.png" width="48" height="48" alt="Leaselmary" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/raznocvete.4424/unread"><span class="prefix prefixPrimary">TS2 Мир:</span> Разноцветье</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: Leaselmary, <abbr class="DateTime" data-time="1781251823" data-diff="16415" data-datestring="12 июн 2026" data-timestring="11:10">12 июн 2026 в 11:10</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-3890" class="threadListItem" data-author="Pippin_spb">
+
+		<a href="members/pippin_spb.1104/" class="avatar Av1104s" data-avatarhtml="true"><img src="data/avatars/s/1/1104.jpg?1506655661" width="48" height="48" alt="Pippin_spb" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/pravila-i-obsuzhdenie-ultraehkstremalnogo-apokalipsisa.3890/unread"><span class="prefix prefixSkyBlue">TS4: Challenge</span> Правила и обсуждение ультраэкстремального апокалипсиса</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: Pippin_spb, <abbr class="DateTime" data-time="1781244070" data-diff="24168" data-datestring="12 июн 2026" data-timestring="09:01">12 июн 2026 в 09:01</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/the-sims-4-challenges-apokalipsis.148/" class="forumLink">The Sims 4: Challenges - Апокалипсис</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-639" class="threadListItem" data-author="Alanna2202">
+
+		<a href="members/alanna2202.668/" class="avatar Av668s" data-avatarhtml="true"><img src="data/avatars/s/0/668.jpg?1488906026" width="48" height="48" alt="Alanna2202" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/xochesh-pozdravit-ne-sderzhivajsja.639/unread">Хочешь поздравить - не сдерживайся!</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: Alanna2202, <abbr class="DateTime" data-time="1781241224" data-diff="27014" data-datestring="12 июн 2026" data-timestring="08:13">12 июн 2026 в 08:13</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/boltalka.34/" class="forumLink">Болталка</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-5799" class="threadListItem" data-author="Leaselmary">
+
+		<a href="members/leaselmary.860/" class="avatar Av860s" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_female_s.png" width="48" height="48" alt="Leaselmary" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/stroim-nju-lizelvil.5799/unread"><span class="prefix prefixPrimary">TS2 Мир:</span> строим Нью-Лизельвиль</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: Leaselmary, <abbr class="DateTime" data-time="1781206248" data-diff="61990" data-datestring="11 июн 2026" data-timestring="22:30">11 июн 2026 в 22:30</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-257" class="threadListItem" data-author="NNNNatali">
+
+		<a href="members/nnnnatali.12583/" class="avatar Av12583s" data-avatarhtml="true"><img src="data/avatars/s/12/12583.jpg?1577881337" width="48" height="48" alt="NNNNatali" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/kontrol-opcij-igry-ispravlenie-bagov.257/unread"><span class="prefix prefixSkyBlue">TS4: Моды и хаки</span> Контроль опций игры, исправление багов</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: NNNNatali, <abbr class="DateTime" data-time="1781176012" data-diff="92226" data-datestring="11 июн 2026" data-timestring="14:06">11 июн 2026 в 14:06</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/the-sims-4-obekty-i-mody-izmenjajuschie-igru.22/" class="forumLink">The Sims 4: Объекты и моды, изменяющие игру</a>
 			</div>
 		</div>
 	</li>
@@ -4703,155 +4796,11 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: ihelen, <abbr class="DateTime" data-time="1780766645" data-diff="2171" data-datestring="6 июн 2026" data-timestring="20:24">6 июн 2026 в 20:24</abbr>
+				Последнее: ihelen, <abbr class="DateTime" data-time="1781174348" data-diff="93890" data-datestring="11 июн 2026" data-timestring="13:39">11 июн 2026 в 13:39</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
 				<a href="forums/paralives.177/" class="forumLink">Paralives</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-4205" class="threadListItem" data-author="29715000">
-
-		<a href="members/29715000.91/" class="avatar Av91s" data-avatarhtml="true"><img src="data/avatars/s/0/91.jpg?1681189686" width="48" height="48" alt="29715000" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/interaktivnyj-proekt-randomnyj-njukrest.4205/unread"><span class="prefix prefixPrimary">TS4 Мир:</span> Интерактивный проект &quot;Рандомный Ньюкрест&quot;</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: 29715000, <abbr class="DateTime" data-time="1780766461" data-diff="2355" data-datestring="6 июн 2026" data-timestring="20:21">6 июн 2026 в 20:21</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-3890" class="threadListItem" data-author="Simanni">
-
-		<a href="members/simanni.48953/" class="avatar Av48953s" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_female_s.png" width="48" height="48" alt="Simanni" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/pravila-i-obsuzhdenie-ultraehkstremalnogo-apokalipsisa.3890/unread"><span class="prefix prefixSkyBlue">TS4: Challenge</span> Правила и обсуждение ультраэкстремального апокалипсиса</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Simanni, <abbr class="DateTime" data-time="1780764220" data-diff="4596" data-datestring="6 июн 2026" data-timestring="19:43">6 июн 2026 в 19:43</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/the-sims-4-challenges-apokalipsis.148/" class="forumLink">The Sims 4: Challenges - Апокалипсис</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-5799" class="threadListItem" data-author="Talita">
-
-		<a href="members/talita.3661/" class="avatar Av3661s" data-avatarhtml="true"><img src="data/avatars/s/3/3661.jpg?1543923496" width="48" height="48" alt="Talita" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/stroim-nju-lizelvil.5799/unread"><span class="prefix prefixPrimary">TS2 Мир:</span> строим Нью-Лизельвиль</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Talita, <abbr class="DateTime" data-time="1780758290" data-diff="10526" data-datestring="6 июн 2026" data-timestring="18:04">6 июн 2026 в 18:04</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-6744" class="threadListItem" data-author="Pippin_spb">
-
-		<a href="members/pippin_spb.1104/" class="avatar Av1104s" data-avatarhtml="true"><img src="data/avatars/s/1/1104.jpg?1506655661" width="48" height="48" alt="Pippin_spb" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/najdi-svoju-ljubov-ili-majkl-xolostjakki-bolshe-ne-xolostjak.6744/unread"><span class="prefix prefixSkyBlue">TS2: Challenge</span> Найди свою любовь или Майкл Холостякки больше не холостяк</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Pippin_spb, <abbr class="DateTime" data-time="1780749576" data-diff="19240" data-datestring="6 июн 2026" data-timestring="15:39">6 июн 2026 в 15:39</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/the-sims-2-challenges-drugie-ispytanija.44/" class="forumLink">The Sims 2: Challenges - Другие испытания</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-6749" class="threadListItem" data-author="Talita">
-
-		<a href="members/talita.3661/" class="avatar Av3661s" data-avatarhtml="true"><img src="data/avatars/s/3/3661.jpg?1543923496" width="48" height="48" alt="Talita" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/ijunskij-monoxrom-2026.6749/unread"><span class="prefix prefixSkyBlue">Конкурсы симс-моделей</span> Июньский монохром - 2026.</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Talita, <abbr class="DateTime" data-time="1780748858" data-diff="19958" data-datestring="6 июн 2026" data-timestring="15:27">6 июн 2026 в 15:27</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/konkursy-sim-modelej.86/" class="forumLink">Конкурсы сим-моделей</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-6654" class="threadListItem" data-author="evklid">
-
-		<a href="members/evklid.8011/" class="avatar Av8011s" data-avatarhtml="true"><img src="data/avatars/s/8/8011.jpg?1619224096" width="48" height="48" alt="evklid" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/ultra-extreme-apocalypse-challenge-spontannyj-ap-ili-popytka-ne-pytka.6654/unread"><span class="prefix prefixSkyBlue">TS4: Challenge</span> Ultra-Extreme Apocalypse Challenge: Спонтанный ап или попытка - не пытка</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: evklid, <abbr class="DateTime" data-time="1780746997" data-diff="21819" data-datestring="6 июн 2026" data-timestring="14:56">6 июн 2026 в 14:56</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/the-sims-4-challenges-apokalipsis.148/" class="forumLink">The Sims 4: Challenges - Апокалипсис</a>
 			</div>
 		</div>
 	</li>
@@ -4871,7 +4820,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Alanna2202, <abbr class="DateTime" data-time="1780740417" data-diff="28399" data-datestring="6 июн 2026" data-timestring="13:06">6 июн 2026 в 13:06</abbr>
+				Последнее: Alanna2202, <abbr class="DateTime" data-time="1781174217" data-diff="94021" data-datestring="11 июн 2026" data-timestring="13:36">11 июн 2026 в 13:36</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4880,9 +4829,33 @@ $(document).ready(function() {
 		</div>
 	</li>
 
-	<li id="thread-6667" class="threadListItem" data-author="Крокозябра">
+	<li id="thread-253" class="threadListItem" data-author="NNNNatali">
 
-		<a href="members/krokozjabra.2554/" class="avatar Av2554s" data-avatarhtml="true"><img src="data/avatars/s/2/2554.jpg?1510762941" width="48" height="48" alt="Крокозябра" /></a>
+		<a href="members/nnnnatali.12583/" class="avatar Av12583s" data-avatarhtml="true"><img src="data/avatars/s/12/12583.jpg?1577881337" width="48" height="48" alt="NNNNatali" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/eda-i-napitki-pokupka-prigotovlenie-servirovka-i-dr.253/unread"><span class="prefix prefixSkyBlue">TS4: Моды и хаки</span> Еда и напитки: покупка, приготовление, сервировка и др.</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: NNNNatali, <abbr class="DateTime" data-time="1781171258" data-diff="96980" data-datestring="11 июн 2026" data-timestring="12:47">11 июн 2026 в 12:47</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/the-sims-4-obekty-i-mody-izmenjajuschie-igru.22/" class="forumLink">The Sims 4: Объекты и моды, изменяющие игру</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-6667" class="threadListItem" data-author="Sophie_V">
+
+		<a href="members/sophie_v.58460/" class="avatar Av58460s" data-avatarhtml="true"><img src="styles/default/xenforo/avatars/avatar_female_s.png" width="48" height="48" alt="Sophie_V" /></a>
 		
 		<div class="messageInfo">
 			
@@ -4895,7 +4868,7 @@ $(document).ready(function() {
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Крокозябра, <abbr class="DateTime" data-time="1780729583" data-diff="39233" data-datestring="6 июн 2026" data-timestring="10:06">6 июн 2026 в 10:06</abbr>
+				Последнее: Sophie_V, <abbr class="DateTime" data-time="1781154997" data-diff="113241" data-datestring="11 июн 2026" data-timestring="08:16">11 июн 2026 в 08:16</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
@@ -4904,7 +4877,55 @@ $(document).ready(function() {
 		</div>
 	</li>
 
-	<li id="thread-6743" class="threadListItem" data-author="ihelen">
+	<li id="thread-6756" class="threadListItem" data-author="Крокозябра">
+
+		<a href="members/krokozjabra.2554/" class="avatar Av2554s" data-avatarhtml="true"><img src="data/avatars/s/2/2554.jpg?1510762941" width="48" height="48" alt="Крокозябра" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/ueha-novoe-nachalo-mjurrej.6756/unread"><span class="prefix prefixSkyBlue">TS4: Challenge</span> УЭА. Новое начало: Мюррей</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: Крокозябра, <abbr class="DateTime" data-time="1781151624" data-diff="116614" data-datestring="11 июн 2026" data-timestring="07:20">11 июн 2026 в 07:20</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/the-sims-4-challenges-apokalipsis.148/" class="forumLink">The Sims 4: Challenges - Апокалипсис</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-543" class="threadListItem" data-author="Крокозябра">
+
+		<a href="members/krokozjabra.2554/" class="avatar Av2554s" data-avatarhtml="true"><img src="data/avatars/s/2/2554.jpg?1510762941" width="48" height="48" alt="Крокозябра" /></a>
+		
+		<div class="messageInfo">
+			
+			<div class="messageContent">
+				<div class="title">
+				
+					<a href="threads/sobytija-ispytanija-i-scenarii-v-the-sims-4.543/unread"><span class="prefix prefixSkyBlue">TS4</span> События, испытания и сценарии в The Sims 4</a>
+				
+				</div>
+			</div>
+
+			<div class="additionalRow muted">
+				Последнее: Крокозябра, <abbr class="DateTime" data-time="1781116835" data-diff="151403" data-datestring="10 июн 2026" data-timestring="21:40">10 июн 2026 в 21:40</abbr>
+			</div>
+			
+			<div class="additionalRow muted">
+				<a href="forums/the-sims-4-informacija-po-igre.5/" class="forumLink">The Sims 4: Информация по игре</a>
+			</div>
+		</div>
+	</li>
+
+	<li id="thread-6751" class="threadListItem" data-author="ihelen">
 
 		<a href="members/ihelen.655/" class="avatar Av655s" data-avatarhtml="true"><img src="data/avatars/s/0/655.jpg?1488037199" width="48" height="48" alt="ihelen" /></a>
 		
@@ -4913,89 +4934,41 @@ $(document).ready(function() {
 			<div class="messageContent">
 				<div class="title">
 				
-					<a href="threads/paralives-rannij-dostup-obsuzhdenie-i-informacija.6743/unread"><span class="prefix prefixGreen">Paralives</span> Paralives - ранний доступ (обсуждение и информация)</a>
+					<a href="threads/skrinshot-ijunja-avgusta-nashe-leto.6751/unread"><span class="prefix prefixSkyBlue">Арт-конкурсы</span> Скриншот июня-августа &quot;Наше лето&quot;</a>
 				
 				</div>
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: ihelen, <abbr class="DateTime" data-time="1780693263" data-diff="75553" data-datestring="6 июн 2026" data-timestring="00:01">6 июн 2026 в 00:01</abbr>
+				Последнее: ihelen, <abbr class="DateTime" data-time="1781035609" data-diff="232629" data-datestring="9 июн 2026" data-timestring="23:06">9 июн 2026 в 23:06</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
-				<a href="forums/paralives.177/" class="forumLink">Paralives</a>
+				<a href="forums/art-konkursy.85/" class="forumLink">Арт-конкурсы</a>
 			</div>
 		</div>
 	</li>
 
-	<li id="thread-564" class="threadListItem" data-author="Ретдис">
+	<li id="thread-6752" class="threadListItem" data-author="ihelen">
 
-		<a href="members/retdis.38/" class="avatar Av38s" data-avatarhtml="true"><img src="data/avatars/s/0/38.jpg?1727901492" width="48" height="48" alt="Ретдис" /></a>
+		<a href="members/ihelen.655/" class="avatar Av655s" data-avatarhtml="true"><img src="data/avatars/s/0/655.jpg?1488037199" width="48" height="48" alt="ihelen" /></a>
 		
 		<div class="messageInfo">
 			
 			<div class="messageContent">
 				<div class="title">
 				
-					<a href="threads/ochudnozeme.564/unread"><span class="prefix prefixPrimary">TS4 Мир:</span> Очудноземье</a>
+					<a href="threads/mini-art-ijunja-avgusta-nashe-leto.6752/unread"><span class="prefix prefixSkyBlue">Арт-конкурсы</span> Мини-арт июня-августа &quot;Наше лето&quot;</a>
 				
 				</div>
 			</div>
 
 			<div class="additionalRow muted">
-				Последнее: Ретдис, <abbr class="DateTime" data-time="1780680513" data-diff="88303" data-datestring="5 июн 2026" data-timestring="20:28">5 июн 2026 в 20:28</abbr>
+				Последнее: ihelen, <abbr class="DateTime" data-time="1781035536" data-diff="232702" data-datestring="9 июн 2026" data-timestring="23:05">9 июн 2026 в 23:05</abbr>
 			</div>
 			
 			<div class="additionalRow muted">
-				<a href="forums/nashi-miry.67/" class="forumLink">Наши миры</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-6750" class="threadListItem" data-author="Alanna2202">
-
-		<a href="members/alanna2202.668/" class="avatar Av668s" data-avatarhtml="true"><img src="data/avatars/s/0/668.jpg?1488906026" width="48" height="48" alt="Alanna2202" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/vnekonkursnyj-ijunskij-monoxrom.6750/unread"><span class="prefix prefixSkyBlue">Конкурсы симс-моделей</span> Внеконкурсный июньский монохром</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Alanna2202, <abbr class="DateTime" data-time="1780677400" data-diff="91416" data-datestring="5 июн 2026" data-timestring="19:36">5 июн 2026 в 19:36</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/konkursy-sim-modelej.86/" class="forumLink">Конкурсы сим-моделей</a>
-			</div>
-		</div>
-	</li>
-
-	<li id="thread-1284" class="threadListItem" data-author="Alanna2202">
-
-		<a href="members/alanna2202.668/" class="avatar Av668s" data-avatarhtml="true"><img src="data/avatars/s/0/668.jpg?1488906026" width="48" height="48" alt="Alanna2202" /></a>
-		
-		<div class="messageInfo">
-			
-			<div class="messageContent">
-				<div class="title">
-				
-					<a href="threads/sledy-nevidannyx-zverej.1284/unread">Следы невиданных зверей</a>
-				
-				</div>
-			</div>
-
-			<div class="additionalRow muted">
-				Последнее: Alanna2202, <abbr class="DateTime" data-time="1780676094" data-diff="92722" data-datestring="5 июн 2026" data-timestring="19:14">5 июн 2026 в 19:14</abbr>
-			</div>
-			
-			<div class="additionalRow muted">
-				<a href="forums/boltalka.34/" class="forumLink">Болталка</a>
+				<a href="forums/art-konkursy.85/" class="forumLink">Арт-конкурсы</a>
 			</div>
 		</div>
 	</li>
@@ -5013,13 +4986,13 @@ $(document).ready(function() {
 				<h3>Статистика форума</h3>
 				<div class="pairsJustified">
 					<dl class="discussionCount"><dt>Темы:</dt>
-						<dd>4.034</dd></dl>
+						<dd>4.036</dd></dl>
 					<dl class="messageCount"><dt>Сообщения:</dt>
-						<dd>408.473</dd></dl>
+						<dd>408.630</dd></dl>
 					<dl class="memberCount"><dt>Пользователи:</dt>
-						<dd>23.849</dd></dl>
+						<dd>23.866</dd></dl>
 					<dl><dt>Новый пользователь:</dt>
-						<dd><a href="members/kotogiko.62319/" class="username" dir="auto">kotogiko</a></dd></dl>
+						<dd><a href="members/ksenius.62464/" class="username" dir="auto">Ксениус</a></dd></dl>
 					<!-- slot: forum_stats_extra -->
 				</div>
 			</div>
@@ -5033,24 +5006,12 @@ $(document).ready(function() {
             <h3>Именинники</h3>
             <ol>
             
-                <li><a href="members/esifoce.57418/"
-			class="username">Esifoce</a>,
+                <li><a href="members/neiara.30679/"
+			class="username">neiara</a>,
 </li>
             
-                <li><a href="members/leek.52207/"
-			class="username">leek</a>,
-</li>
-            
-                <li><a href="members/ssezzh.56735/"
-			class="username">ssezzh</a>,
-</li>
-            
-                <li><a href="members/dzheff.60963/"
-			class="username">Джефф</a>,
-</li>
-            
-                <li><a href="members/chintamani.1835/"
-			class="username">чинтамани</a>
+                <li><a href="members/olivas.2569/"
+			class="username">olivas</a>
 </li>
             
             </ol>
@@ -5162,7 +5123,7 @@ $(document).ready(function() {
 					</div>
 					<ul class="secondaryContent blockLinksList">
 					
-						<li><a href="forums/-/mark-read?date=1780768816" class="OverlayTrigger">Отметить разделы прочитанными</a></li>
+						<li><a href="forums/-/mark-read?date=1781268238" class="OverlayTrigger">Отметить разделы прочитанными</a></li>
 						<li><a href="search/?type=post">Поиск сообщений</a></li>
 						
 							<li><a href="watched/forums">Отслеживаемые разделы</a></li>
@@ -5341,12 +5302,12 @@ $(document).ready(function() {
 						<form action="account/toggle-visibility" method="post" class="AutoValidator visibilityForm">
 							<label><input type="checkbox" name="visible" value="1" class="SubmitOnChange"  checked="checked" />
 								Показывать онлайн-статус</label>
-							<input type="hidden" name="_xfToken" value="961,1780768816,97ca3613df5c209bc1b28b9576560bcb2e1fb4c8" />
+							<input type="hidden" name="_xfToken" value="961,1781268238,d26838f9f63d6df63189ca983938f7c73bb2c145" />
 						</form>
 					</li>
 				</ul>
 				<ul class="col2 blockLinksList">
-					<li><a href="logout/?_xfToken=961%2C1780768816%2C97ca3613df5c209bc1b28b9576560bcb2e1fb4c8" class="LogOut">Выход</a></li>
+					<li><a href="logout/?_xfToken=961%2C1781268238%2Cd26838f9f63d6df63189ca983938f7c73bb2c145" class="LogOut">Выход</a></li>
 				</ul>
 			</div>
 			
@@ -5355,7 +5316,7 @@ $(document).ready(function() {
 					<div class="submitUnit">
 						<span id="visMenuSEdCount" title="Осталось символов"></span>
 						<input type="submit" class="button primary MenuCloser" value="Отправить" />
-						<input type="hidden" name="_xfToken" value="961,1780768816,97ca3613df5c209bc1b28b9576560bcb2e1fb4c8" />
+						<input type="hidden" name="_xfToken" value="961,1781268238,d26838f9f63d6df63189ca983938f7c73bb2c145" />
 						<input type="hidden" name="return" value="1" /> 
 					</div>
 				</form>
@@ -5519,7 +5480,7 @@ $(document).ready(function() {
 				
 			</div>
 			
-			<input type="hidden" name="_xfToken" value="961,1780768816,97ca3613df5c209bc1b28b9576560bcb2e1fb4c8" />
+			<input type="hidden" name="_xfToken" value="961,1781268238,d26838f9f63d6df63189ca983938f7c73bb2c145" />
 		</form>		
 	</fieldset>
 	
@@ -5635,9 +5596,9 @@ jQuery.extend(true, XenForo,
 	visitor: { user_id: 961 },
 	serverTimeInfo:
 	{
-		now: 1780768816,
-		today: 1780693200,
-		todayDow: 6
+		now: 1781268238,
+		today: 1781211600,
+		todayDow: 5
 	},
 	_lightBoxUniversal: "0",
 	_enableOverlays: "1",
@@ -5658,7 +5619,7 @@ jQuery.extend(true, XenForo,
 	_ignoredUsers: [],
 	_loadedScripts: {"node_list":true,"node_category":true,"node_forum":true,"sidebar_social":true,"thread_list_simple":true,"andy_todaysbirthdays":true,"bbm_buttons":true,"notices":true,"panel_scroller":true,"bookmarks_tab":true,"GoToTop_purecss":true,"js\/brivium\/CustomNodeStyle\/custom_node.js?_v=51f0ae65":true,"js\/sedo\/gototop\/xen.ui.totop.js?_v=51f0ae65":true},
 	_cookieConfig: { path: "/", domain: "", prefix: "xf_"},
-	_csrfToken: "961,1780768816,97ca3613df5c209bc1b28b9576560bcb2e1fb4c8",
+	_csrfToken: "961,1781268238,d26838f9f63d6df63189ca983938f7c73bb2c145",
 	_csrfRefreshUrl: "login/csrf-token-refresh",
 	_jsVersion: "51f0ae65",
 	_noRtnProtect: false,

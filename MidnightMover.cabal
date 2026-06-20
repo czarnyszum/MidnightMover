@@ -20,6 +20,7 @@ executable MidnightMover
   other-modules:
                        Parse
                        Post
+                       Antibot
                        TlsManager
                        Ctx
                        Bunker

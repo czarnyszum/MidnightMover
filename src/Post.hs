@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 
-module Post (Post, isValidPost, extractPost, savePost, exractPageNumber) where
+module Post (Post, isValidPost, extractPost, savePost, exractPageNumber, toBBCMap) where
 
 import Control.Monad
 import Control.Monad.IO.Class
@@ -121,13 +121,14 @@ toBBC (PostYouTube src) = T.concat ["[video]", src, "[/video]"]
  
 type Post = [PostElement]
 
-savePost :: (MonadIO m) => String -> Post -> m ()
+savePost :: (MonadIO m) => String -> Post -> m String
 savePost prefix p =
   do
     let
       ps = T.unpack . toBBCMap $ p
       nm = "./posts/" ++ prefix ++ ".txt"
     liftIO $ writeFile nm ps
+    return nm
 
 {-
 savePost :: (MonadIO m) => String -> Post -> m ()

@@ -2,15 +2,16 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module Bunker (loginBunker) where
+module Bunker (copyToBunker) where
 
 import Control.Concurrent
-import Control.Lens hiding (element)
+import Control.Lens hiding (element, (.=))
 import Control.Monad
 import Control.Monad.Except
 import Control.Monad.State
 import Control.Monad.IO.Class
 
+import Data.Aeson
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
@@ -19,13 +20,28 @@ import Test.WebDriver
 import Test.WebDriver.Commands
 import Test.WebDriver.Config
 
+import Antibot
 import Ctx
+
+pubbCap :: Capabilities
+pubbCap = defaultCaps
+ { browser = firefox
+  , additionalCaps =
+      [ "pageLoadStrategy" .= ("eager" :: Text)
+      , "moz:firefoxOptions" .= object
+          [ "prefs" .= object
+              [ "javascript.enabled" .= False
+              ]
+          ]
+      ]
+  }
 
 -- | Default WebDriver configuration using ChromeDriver
 punbbConfig :: WDConfig
 punbbConfig = defaultConfig
   { wdHost = "localhost"
   , wdPort = 4444
+  , wdCapabilities = pubbCap
   }
 
 savePageAsHtml :: FilePath -> WD ()
@@ -105,21 +121,26 @@ getSecurityTokens = do
 -- Takes base URL, thread ID, and message content
 postMessage :: Text -> Int -> Text -> WD ()
 postMessage baseUrl threadId message = do
-  -- Navigate to the post reply page
-  openPage $ T.unpack baseUrl <> "/post.php?tid=" <> show threadId
   
+  liftIO $ putStrLn $ "POST START"
+
+  -- openPage $ T.unpack baseUtrl <> "/post.php?tid=" <> show threadId
   -- Wait for page to load
-  liftIO $ threadDelay 1000000 -- 1 second delay
+  liftIO $ threadDelay 3000000 -- delay
   
   -- Find and fill in the message textarea
   -- PunBB uses 'req_message' as the textarea name
   messageArea <- findElem (ByName "req_message")
   clearInput messageArea
   sendKeys message messageArea
+
+  liftIO $ putStrLn $ "MESSAGE SENT"
   
   -- Trigger process_form to populate security tokens
   -- We call it via JS before clicking submit
   triggerProcessForm
+
+  liftIO $ putStrLn $ "TRIGGER PROCESS FORM"
   
   -- Small delay for token population
   liftIO $ threadDelay 500000
@@ -138,89 +159,35 @@ postMessage baseUrl threadId message = do
 -- The onsubmit handler will call process_form again, but tokens are already set
   submitBtn <- findElem (ByName "submit")
   click submitBtn
-  
+
+  liftIO $ putStrLn $ "SUBMIT"
+
   -- Wait for post to complete
   liftIO $ threadDelay 2000000 -- 2 second delay
-
-
-
-{-
-
-
-
--- | Alternative: Submit form entirely via JavaScript
--- Useful if the normal submit flow has issues
-postMessageViaJS :: Text -> Int -> Text -> WD ()
-postMessageViaJS baseUrl threadId message = do
-  openPage $ T.unpack baseUrl <> "/post.php?tid=" <> show threadId
-  liftIO $ threadDelay 1000000
-  
-  -- Fill message via JavaScript to avoid any input issues
-  executeJS [JSArg message] 
-    "document.getElementsByName('req_message')[0].value = arguments[0];" :: WD ()
-  
-  -- Trigger process_form to set security tokens
-  triggerProcessForm
-  liftIO $ threadDelay 500000
-  
-  -- Submit form via JavaScript
-  executeJS []
-    "var form = document.getElementById('post');\
-    \form.submit();" :: WD ()
-  
-  liftIO $ threadDelay 2000000
-
--- | Complete bot session: login and post a message
-runPunBBBot :: Text -- ^ Base URL (e.g., "http://forum.example.com")
-            -> Text -- ^ Username
-            -> Text -- ^ Password  
-            -> Int -- ^ Thread ID
-            -> Text -- ^ Message to post
-            -> IO ()
-runPunBBBot baseUrl username password threadId message = do
-  runSession punbbConfig $ do
-    -- Login first
-    loginPunBB baseUrl username password
-    
-    -- Post the message
-    postMessage baseUrl threadId message
-    
-    -- Close the session
-    closeSession
-
--- | Run multiple posts in a single session
-runPunBBBotMultiple :: Text -- ^ Base URL
-                    -> Text -- ^ Username
-                    -> Text -- ^ Password
-                    -> [(Int, Text)] -- ^ List of (threadId, message) pairs
-                    -> IO ()
-runPunBBBotMultiple baseUrl username password posts = do
-  runSession punbbConfig $ do
-    loginPunBB baseUrl username password
-    
-    mapM_ (\(tid, msg) -> do
-      postMessage baseUrl tid msg
-      liftIO $ threadDelay 1000000 -- 1 second between posts
-      ) posts
-    
-    closeSession
--}
 
 
 bunkerUrl :: String
 bunkerUrl = "https://gamestories.clanboard.ru"
 
-loginBunker
+copyToBunker
     :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m)
-    => String -> String -> m ()
-loginBunker login password =
+    => String -> String -> [Text] -> m ()
+copyToBunker login password msgs =
   do
     let
       base = T.pack bunkerUrl
     liftIO $ runSession punbbConfig $ do
 
       loginPunBB base (T.pack login) (T.pack password)    
-      postMessage base 22 "Hey you - come on!\nI show you something\nThere is what it takes for you\nMmh, you better follow me" 
+
+      liftIO $ putStrLn "LOGIN OK"
+
+      -- Navigate to the post reply page
+      openPage $ T.unpack base <> "/post.php?tid=22"
+
+      liftIO $ putStrLn "PAGE OPENED"
+
+      mapM (postMessage base 22) msgs 
 
       -- savePageAsHtml "test_login.html"
       closeSession

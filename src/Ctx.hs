@@ -19,7 +19,7 @@ import qualified Data.ByteString.Lazy as BL
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
--- import Data.Sequence (Seq)
+import Data.Maybe (catMaybes)
 import Data.Time
 
 import GHC.Generics (Generic)
@@ -256,7 +256,6 @@ processMessage user (p, u, c) =
     else
       liftIO $ putStrLn $ filename ++ " пропускаем, не тот автор"
 
-
 processPage :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> String -> m ()
 processPage user addr =
   do
@@ -265,7 +264,45 @@ processPage user addr =
     let
       messages = extractMessages cursor
     mapM_ (processMessage user) messages
-    
+
+getPageMessage :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> Message -> m (Maybe String)
+getPageMessage user (p, u, c) =
+  do
+    let
+      postname = T.unpack p
+      username = T.unpack u
+      filename = postname ++ "-" ++  username      
+    if username `elem` (view userFilter user)
+    then
+      do
+        let
+          post = extractPost c
+          (bs, bi, bd) = isValidPost post
+        if bd || (bs && bi)
+        then 
+          do
+            liftIO $ putStrLn $ filename ++ " выводим"
+            out <- savePost filename post
+            return (Just out)
+        else
+          do
+           liftIO $ putStrLn $ filename ++ " пропускаем, это коментарий"
+           return Nothing
+    else
+      do
+        liftIO $ putStrLn $ filename ++ " пропускаем, не тот автор"
+        return Nothing
+
+getPageMessages :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> String -> m [String]
+getPageMessages user addr =
+  do
+    liftIO $ putStrLn $ "Loading: " ++ addr
+    cursor <- getPageCursor addr
+    let
+      messages = extractMessages cursor
+    msg <- mapM (getPageMessage user) messages
+    return (catMaybes $ msg)
+       
 move :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m ()
 move user =
   do
@@ -285,3 +322,27 @@ move user =
         liftIO . putStrLn $ "Total: " ++ (show n)
         mapM_ (processPage user) pages
      Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"
+
+getMessages :: (MonadError ErrorKind m, MonadState Ctx m, MonadIO m) => User -> m [String]
+getMessages user =
+  do
+    let
+      threads = view userThreads user
+      thread0 = threads !! 0
+    login user
+    cursor <- getPageCursor thread0
+    let
+      maybePageNumber = exractPageNumber cursor    
+    case maybePageNumber of
+     Just n ->
+       do
+        let
+          pager y x = y ++ "page-" ++ (show x)
+          pages = thread0 : map (pager thread0) [1 .. 1] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
+        liftIO . putStrLn $ "Total: " ++ (show n)
+        msgs <- mapM (getPageMessages user) pages
+        return (join msgs)
+     Nothing ->
+       do
+         liftIO . putStrLn $ "Не нашел счетчик страниц"
+         return []
