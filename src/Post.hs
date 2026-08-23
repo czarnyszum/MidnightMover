@@ -6,11 +6,15 @@ module Post (Post, isValidPost, extractPost, savePost, exractPageNumber, toBBCMa
 import Control.Monad
 import Control.Monad.IO.Class
 
-import Data.Maybe (listToMaybe, isJust, fromJust)
+import Data.Char (isControl)
+import Data.List (find)
+import Data.Maybe (isJust, fromJust)
 
 import Data.Text (Text)
 import qualified Data.Text as T
 import Text.Read (readMaybe)
+
+import System.Directory (createDirectoryIfMissing)
 
 
 import Text.XML hiding (writeFile)
@@ -113,7 +117,7 @@ toBBCMap ps = T.concat $ map toBBC ps
 toBBC :: PostElement -> Text
 toBBC (PostImageGlobal src) = T.concat ["[img]", src, "[/img]"] 
 toBBC (PostImageLocal src) = src
-toBBC (PostColor col post) = let x = toBBCMap post in T.concat ["[color=", col, "]", x, "[/img]"]
+toBBC (PostColor col post) = let x = toBBCMap post in T.concat ["[color=", col, "]", x, "[/color]"]
 toBBC (PostLine l) = l
 toBBC PostLineBreak = "\n"
 toBBC (PostQuote author post) = let x = toBBCMap post in T.concat ["[quote=", author, "]", x, "[/quote]"] 
@@ -130,12 +134,22 @@ toBBC (PostYouTube src) = T.concat ["[video]", src, "[/video]"]
  
 type Post = [PostElement]
 
+-- | Replace characters that are unsafe / unsupported in file names.
+sanitizeFileName :: String -> String
+sanitizeFileName = map sanitize
+  where
+    sanitize c
+      | c `elem` ("/\\:*?\"<>|" :: String) || isControl c = '_'
+      | otherwise = c
+
 savePost :: (MonadIO m) => String -> Post -> m String
 savePost prefix p =
   do
     let
-      ps = T.unpack . toBBCMap $ p
-      nm = "./posts/" ++ prefix ++ ".txt"
+      ps = T.unpack . T.strip . toBBCMap $ p
+      dir = "./posts"
+      nm = dir ++ "/" ++ sanitizeFileName prefix ++ ".txt"
+    liftIO $ createDirectoryIfMissing True dir
     liftIO $ writeFile nm ps
     return nm
 
@@ -164,37 +178,44 @@ extractNode c =
 extractText :: Text -> Post
 extractText txt =
   let
-    trimmed = txt -- T.strip txt
+    trimmed = T.strip txt -- skip whitespace-only text nodes
   in
     if T.null trimmed
     then []
-    else [PostLine trimmed]
+    else [PostLine txt]
 
 hasColor :: Cursor -> Maybe Text
-hasColor c =
-  do
-    style <- getAttr "style" c
-    guard $ T.isPrefixOf "color:" style
-    let
-      colorValue = T.strip . T.drop (T.length "color:") $ style
-    guard $ not $ T.null colorValue
-    return colorValue
+hasColor c = do
+  style <- getAttr "style" c
+  let
+    decls = map T.strip (T.splitOn ";" style)
+  colorDecl <- find ("color:" `T.isPrefixOf`) decls
+  let
+    colorValue = T.strip . T.drop (T.length "color:") $ colorDecl
+  guard $ not $ T.null colorValue
+  return colorValue
 
 extractElement :: Element -> Cursor -> Post
 extractElement el c                      
+  | tag == "script" = []
   | tag == "iframe" = extractYouTube c 
   | tag == "a" = extractLink c 
   | tag == "br" = [PostLineBreak]
   | tag == "i" = [PostFormated FormatI (extractPost c)]
   | tag == "b" = [PostFormated FormatB (extractPost c)]
   | tag == "u" = [PostFormated FormatU (extractPost c)]
+  | tag == "s" = [PostFormated FormatS (extractPost c)]
   | tag == "span" && hasStyle "text-decoration: line-through" c = [PostFormated FormatS (extractPost c)]
   | tag == "span" && isJust (hasColor c) = [PostColor (fromJust $ hasColor c) (extractPost c) ] 
   | tag == "img" = extractImage c
-  | tag == "div" && hasClass "bbCodeQuote" c = extractQuote c
+  | tag == "blockquote" && hasClass "bbCodeBlock--quote" c = extractQuote c
+  | tag == "div" && hasClass "bbCodeQuote" c = extractQuote c -- XF1 legacy
   | tag == "div" && hasClass "quoteExpand" c = []
-  | tag == "div" && hasClass "bbCodeSpoilerContainer" c = extractSpoiler c
-  | tag == "div" && hasStyle "text-align: center" c = [PostCentered (extractPost c)]
+  | tag == "div" && hasClass "bbCodeSpoiler" c = extractSpoiler c
+  | tag == "div" && hasClass "bbCodeSpoilerContainer" c = extractSpoiler c -- XF1 legacy
+  | tag == "div" && hasClass "bbCodeBlock-expandLink" c = []
+  | tag == "div" && hasClass "js-selectToQuoteEnd" c = []
+  | (tag == "div" || tag == "p") && hasStyle "text-align: center" c = [PostCentered (extractPost c)]
   | tag == "div" && hasClass "dice_outer" c = extractDice c
   | otherwise = extractPost c
   where
@@ -202,12 +223,28 @@ extractElement el c
 
 extractQuote :: Cursor -> Post
 extractQuote c =
-  case getAttr "data-author" c of
-    Just author ->
-      case c $// element "div" >=> check (hasClass "quote") of
-        (q : _) -> [PostQuote author . extractPost $ q]
-        [] -> []
-    Nothing -> []
+  case getAttr "data-quote" c of
+    Just author -> quoteFrom author
+    Nothing ->
+      case getAttr "data-author" c of -- XF1 legacy (div.bbCodeQuote)
+        Just author -> quoteFrom author
+        Nothing -> []
+  where
+    -- XF2: content lives in div.bbCodeBlock-expandContent (inside
+    -- div.bbCodeBlock-content); fall back to div.quote for the old XF1 markup.
+    quoteFrom author =
+      let
+        cs = c $// element "div" >=> check (hasClass "bbCodeBlock-expandContent")
+        cs' = case cs of
+                (q : _) -> [q]
+                [] -> c $// element "div" >=> check (hasClass "bbCodeBlock-content")
+        cs'' = case cs' of
+                 (q : _) -> [q]
+                 [] -> c $// element "div" >=> check (hasClass "quote")
+      in
+        case cs'' of
+          (q : _) -> [PostQuote author (extractPost q)]
+          [] -> []
 
 extractLink :: Cursor -> Post
 extractLink c =
@@ -238,16 +275,24 @@ extractDice :: Cursor -> Post
 extractDice c = [PostDice (extractDiceValue c) (extractDiceText c)]
     
 extractImage :: Cursor -> Post
-extractImage c =                 
-    case getAttr "src" c of
-      Just src ->
-        if "http" `T.isPrefixOf` src
-        then [PostImageGlobal src]
-        else
-          case getAttr "alt" c of
-            Just ty -> [PostImageLocal ty]
-            Nothing -> [PostImageLocal src]
-      _ -> []
+extractImage c =
+  let
+    -- XF2 wraps images in div.bbImageWrapper > img.bbImage; the img carries the
+    -- real URL in data-url (proxy.php URLs have a relative src but a full
+    -- data-url). Smilies are img.smilie with a relative src and an alt text.
+    mUrl =
+      case getAttr "data-url" c of
+        Just u | "http" `T.isPrefixOf` u -> Just u
+        _ -> getAttr "src" c
+  in
+    case mUrl of
+      Just src
+        | "http" `T.isPrefixOf` src -> [PostImageGlobal src]
+        | otherwise ->
+            case getAttr "alt" c of
+              Just ty -> [PostImageLocal ty]
+              Nothing -> [PostImageLocal src]
+      Nothing -> []
 
 extractSpoiler :: Cursor -> Post
 extractSpoiler c =
@@ -260,28 +305,30 @@ extractSpoiler c =
 exractPageNumber :: Cursor -> Maybe Int
 exractPageNumber c =
   let
-    els = c $// element "div" &/ check (hasClass "PageNav")
+    -- XF2: the page-jump input carries the last page in its max attribute
+    -- (old XF1 markup had div.PageNav with data-last)
+    els = c $// element "input" >=> check (hasClass "js-pageJumpPage")
   in
     case els of
       (e : _) ->
         do
-          la <- getAttr "data-last" e
-          readMaybe (T.unpack la)
+          mx <- getAttr "max" e
+          readMaybe (T.unpack mx)
       [] -> Nothing
 
 exractSpoilerTitle :: Cursor -> Text
 exractSpoilerTitle c =
   let
-     spans = c $// element "span" &/ check (hasClass "SpoilerTitle") 
+    spans = c $// element "span" >=> check (hasClass "bbCodeSpoiler-button-title")
   in
     case spans of
       span : _ -> T.strip (T.concat (span $/ content))
       [] -> "Спойлер"
-    
+
 exractSpoilerContent :: Cursor -> Post
 exractSpoilerContent c =
   let
-    cs = c $// check (hasClass "bbCodeSpoilerText") 
+    cs = c $// check (hasClass "bbCodeSpoiler-content")
   in
     case cs of
       c' : _ -> extractPost c'

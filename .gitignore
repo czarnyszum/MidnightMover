@@ -40,3 +40,6 @@ cabal.project.local~
 auto-save-list
 tramp
 .\#*
+
+# local cabal state
+.cabal-local/

@@ -3,23 +3,20 @@
 
 module Parse (extractMessages, Message, getAttr, hasClass, hasStyle, attrIs) where
 
-import qualified Data.ByteString.Lazy as BL
-import Data.ByteString.Lazy (ByteString)
-import qualified Data.ByteString.Char8 as B
-import Data.Sequence (Seq)
 import qualified Data.Map as M
 import Data.Text (Text)
 import qualified Data.Text as T
 
--- import qualified Data.Sequence as S
-
 import Text.XML
 import Text.XML.Cursor
 
-import Debug.Trace
-
 -- [(ByteString, ByteString, [Tag ByteString])]   -- ^ (id, author, содержимое)
 
+-- | (postId, author, cursor on the message body).
+--   postId   - "post-282681" (from data-content)
+--   author   - display name or numeric user id (from data-author)
+--   cursor   - on <article class="message-body js-selectToQuote">, i.e. the
+--              actual post content (BBCode source of the message)
 type Message = (Text, Text, Cursor)
 
 attrIs :: Text -> Text -> Cursor -> [Cursor]
@@ -34,7 +31,7 @@ getAttr attrName c =
 hasStyle :: Text -> Cursor -> Bool
 hasStyle st c =
   case getAttr "style" c of
-    Just styles -> styles == st -- problematic  
+    Just styles -> st `elem` map T.strip (T.splitOn ";" styles)
     Nothing -> False
 
 hasClass :: Text -> Cursor -> Bool
@@ -43,23 +40,35 @@ hasClass cls c =
     Just classes -> cls `elem` T.words classes
     Nothing -> False
 
+-- | Message id: XenForo 2 puts it into data-content ("post-282681");
+--   fall back to id="js-post-282681" (strip the "js-post-" prefix).
+msgIdOf :: Cursor -> Maybe Text
+msgIdOf c =
+  case getAttr "data-content" c of
+    Just v | not (T.null v) -> Just v
+    _ ->
+      case getAttr "id" c of
+        Just v -> T.stripPrefix "js-post-" v
+        Nothing -> Nothing
+
 isMessage :: Cursor -> [Message]
 isMessage c =
-  case (getAttr "id" c, getAttr "data-author" c) of
+  case (msgIdOf c, getAttr "data-author" c) of
     (Just msgId, Just msgAuthor) ->
       let
-        cs = c $// check (hasClass "messageContent")
-      in   
+        cs = c $// element "article" >=> check (hasClass "message-body")
+      in
         case cs of
-          c' : _ -> [(msgId, msgAuthor, c')] -- | "message " `elem` T.words cls
+          c' : _ -> [(msgId, msgAuthor, c')]
           [] -> []
     (_, _) -> []
 
 extractMessages :: Cursor -> [Message]
 extractMessages cursor =
   let
-    messageList = cursor $// element "ol" >=> (attrIs "id" "messageList")
-    messageCursors = messageList >>= child >>= element "li"
+    -- XenForo 2.x: messages are <article class="message ... message--post js-post">
+    -- (the old XF1 markup had <ol id="messageList"> with <li> children)
+    messageCursors = cursor $// element "article" >=> check (hasClass "message--post")
   in
     concatMap isMessage messageCursors 
 

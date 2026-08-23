@@ -1,5 +1,5 @@
 { mkDerivation, aeson, base, blaze-html, bytestring, containers
-, crypton-connection, crypton-x509, encoding, filepath
+, crypton-connection, crypton-x509, directory, encoding, filepath
 , html-conduit, http-client, http-client-tls, http-types, lens, lib
 , mtl, process, text, time, tls, webdriver, wreq, xml-conduit
 }:
@@ -11,7 +11,7 @@ mkDerivation {
   isExecutable = true;
   executableHaskellDepends = [
     aeson base blaze-html bytestring containers crypton-connection
-    crypton-x509 encoding filepath html-conduit http-client
+    crypton-x509 directory encoding filepath html-conduit http-client
     http-client-tls http-types lens mtl process text time tls webdriver
     wreq xml-conduit
   ];

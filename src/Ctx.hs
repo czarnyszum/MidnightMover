@@ -313,13 +313,17 @@ move user =
     login user
     cursor <- getPageCursor thread0
     let
-      maybePageNumber = Just (273 * 2) --  exractPageNumber cursor    
+      maybePageNumber = exractPageNumber cursor
     case maybePageNumber of
      Just n ->
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          pages = thread0 : map (pager thread0) [141, 502, 503, 505, 507, 518, 522, 532] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
+          -- page numbers below are in the NEW pagination (20 posts/page);
+          -- the old forum had 10 posts/page, so old page p maps to p `div` 2:
+          -- 141 -> 71, 502 -> 251, 503 -> 252, 505 -> 253, 507 -> 254,
+          -- 518 -> 259, 522 -> 261, 532 -> 266
+          pages = thread0 : map (pager thread0) ([71, 251, 252, 253, 254, 259, 261, 266] :: [Int])
         liftIO . putStrLn $ "Total: " ++ (show n)
         mapM_ (processPage user) pages
      Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"
@@ -333,13 +337,17 @@ getMessages user =
     login user
     cursor <- getPageCursor thread0
     let
-      maybePageNumber = Just (2 * 273) -- exractPageNumber cursor    
-    case maybePageNumber of
+      lastPage = exractPageNumber cursor
+    case lastPage of
      Just n ->
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          pages = thread0 : map (pager thread0) [141, 502, 503, 505, 507, 518, 522, 532] -- 1 .. 15 ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
+          -- page numbers below are in the NEW pagination (20 posts/page);
+          -- the old forum had 10 posts/page, so old page p maps to p `div` 2:
+          -- 141 -> 71, 502 -> 251, 503 -> 252, 505 -> 253, 507 -> 254,
+          -- 518 -> 259, 522 -> 261, 532 -> 266
+          pages = thread0 : map (pager thread0) ([71, 251, 252, 253, 254, 259, 261, 266] :: [Int])
         liftIO . putStrLn $ "Total: " ++ (show n)
         msgs <- mapM (getPageMessages user) pages
         return (nub $ join msgs)

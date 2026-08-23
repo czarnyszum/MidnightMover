@@ -25,6 +25,7 @@
           blaze-html         = hpkg.blaze-html;
           bytestring         = hpkg.bytestring;
           html-conduit       = hpkg.html-conduit;
+          directory          = hpkg.directory;
           encoding           = hpkg.encoding;
           xml-conduit        = hpkg.xml-conduit;
           http-client        = hpkg.http-client;
