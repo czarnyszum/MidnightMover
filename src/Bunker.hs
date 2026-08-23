@@ -96,17 +96,22 @@ getTokenFromDiv divId = do
 -- We need to execute process_form() to populate the hidden fields
 triggerProcessForm :: WD ()
 triggerProcessForm = do
+  loadOnlyProcessFormScript
   -- Execute process_form via JavaScript to populate hidden fields
   -- without actually submitting the form
   executeJS [] 
     "var form = document.getElementById('post');\
     \process_form(form);" :: WD ()
 
+
+  
 -- | Get both security tokens after triggering process_form
 getSecurityTokens :: WD ((Text, Text), (Text, Text))
 getSecurityTokens = do
   -- Trigger process_form to populate the hidden divs
   triggerProcessForm
+
+  liftIO $ putStrLn "FORM Triggered!"
   
   -- Small delay to ensure DOM is updated
   liftIO $ threadDelay 500000 -- 0.5 second delay

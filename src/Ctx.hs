@@ -15,6 +15,7 @@ import Control.Lens hiding (element)
 -- import Data.ByteString.Lazy (ByteString)
 -- import qualified Data.Text as T
 import Data.Aeson
+import Data.List
 import qualified Data.ByteString.Lazy as BL
 import Data.Text (Text)
 import qualified Data.Text as T
@@ -312,7 +313,7 @@ move user =
     login user
     cursor <- getPageCursor thread0
     let
-      maybePageNumber = exractPageNumber cursor    
+      maybePageNumber = Just (273 * 2) --  exractPageNumber cursor    
     case maybePageNumber of
      Just n ->
        do
@@ -332,16 +333,16 @@ getMessages user =
     login user
     cursor <- getPageCursor thread0
     let
-      maybePageNumber = exractPageNumber cursor    
+      maybePageNumber = Just (2 * 273) -- exractPageNumber cursor    
     case maybePageNumber of
      Just n ->
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          pages = thread0 : map (pager thread0) [1 .. 1] -- ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
+          pages = thread0 : map (pager thread0) [141, 502, 503, 505, 507, 518, 522, 532] -- 1 .. 15 ([2 .. 10] ++ [122, 168, 248] ++ [250 .. 255]) -- 2 .. n
         liftIO . putStrLn $ "Total: " ++ (show n)
         msgs <- mapM (getPageMessages user) pages
-        return (join msgs)
+        return (nub $ join msgs)
      Nothing ->
        do
          liftIO . putStrLn $ "Не нашел счетчик страниц"

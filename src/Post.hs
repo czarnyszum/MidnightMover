@@ -42,6 +42,15 @@ data PostElement =
   | PostDice Text Text
   | PostSpoiler Text [PostElement]
 
+isFormated :: PostElement -> Bool
+isFormated (PostFormated _ _) = True
+isFormated _ = False                      
+
+isLine :: PostElement -> Bool
+isLine (PostLine t) = not $ T.null t
+isLine _ = False                      
+
+
 postValidator :: (Bool, Bool, Bool) -> PostElement -> (Bool, Bool, Bool)
 postValidator (bs, bi, bd) (PostFormated _ post) =
   let
@@ -109,7 +118,7 @@ toBBC (PostLine l) = l
 toBBC PostLineBreak = "\n"
 toBBC (PostQuote author post) = let x = toBBCMap post in T.concat ["[quote=", author, "]", x, "[/quote]"] 
 toBBC (PostCentered post) = let x = toBBCMap post in T.concat ["[align=center]", x, "[/align]"]
-toBBC (PostSpoiler title body) = let x = toBBCMap body in T.concat [ "[hide=", title, "]", x, "[/hide]"]
+toBBC (PostSpoiler title body) = let x = toBBCMap body in T.concat [ "[spoiler=", title, "]", x, "[/spoiler]"]
 toBBC (PostDice value full) = T.concat [full, ": ", value]
 toBBC (PostFormated FormatI post) = let x = toBBCMap post in T.concat ["[i]", x, "[/i]"]
 toBBC (PostFormated FormatB post) = let x = toBBCMap post in T.concat ["[b]", x, "[/b]"]
@@ -155,7 +164,7 @@ extractNode c =
 extractText :: Text -> Post
 extractText txt =
   let
-    trimmed = T.strip txt
+    trimmed = txt -- T.strip txt
   in
     if T.null trimmed
     then []
