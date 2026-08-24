@@ -6,12 +6,14 @@ module Post (Post, isValidPost, extractPost, savePost, exractPageNumber, toBBCMa
 import Control.Monad
 import Control.Monad.IO.Class
 
+import Data.Aeson (decodeStrict')
 import Data.Char (isControl)
 import Data.List (find)
 import Data.Maybe (isJust, fromJust)
 
 import Data.Text (Text)
 import qualified Data.Text as T
+import qualified Data.Text.Encoding as TE
 import Text.Read (readMaybe)
 
 import System.Directory (createDirectoryIfMissing)
@@ -269,6 +271,22 @@ hasFontFamily c = do
   guard $ not $ T.null stripped
   return stripped
 
+-- | XF2 renders media embeds (YouTube etc.) without JS as
+--   <span data-s9e-mediaembed="youtube">
+--     <span data-s9e-mediaembed-iframe='["...","src","https://…"]'>…
+--   (an actual <iframe> is only built by JavaScript). Extract the "src"
+--   entry from the JSON array stored in data-s9e-mediaembed-iframe.
+hasMediaEmbed :: Cursor -> Maybe Text
+hasMediaEmbed c = do
+  raw <- getAttr "data-s9e-mediaembed-iframe" c
+  arr <- decodeStrict' (TE.encodeUtf8 raw) :: Maybe [Text]
+  src <- lookup "src" (pairs arr)
+  guard $ not $ T.null src
+  return src
+  where
+    pairs (a : b : rest) = (a, b) : pairs (b : rest)
+    pairs _ = []
+
 -- | XF2 tables: <table><tr><td>…</td>…</tr></table> (cells may contain
 --   formatted content). Renders as [table][tr][td]…[/td][/tr][/table],
 --   which the target forum understands.
@@ -301,6 +319,7 @@ extractElement el c
   | tag == "span" && isJust (hasColor c) = [PostColor (fromJust $ hasColor c) (extractPost c) ] 
   | tag == "span" && isJust (hasFontSize c) = [PostSize (fromJust $ hasFontSize c) (extractPost c)]
   | tag == "span" && isJust (hasFontFamily c) = [PostFont (fromJust $ hasFontFamily c) (extractPost c)]
+  | tag == "span" && isJust (hasMediaEmbed c) = [PostYouTube (fromJust $ hasMediaEmbed c)]
   | tag == "img" = extractImage c
   | tag == "table" = extractTable c
   | tag == "blockquote" && hasClass "bbCodeBlock--quote" c = extractQuote c

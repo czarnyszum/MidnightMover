@@ -46,3 +46,8 @@
   but are a distinct element so they do not count as "images" in the
   story-post filter (isValidPost) — otherwise posts with only spoilers +
   smilies would pass the filter.
+* Media embeds: XF2 renders YouTube etc. (without JS) as
+  `<span data-s9e-mediaembed-iframe='["…","src","https://…"]'>` instead of an
+  `<iframe>`; `hasMediaEmbed` parses the JSON array and emits `[video]`.
+  Fixes 4 posts whose videos were missing (284917, 290503, 294003, 294762);
+  verified post 284917 renders a real YouTube iframe on the bunker.

@@ -163,7 +163,7 @@ cabal run MidnightMover
 | `img.smilie` | `PostSmilie` | `[img]абсолютный URL смайла[/img]` (в фильтре `isValidPost` картинкой не считается) |
 | `b`, `i`, `u`, `s` | `PostFormated` | `[b]…[/b]` и т.п. |
 | `a[href]` | `PostLink` | `[url=href]текст[/url]` |
-| `iframe` | `PostYouTube` | `[video]src[/video]` |
+| `iframe`; XF2 media-embed (`span[data-s9e-mediaembed-iframe]`, JSON-массив с `src`) | `PostYouTube` | `[video]src[/video]` |
 | `br` | `PostLineBreak` | `\n` |
 | `script` | — | пропускается |
 | `div.js-selectToQuoteEnd`, `div.bbCodeBlock-expandLink` | — | пропускается |
@@ -179,6 +179,11 @@ cabal run MidnightMover
 * Внутри цитат контент лежит в `div.bbCodeBlock-expandContent`
   (скрипт-патч lightbox и ссылка «Нажмите для раскрытия…» отбрасываются).
 * Внутри постов встречаются `<script>` (JSON фраз / патчи) — отбрасываются.
+* Видео (YouTube и др.): XF2 без JS рендерит их как
+  `<span data-s9e-mediaembed-iframe='["…","src","https://…"]'>` (iframe
+  строится только JS-ом). `Post.hasMediaEmbed` разбирает JSON-массив и
+  выдаёт `[video]src[/video]`. Раньше такие посты теряли видео (284917,
+  290503, 294003, 294762).
 * Пустые (whitespace-only) текстовые узлы не порождают строк; итоговый файл
   обрезается по краям.
 
