@@ -160,7 +160,7 @@ cabal run MidnightMover
 | `span` со `style="font-size: Npx"` | `PostSize` | `[size=N]` (бункер трактует `[size=N]` как N px) |
 | `span` со `style="font-family: X"` | `PostFont` | `[font=X]` |
 | `table` / `tr` / `td` (XF2, класс `brtb_item_table`) | `PostTable` | `[table][tr][td]…[/td][/tr][/table]` |
-| `img.smilie` | `PostImageGlobal` | `[img]абсолютный URL смайла[/img]` |
+| `img.smilie` | `PostSmilie` | `[img]абсолютный URL смайла[/img]` (в фильтре `isValidPost` картинкой не считается) |
 | `b`, `i`, `u`, `s` | `PostFormated` | `[b]…[/b]` и т.п. |
 | `a[href]` | `PostLink` | `[url=href]текст[/url]` |
 | `iframe` | `PostYouTube` | `[video]src[/video]` |
@@ -184,9 +184,11 @@ cabal run MidnightMover
 
 Проверка рендеринга на бункере (пробный пост): `[table]`, `[tr]`, `[td]`,
 `[s]`, `[font=X]`, `[hr]`, `[video]`, `[color=…]`, `[size=N]` (N — px)
-поддерживаются; `[size=18px]` и `[list]` — НЕ поддерживаются (выводятся как
-текст), поэтому `font-size: Npx` маппится в `[size=N]`, а списки остаются
-плоскими текстом.
+поддерживаются; `[size=18px]`, `[list]` и `[align=…]` вокруг блочных тегов
+(`[spoiler]`, `[table]`, …) — НЕ поддерживаются (выводятся как текст).
+Поэтому: `font-size: Npx` → `[size=N]`; списки остаются плоскими текстом;
+`PostCentered` оборачивает в `[align=center]` только «не-блочные» фрагменты
+(текст, картинки, смайлы), а спойлеры/таблицы/цитаты/кубики оставляет как есть.
 
 ### Фильтр «это пост истории или комментарий» (`isValidPost`)
 

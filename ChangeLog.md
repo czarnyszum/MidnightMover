@@ -38,3 +38,11 @@
 * Verified: the re-generated thread-starter post renders with a proper table
   (21 rows), all 46 smilies as images, 18px text size, and ~100% text fidelity
   vs the simsmix original.
+* `[align=center]` fix: the target forum's BBCode parser leaves `[align=…]`
+  as literal text when it wraps block-level tags ([spoiler]/[table]/…).
+  `PostCentered` now splits its content into runs and wraps only the
+  non-blocky ones; block content is emitted unwrapped.
+* `PostSmilie`: smilies render as `[img]` (so they show on the target forum)
+  but are a distinct element so they do not count as "images" in the
+  story-post filter (isValidPost) — otherwise posts with only spoilers +
+  smilies would pass the filter.

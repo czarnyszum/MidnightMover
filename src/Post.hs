@@ -48,6 +48,7 @@ data PostElement =
   | PostTable [[Post]]
   | PostSize Int [PostElement]
   | PostFont Text [PostElement]
+  | PostSmilie Text
 
 isFormated :: PostElement -> Bool
 isFormated (PostFormated _ _) = True
@@ -96,6 +97,7 @@ instance Show PostElement where
   show (PostYouTube src)= "YouTube[" ++ (T.unpack src) ++ "]"
   show (PostTable rows) = "Table[" ++ concatMap (concatMap (concatMap show)) rows ++ "]"
   show (PostSize n post) = "Size" ++ show n ++ "[" ++ concatMap show post ++ "]"
+  show (PostSmilie u) = "Smilie[" ++ T.unpack u ++ "]"
   show (PostFont f post) = "Font[" ++ T.unpack f ++ " " ++ concatMap show post ++ "]"
 
 {-
@@ -127,7 +129,12 @@ toBBC (PostColor col post) = let x = toBBCMap post in T.concat ["[color=", col, 
 toBBC (PostLine l) = l
 toBBC PostLineBreak = "\n"
 toBBC (PostQuote author post) = let x = toBBCMap post in T.concat ["[quote=", author, "]", x, "[/quote]"] 
-toBBC (PostCentered post) = let x = toBBCMap post in T.concat ["[align=center]", x, "[/align]"]
+toBBC (PostCentered post) = T.concat (map wrapAlign (alignParts post))
+  where
+    wrapAlign r
+      | null r = ""
+      | any isBlocky r = toBBCMap r -- blocky content: emit unwrapped
+      | otherwise = T.concat ["[align=center]", toBBCMap r, "[/align]"]
 toBBC (PostSpoiler title body) = let x = toBBCMap body in T.concat [ "[spoiler=", title, "]", x, "[/spoiler]"]
 toBBC (PostDice value full) = T.concat [full, ": ", value]
 toBBC (PostFormated FormatI post) = let x = toBBCMap post in T.concat ["[i]", x, "[/i]"]
@@ -143,7 +150,34 @@ toBBC (PostTable rows) =
   in
     T.concat ["[table]", T.concat (map row rows), "[/table]"]
 toBBC (PostSize n post) = let x = toBBCMap post in T.concat ["[size=", T.pack (show n), "]", x, "[/size]"]
+toBBC (PostSmilie u) = T.concat ["[img]", u, "[/img]"]
 toBBC (PostFont f post) = let x = toBBCMap post in T.concat ["[font=", f, "]", x, "[/font]"]
+
+-- | Elements that the target forum cannot wrap in [align=…]: its BBCode
+--   parser leaves [align=…] as literal text when it contains block-level
+--   tags ([spoiler], [table], …), so such runs are emitted unwrapped.
+isBlocky :: PostElement -> Bool
+isBlocky (PostSpoiler _ _) = True
+isBlocky (PostQuote _ _) = True
+isBlocky (PostTable _) = True
+isBlocky (PostDice _ _) = True
+isBlocky (PostCentered _) = True
+isBlocky (PostFormated _ p) = any isBlocky p
+isBlocky _ = False
+
+-- | Split post content into maximal runs of non-blocky elements; blocky
+--   elements stay as singleton runs (emitted without the align wrapper).
+alignParts :: Post -> [Post]
+alignParts = go
+  where
+    go [] = []
+    go xs =
+      let
+        (simple, rest) = span (not . isBlocky) xs
+      in
+        case rest of
+          [] -> [simple]
+          (b : rest') -> simple : [b] : go rest'
    
  
 type Post = [PostElement]
@@ -347,8 +381,10 @@ extractImage c
   -- Smilies: the target forum has a different smiley set, so emit the smiley
   -- image URL instead of the text code (which would not render there).
   | hasClass "smilie" c =
+      -- PostSmilie: renders as [img] on the target forum, but does NOT count
+      -- as an image in the story-post filter (isValidPost).
       case getAttr "src" c of
-        Just src -> [PostImageGlobal (absolutizeUrl src)]
+        Just src -> [PostSmilie (absolutizeUrl src)]
         Nothing -> []
   | otherwise =
       let
