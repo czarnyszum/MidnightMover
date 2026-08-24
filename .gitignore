@@ -48,3 +48,6 @@ tramp
 
 # downloaded selenium toolchain (firefox, geckodriver, JRE, selenium jar)
 tools/
+
+# browser session cookies
+*cookies*.txt
