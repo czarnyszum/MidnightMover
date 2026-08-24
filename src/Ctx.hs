@@ -319,11 +319,8 @@ move user =
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          -- page numbers below are in the NEW pagination (20 posts/page);
-          -- the old forum had 10 posts/page, so old page p maps to p `div` 2:
-          -- 141 -> 71, 502 -> 251, 503 -> 252, 505 -> 253, 507 -> 254,
-          -- 518 -> 259, 522 -> 261, 532 -> 266
-          pages = thread0 : map (pager thread0) ([71, 251, 252, 253, 254, 259, 261, 266] :: [Int])
+          -- scan the first 40 pages of the thread (page 1 = thread0)
+          pages = thread0 : map (pager thread0) ([2 .. 40] :: [Int])
         liftIO . putStrLn $ "Total: " ++ (show n)
         mapM_ (processPage user) pages
      Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"
@@ -343,11 +340,8 @@ getMessages user =
        do
         let
           pager y x = y ++ "page-" ++ (show x)
-          -- page numbers below are in the NEW pagination (20 posts/page);
-          -- the old forum had 10 posts/page, so old page p maps to p `div` 2:
-          -- 141 -> 71, 502 -> 251, 503 -> 252, 505 -> 253, 507 -> 254,
-          -- 518 -> 259, 522 -> 261, 532 -> 266
-          pages = thread0 : map (pager thread0) ([71, 251, 252, 253, 254, 259, 261, 266] :: [Int])
+          -- scan the first 40 pages of the thread (page 1 = thread0)
+          pages = thread0 : map (pager thread0) ([2 .. 40] :: [Int])
         liftIO . putStrLn $ "Total: " ++ (show n)
         msgs <- mapM (getPageMessages user) pages
         return (nub $ join msgs)

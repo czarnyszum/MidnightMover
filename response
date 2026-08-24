@@ -184,7 +184,7 @@
 	  data-content-key=""
 	  data-logged-in="true"
 	  data-cookie-prefix="xf_"
-	  data-csrf="1787513285,b4577f757db45042d95d99071b73e5e6"
+	  data-csrf="1787592395,ba188f7effb01e1e7651e14fd02c5515"
 	  class="has-no-js template-forum_list  uix_page--fluid uix_hasSectionLinks  uix_hasPageAction"
 	  >
 	<head>
@@ -310,17 +310,17 @@
 					consented: ["optional","_third_party"]
 				},
 				cacheKey: 'f3ed7234243583f554e27d349fe769c5',
-				csrf: '1787513285,b4577f757db45042d95d99071b73e5e6',
+				csrf: '1787592395,ba188f7effb01e1e7651e14fd02c5515',
 				js: {"\/forum\/js\/sv\/lib\/link-post.min.js?_v=07cd6260":true,"\/forum\/js\/themehouse\/uix\/ripple.min.js?_v=07cd6260":true,"\/forum\/js\/themehouse\/global\/20210125.min.js?_v=07cd6260":true,"\/forum\/js\/themehouse\/uix\/index.min.js?_v=07cd6260":true,"\/forum\/js\/themehouse\/uix\/vendor\/hover-intent\/hoverintent.min.js?_v=07cd6260":true},
 				fullJs: false,
 				css: {"public:node_list.less":true,"public:notices.less":true,"public:share_controls.less":true,"public:uix.less":true,"public:uix_socialMedia.less":true,"public:extra.less":true},
 				time: {
-					now: 1787513285,
-					today: 1787432400,
-					todayDow: 0,
-					tomorrow: 1787518800,
-					yesterday: 1787346000,
-					week: 1786914000,
+					now: 1787592395,
+					today: 1787518800,
+					todayDow: 1,
+					tomorrow: 1787605200,
+					yesterday: 1787432400,
+					week: 1787000400,
 					month: 1785531600,
 					year: 1767214800
 				},
@@ -1328,7 +1328,7 @@ document.addEventListener('ajax:complete', function(e) {
 								
 	
 	
-	<a href="/forum/forums/-/mark-read?date=1787513285"
+	<a href="/forum/forums/-/mark-read?date=1787592395"
 			class="menu-linkRow u-ripple u-indentDepth0 js-offCanvasCopy "
 			 data-xf-click="overlay"
 			
@@ -1700,7 +1700,7 @@ document.addEventListener('ajax:complete', function(e) {
 						<span class=" uix_searchIcon">
 							<i class="fa--xf far fa-search "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/regular.svg?v=1787083605#search"></use></svg></i>
 						</span>
-						<input type="hidden" name="_xfToken" value="1787513285,b4577f757db45042d95d99071b73e5e6" />
+						<input type="hidden" name="_xfToken" value="1787592395,ba188f7effb01e1e7651e14fd02c5515" />
 					</form>
 				</div>
 
@@ -1764,7 +1764,7 @@ document.addEventListener('ajax:complete', function(e) {
 							</span>
 						</div>
 
-						<input type="hidden" name="_xfToken" value="1787513285,b4577f757db45042d95d99071b73e5e6" />
+						<input type="hidden" name="_xfToken" value="1787592395,ba188f7effb01e1e7651e14fd02c5515" />
 					</form>
 				</div>
 
@@ -1809,7 +1809,7 @@ document.addEventListener('ajax:complete', function(e) {
 							</span>
 						</div>
 
-						<input type="hidden" name="_xfToken" value="1787513285,b4577f757db45042d95d99071b73e5e6" />
+						<input type="hidden" name="_xfToken" value="1787592395,ba188f7effb01e1e7651e14fd02c5515" />
 					</form>
 				</div>
 			</div>
@@ -2083,7 +2083,7 @@ document.addEventListener('ajax:complete', function(e) {
 			
 				
 	
-	<a href="/forum/forums/-/mark-read?date=1787513285"
+	<a href="/forum/forums/-/mark-read?date=1787592395"
 			class="p-navEl-link  "
 			 data-xf-click="overlay"
 			data-xf-key="alt+5"
@@ -2786,7 +2786,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-20T08:33:29+0300" data-timestamp="1787204009" data-date="20 Авг 2026" data-time="08:33" data-short="3д" title="20 Авг 2026 в 08:33">Четверг в 08:33</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-20T08:33:29+0300" data-timestamp="1787204009" data-date="20 Авг 2026" data-time="08:33" data-short="4д" title="20 Авг 2026 в 08:33">Четверг в 08:33</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/svetlyak.9906/" class="username " dir="auto" data-user-id="9906" data-xf-init="member-tooltip">Светляк</a></li>
 								
@@ -2895,7 +2895,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-21T08:57:34+0300" data-timestamp="1787291854" data-date="21 Авг 2026" data-time="08:57" data-short="2д" title="21 Авг 2026 в 08:57">Пятница в 08:57</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-21T08:57:34+0300" data-timestamp="1787291854" data-date="21 Авг 2026" data-time="08:57" data-short="3д" title="21 Авг 2026 в 08:57">Пятница в 08:57</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/rany-randolff.3/" class="username " dir="auto" data-user-id="3" data-xf-init="member-tooltip"><span class="username--staff username--moderator username--admin">Rany Randolff</span></a></li>
 								
@@ -3639,7 +3639,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-18T14:11:39+0300" data-timestamp="1787051499" data-date="18 Авг 2026" data-time="14:11" data-short="5д" title="18 Авг 2026 в 14:11">Вторник в 14:11</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-18T14:11:39+0300" data-timestamp="1787051499" data-date="18 Авг 2026" data-time="14:11" data-short="6д" title="18 Авг 2026 в 14:11">Вторник в 14:11</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/felelya.11032/" class="username " dir="auto" data-user-id="11032" data-xf-init="member-tooltip">felelya</a></li>
 								
@@ -3814,7 +3814,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-14T18:33:12+0300" data-timestamp="1786721592" data-date="14 Авг 2026" data-time="18:33" data-short="9д" title="14 Авг 2026 в 18:33">14 Авг 2026</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-14T18:33:12+0300" data-timestamp="1786721592" data-date="14 Авг 2026" data-time="18:33" data-short="10д" title="14 Авг 2026 в 18:33">14 Авг 2026</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/silver-arrows.853/" class="username " dir="auto" data-user-id="853" data-xf-init="member-tooltip">silver arrows</a></li>
 								
@@ -4192,7 +4192,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-07-30T10:57:36+0300" data-timestamp="1785398256" data-date="30 Июл 2026" data-time="10:57" data-short="24д" title="30 Июл 2026 в 10:57">30 Июл 2026</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-07-30T10:57:36+0300" data-timestamp="1785398256" data-date="30 Июл 2026" data-time="10:57" data-short="25д" title="30 Июл 2026 в 10:57">30 Июл 2026</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/orangepink.16764/" class="username " dir="auto" data-user-id="16764" data-xf-init="member-tooltip">orangepink</a></li>
 								
@@ -5783,8 +5783,8 @@ document.addEventListener('ajax:complete', function(e) {
 				
 					<div class="node-extra-icon">
 						
-							<a href="/forum/members/nataliya_k.27750/" class="avatar avatar--xs" data-user-id="27750" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/27/27750.jpg?1610014096" srcset="/forum/data/avatars/m/27/27750.jpg?1610014096 2x" alt="Nataliya_k" class="avatar-u27750-s" width="48" height="48" loading="lazy" /> 
+							<a href="/forum/members/dzhanai.47419/" class="avatar avatar--xs avatar--default avatar--default--image" data-user-id="47419" data-xf-init="member-tooltip">
+			<span class="avatar-u47419-s"></span> 
 		</a>
 						
 					</div>
@@ -5796,9 +5796,9 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-23T21:24:36+0300" data-timestamp="1787509476" data-date="23 Авг 2026" data-time="21:24" data-short="1ч" title="23 Авг 2026 в 21:24">Сегодня в 21:24</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-24T18:56:57+0300" data-timestamp="1787587017" data-date="24 Авг 2026" data-time="18:56" data-short="1ч" title="24 Авг 2026 в 18:56">Сегодня в 18:56</time></li>
 								
-									<li class="node-extra-user"><a href="/forum/members/nataliya_k.27750/" class="username " dir="auto" data-user-id="27750" data-xf-init="member-tooltip">Nataliya_k</a></li>
+									<li class="node-extra-user"><a href="/forum/members/dzhanai.47419/" class="username " dir="auto" data-user-id="47419" data-xf-init="member-tooltip">Джанай</a></li>
 								
 							</ul>
 						</div>
@@ -5892,13 +5892,13 @@ document.addEventListener('ajax:complete', function(e) {
 								
 									<dt><i class="fa--xf far fa-comment "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/regular.svg?v=1787083605#comment"></use></svg></i></dt>
 									
-								<dd>182</dd>
+								<dd>181</dd>
 							</dl>
 							<dl class="pairs pairs--inline">
 								
 									<dt><i class="fa--xf far fa-comments "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/regular.svg?v=1787083605#comments"></use></svg></i></dt>
 									
-								<dd>75,5K</dd>
+								<dd>74,3K</dd>
 							</dl>
 						</div>
 					
@@ -5920,11 +5920,11 @@ document.addEventListener('ajax:complete', function(e) {
 				<div class="node-stats">
 					<dl class="pairs pairs--rows">
 						<dt>Темы</dt>
-						<dd>182</dd>
+						<dd>181</dd>
 					</dl>
 					<dl class="pairs pairs--rows">
 						<dt>Сообщения</dt>
-						<dd>75,5K</dd>
+						<dd>74,3K</dd>
 					</dl>
 				</div>
 			
@@ -5933,8 +5933,8 @@ document.addEventListener('ajax:complete', function(e) {
 				
 					<div class="node-extra-icon">
 						
-							<a href="/forum/members/alanna2202.668/" class="avatar avatar--xs" data-user-id="668" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/668.jpg?1488906026" srcset="/forum/data/avatars/m/0/668.jpg?1488906026 2x" alt="Alanna2202" class="avatar-u668-s" width="48" height="48" loading="lazy" /> 
+							<a href="/forum/members/leaselmary.860/" class="avatar avatar--xs" data-user-id="860" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/0/860.jpg?1786719271" srcset="/forum/data/avatars/m/0/860.jpg?1786719271 2x" alt="Leaselmary" class="avatar-u860-s" width="48" height="48" loading="lazy" /> 
 		</a>
 						
 					</div>
@@ -5946,9 +5946,9 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-23T21:23:05+0300" data-timestamp="1787509385" data-date="23 Авг 2026" data-time="21:23" data-short="1ч" title="23 Авг 2026 в 21:23">Сегодня в 21:23</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-24T00:31:39+0300" data-timestamp="1787520699" data-date="24 Авг 2026" data-time="00:31" data-short="19ч" title="24 Авг 2026 в 00:31">Сегодня в 00:31</time></li>
 								
-									<li class="node-extra-user"><a href="/forum/members/alanna2202.668/" class="username " dir="auto" data-user-id="668" data-xf-init="member-tooltip"><span class="username--staff username--moderator">Alanna2202</span></a></li>
+									<li class="node-extra-user"><a href="/forum/members/leaselmary.860/" class="username " dir="auto" data-user-id="860" data-xf-init="member-tooltip">Leaselmary</a></li>
 								
 							</ul>
 						</div>
@@ -6273,7 +6273,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-05T18:52:10+0300" data-timestamp="1785945130" data-date="5 Авг 2026" data-time="18:52" data-short="18д" title="5 Авг 2026 в 18:52">5 Авг 2026</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-05T18:52:10+0300" data-timestamp="1785945130" data-date="5 Авг 2026" data-time="18:52" data-short="19д" title="5 Авг 2026 в 18:52">5 Авг 2026</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/ihelen.655/" class="username " dir="auto" data-user-id="655" data-xf-init="member-tooltip"><span class="username--staff username--moderator username--admin">ihelen</span></a></li>
 								
@@ -6382,7 +6382,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-02T19:42:30+0300" data-timestamp="1785688950" data-date="2 Авг 2026" data-time="19:42" data-short="21д" title="2 Авг 2026 в 19:42">2 Авг 2026</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-02T19:42:30+0300" data-timestamp="1785688950" data-date="2 Авг 2026" data-time="19:42" data-short="22д" title="2 Авг 2026 в 19:42">2 Авг 2026</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/taiin.23971/" class="username " dir="auto" data-user-id="23971" data-xf-init="member-tooltip">Тайин</a></li>
 								
@@ -7339,7 +7339,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-11T14:17:35+0300" data-timestamp="1786447055" data-date="11 Авг 2026" data-time="14:17" data-short="12д" title="11 Авг 2026 в 14:17">11 Авг 2026</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-11T14:17:35+0300" data-timestamp="1786447055" data-date="11 Авг 2026" data-time="14:17" data-short="13д" title="11 Авг 2026 в 14:17">11 Авг 2026</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/taiin.23971/" class="username " dir="auto" data-user-id="23971" data-xf-init="member-tooltip">Тайин</a></li>
 								
@@ -7519,22 +7519,22 @@ document.addEventListener('ajax:complete', function(e) {
 				
 					<div class="node-extra-icon">
 						
-							<a href="/forum/members/alanna2202.668/" class="avatar avatar--xs" data-user-id="668" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/668.jpg?1488906026" srcset="/forum/data/avatars/m/0/668.jpg?1488906026 2x" alt="Alanna2202" class="avatar-u668-s" width="48" height="48" loading="lazy" /> 
+							<a href="/forum/members/aurelija.37341/" class="avatar avatar--xs" data-user-id="37341" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/37/37341.jpg?1634326359" srcset="/forum/data/avatars/m/37/37341.jpg?1634326359 2x" alt="aurelija" class="avatar-u37341-s" width="48" height="48" loading="lazy" /> 
 		</a>
 						
 					</div>
 					<div class="uix_nodeExtra__rows">
 						<div class="node-extra-row">
 							
-								<a href="/forum/threads/kakiye-konkursy-my-by-khoteli-provesti.1213/unread" class="node-extra-title" title="Какие конкурсы мы бы хотели провести">Какие конкурсы мы бы хотели провести</a>
+								<a href="/forum/threads/skrinshot-iyunya-avgusta-nashe-leto.6751/unread" class="node-extra-title" title="Скриншот июня-августа &quot;Наше лето&quot;"><span class="label label--skyBlue" dir="auto">Арт-конкурсы</span><span class="label-append">&nbsp;</span>Скриншот июня-августа &quot;Наше лето&quot;</a>
 								
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-23T17:11:30+0300" data-timestamp="1787494290" data-date="23 Авг 2026" data-time="17:11" data-short="5ч" title="23 Авг 2026 в 17:11">Сегодня в 17:11</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-24T20:02:36+0300" data-timestamp="1787590956" data-date="24 Авг 2026" data-time="20:02" data-short="23м" title="24 Авг 2026 в 20:02">23 мин. назад</time></li>
 								
-									<li class="node-extra-user"><a href="/forum/members/alanna2202.668/" class="username " dir="auto" data-user-id="668" data-xf-init="member-tooltip"><span class="username--staff username--moderator">Alanna2202</span></a></li>
+									<li class="node-extra-user"><a href="/forum/members/aurelija.37341/" class="username " dir="auto" data-user-id="37341" data-xf-init="member-tooltip">aurelija</a></li>
 								
 							</ul>
 						</div>
@@ -7743,12 +7743,12 @@ document.addEventListener('ajax:complete', function(e) {
 					<div class="uix_nodeExtra__rows">
 						<div class="node-extra-row">
 							
-								<a href="/forum/threads/starinnaya-odezhda-aksessuary-ob-yekty.159/unread" class="node-extra-title" title="Старинная одежда, аксессуары, объекты">Старинная одежда, аксессуары, объекты</a>
+								<a href="/forum/threads/obnovleniya-tekushchikh-versii-modov-i-khaknutykh-predmetov.482/unread" class="node-extra-title" title="Обновления текущих версий модов и хакнутых предметов"><span class="label label--skyBlue" dir="auto">TS4: Моды и хаки</span><span class="label-append">&nbsp;</span>Обновления текущих версий модов и хакнутых предметов</a>
 								
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-21T17:38:56+0300" data-timestamp="1787323136" data-date="21 Авг 2026" data-time="17:38" data-short="2д" title="21 Авг 2026 в 17:38">Пятница в 17:38</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-24T16:06:24+0300" data-timestamp="1787576784" data-date="24 Авг 2026" data-time="16:06" data-short="4ч" title="24 Авг 2026 в 16:06">Сегодня в 16:06</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/nnnnatali.12583/" class="username " dir="auto" data-user-id="12583" data-xf-init="member-tooltip">NNNNatali</a></li>
 								
@@ -7803,13 +7803,13 @@ document.addEventListener('ajax:complete', function(e) {
 								
 									<dt><i class="fa--xf far fa-comment "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/regular.svg?v=1787083605#comment"></use></svg></i></dt>
 									
-								<dd>275</dd>
+								<dd>276</dd>
 							</dl>
 							<dl class="pairs pairs--inline">
 								
 									<dt><i class="fa--xf far fa-comments "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/regular.svg?v=1787083605#comments"></use></svg></i></dt>
 									
-								<dd>18,5K</dd>
+								<dd>18,6K</dd>
 							</dl>
 						</div>
 					
@@ -7897,11 +7897,11 @@ document.addEventListener('ajax:complete', function(e) {
 				<div class="node-stats">
 					<dl class="pairs pairs--rows">
 						<dt>Темы</dt>
-						<dd>275</dd>
+						<dd>276</dd>
 					</dl>
 					<dl class="pairs pairs--rows">
 						<dt>Сообщения</dt>
-						<dd>18,5K</dd>
+						<dd>18,6K</dd>
 					</dl>
 				</div>
 			
@@ -7918,12 +7918,12 @@ document.addEventListener('ajax:complete', function(e) {
 					<div class="uix_nodeExtra__rows">
 						<div class="node-extra-row">
 							
-								<a href="/forum/threads/instruktsiya-po-al-ternativnoi-ustanovke-dopolnitel-nykh-materialov.880/unread" class="node-extra-title" title="Инструкция по альтернативной установке дополнительных материалов">Инструкция по альтернативной установке дополнительных материалов</a>
+								<a href="/forum/threads/transport.6779/unread" class="node-extra-title" title="Транспорт"><span class="label label--skyBlue" dir="auto">TS3: Моды и хаки</span><span class="label-append">&nbsp;</span>Транспорт</a>
 								
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-05-26T19:40:52+0300" data-timestamp="1779813652" data-date="26 Май 2026" data-time="19:40" data-short="Май 26" title="26 Май 2026 в 19:40">26 Май 2026</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-24T19:00:03+0300" data-timestamp="1787587203" data-date="24 Авг 2026" data-time="19:00" data-short="1ч" title="24 Авг 2026 в 19:00">Сегодня в 19:00</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/ihelen.655/" class="username " dir="auto" data-user-id="655" data-xf-init="member-tooltip"><span class="username--staff username--moderator username--admin">ihelen</span></a></li>
 								
@@ -9513,7 +9513,7 @@ document.addEventListener('ajax:complete', function(e) {
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-15T16:39:21+0300" data-timestamp="1786801161" data-date="15 Авг 2026" data-time="16:39" data-short="8д" title="15 Авг 2026 в 16:39">15 Авг 2026</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-15T16:39:21+0300" data-timestamp="1786801161" data-date="15 Авг 2026" data-time="16:39" data-short="9д" title="15 Авг 2026 в 16:39">15 Авг 2026</time></li>
 								
 									<li class="node-extra-user"><a href="/forum/members/taiin.23971/" class="username " dir="auto" data-user-id="23971" data-xf-init="member-tooltip">Тайин</a></li>
 								
@@ -9611,22 +9611,22 @@ document.addEventListener('ajax:complete', function(e) {
 				
 					<div class="node-extra-icon">
 						
-							<a href="/forum/members/alanna2202.668/" class="avatar avatar--xs" data-user-id="668" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/668.jpg?1488906026" srcset="/forum/data/avatars/m/0/668.jpg?1488906026 2x" alt="Alanna2202" class="avatar-u668-s" width="48" height="48" loading="lazy" /> 
+							<a href="/forum/members/maggiemanor.6125/" class="avatar avatar--xs" data-user-id="6125" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/6/6125.jpg?1781852130" srcset="/forum/data/avatars/m/6/6125.jpg?1781852130 2x" alt="MaggieManor" class="avatar-u6125-s" width="48" height="48" loading="lazy" /> 
 		</a>
 						
 					</div>
 					<div class="uix_nodeExtra__rows">
 						<div class="node-extra-row">
 							
-								<a href="/forum/threads/sledy-nevidannykh-zverei.1284/unread" class="node-extra-title" title="Следы невиданных зверей">Следы невиданных зверей</a>
+								<a href="/forum/threads/happy-birthday.1847/unread" class="node-extra-title" title="Happy Birthday!!!">Happy Birthday!!!</a>
 								
 						</div>
 						<div class="node-extra-row">
 							<ul class="listInline listInline--bullet">
-								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-23T21:39:52+0300" data-timestamp="1787510392" data-date="23 Авг 2026" data-time="21:39" data-short="48м" title="23 Авг 2026 в 21:39">48 мин. назад</time></li>
+								<li><time  class="node-extra-date u-dt" dir="auto" datetime="2026-08-24T09:59:50+0300" data-timestamp="1787554790" data-date="24 Авг 2026" data-time="09:59" data-short="10ч" title="24 Авг 2026 в 09:59">Сегодня в 09:59</time></li>
 								
-									<li class="node-extra-user"><a href="/forum/members/alanna2202.668/" class="username " dir="auto" data-user-id="668" data-xf-init="member-tooltip"><span class="username--staff username--moderator">Alanna2202</span></a></li>
+									<li class="node-extra-user"><a href="/forum/members/maggiemanor.6125/" class="username " dir="auto" data-user-id="6125" data-xf-init="member-tooltip">MaggieManor</a></li>
 								
 							</ul>
 						</div>
@@ -9953,14 +9953,14 @@ document.addEventListener('ajax:complete', function(e) {
 
 				
 					<ul class="listInline listInline--comma">
-						<li><a href="/forum/members/apelsinka.961/" class="username " dir="auto" data-user-id="961" data-xf-init="member-tooltip">apelsinka</a></li><li><a href="/forum/members/oksiniya.4146/" class="username " dir="auto" data-user-id="4146" data-xf-init="member-tooltip">Oksiniya</a></li><li><a href="/forum/members/ashera.2290/" class="username " dir="auto" data-user-id="2290" data-xf-init="member-tooltip">Ashera</a></li><li><a href="/forum/members/polar_night.40664/" class="username " dir="auto" data-user-id="40664" data-xf-init="member-tooltip">Polar_Night</a></li>
+						<li><a href="/forum/members/apelsinka.961/" class="username " dir="auto" data-user-id="961" data-xf-init="member-tooltip">apelsinka</a></li><li><a href="/forum/members/moonghostly.28/" class="username " dir="auto" data-user-id="28" data-xf-init="member-tooltip">moonghostly</a></li><li><a href="/forum/members/cherry-whiteness.44764/" class="username " dir="auto" data-user-id="44764" data-xf-init="member-tooltip">Cherry Whiteness</a></li><li><a href="/forum/members/polar_night.40664/" class="username " dir="auto" data-user-id="40664" data-xf-init="member-tooltip">Polar_Night</a></li>
 					</ul>
 					
 				
 			</div>
 		</div>
 		<div class="block-footer">
-			<span class="block-footer-counter">Всего:&nbsp;734 (пользователей:&nbsp;6, гостей:&nbsp;728)</span>
+			<span class="block-footer-counter">Всего:&nbsp;540 (пользователей:&nbsp;7, гостей:&nbsp;533)</span>
 		</div>
 	</div>
 </div>
@@ -9979,43 +9979,13 @@ document.addEventListener('ajax:complete', function(e) {
 								
 	<div class="contentRow">
 		<div class="contentRow-figure">
-			<a href="/forum/members/alanna2202.668/" class="avatar avatar--xxs" data-user-id="668" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/668.jpg?1488906026"  alt="Alanna2202" class="avatar-u668-s" width="48" height="48" loading="lazy" /> 
+			<a href="/forum/members/aurelija.37341/" class="avatar avatar--xxs" data-user-id="37341" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/37/37341.jpg?1634326359"  alt="aurelija" class="avatar-u37341-s" width="48" height="48" loading="lazy" /> 
 		</a>
 		</div>
 		<div class="contentRow-main contentRow-main--close">
 			
-				<a href="/forum/threads/sledy-nevidannykh-zverei.1284/unread" >Следы невиданных зверей</a>
-    
-    
-
-			
-
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<ul class="listInline listInline--bullet">
-					<li>От: Alanna2202</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T21:39:52+0300" data-timestamp="1787510392" data-date="23 Авг 2026" data-time="21:39" data-short="48м" title="23 Авг 2026 в 21:39">48 мин. назад</time></li>
-				</ul>
-			</div>
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/boltalka.34/">Болталка</a>
-			</div>
-		</div>
-	</div>
-
-							</li>
-						
-							<li class="block-row">
-								
-	<div class="contentRow">
-		<div class="contentRow-figure">
-			<a href="/forum/members/nataliya_k.27750/" class="avatar avatar--xxs" data-user-id="27750" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/27/27750.jpg?1610014096"  alt="Nataliya_k" class="avatar-u27750-s" width="48" height="48" loading="lazy" /> 
-		</a>
-		</div>
-		<div class="contentRow-main contentRow-main--close">
-			
-				<a href="/forum/threads/pravila-i-obsuzhdeniye-ul-traekstremal-nogo-apokalipsisa.3890/unread" ><span class="label label--skyBlue" dir="auto">TS4: Challenge</span><span class="label-append">&nbsp;</span>Правила и обсуждение ультраэкстремального апокалипсиса</a>
+				<a href="/forum/threads/skrinshot-iyunya-avgusta-nashe-leto.6751/unread" ><span class="label label--skyBlue" dir="auto">Арт-конкурсы</span><span class="label-append">&nbsp;</span>Скриншот июня-августа &quot;Наше лето&quot;</a>
     
     
         <span class="sv-user-activity--viewer-count">(1 просм.)</span>
@@ -10025,8 +9995,100 @@ document.addEventListener('ajax:complete', function(e) {
 
 			<div class="contentRow-minor contentRow-minor--hideLinks">
 				<ul class="listInline listInline--bullet">
-					<li>От: Nataliya_k</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T21:24:36+0300" data-timestamp="1787509476" data-date="23 Авг 2026" data-time="21:24" data-short="1ч" title="23 Авг 2026 в 21:24">Сегодня в 21:24</time></li>
+					<li>От: aurelija</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T20:02:36+0300" data-timestamp="1787590956" data-date="24 Авг 2026" data-time="20:02" data-short="23м" title="24 Авг 2026 в 20:02">23 мин. назад</time></li>
+				</ul>
+			</div>
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<a href="/forum/forums/art-konkursy.85/">Арт-конкурсы</a>
+			</div>
+		</div>
+	</div>
+
+							</li>
+						
+							<li class="block-row">
+								
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			<a href="/forum/members/aurelija.37341/" class="avatar avatar--xxs" data-user-id="37341" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/37/37341.jpg?1634326359"  alt="aurelija" class="avatar-u37341-s" width="48" height="48" loading="lazy" /> 
+		</a>
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			
+				<a href="/forum/threads/sel-skii-stil-avgust-2026-g.6772/unread" ><span class="label label--skyBlue" dir="auto">Конкурсы симс-моделей</span><span class="label-append">&nbsp;</span>Сельский стиль. Август 2026 г</a>
+    
+    
+
+			
+
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<ul class="listInline listInline--bullet">
+					<li>От: aurelija</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T19:31:14+0300" data-timestamp="1787589074" data-date="24 Авг 2026" data-time="19:31" data-short="55м" title="24 Авг 2026 в 19:31">55 мин. назад</time></li>
+				</ul>
+			</div>
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<a href="/forum/forums/konkursy-sim-modelei.86/">Конкурсы сим-моделей</a>
+			</div>
+		</div>
+	</div>
+
+							</li>
+						
+							<li class="block-row">
+								
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			<a href="/forum/members/ihelen.655/" class="avatar avatar--xxs" data-user-id="655" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/0/655.jpg?1488037199"  alt="ihelen" class="avatar-u655-s" width="48" height="48" loading="lazy" /> 
+		</a>
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			
+				<a href="/forum/threads/transport.6779/unread" ><span class="label label--skyBlue" dir="auto">TS3: Моды и хаки</span><span class="label-append">&nbsp;</span>Транспорт</a>
+    
+    
+
+			
+
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<ul class="listInline listInline--bullet">
+					<li>От: ihelen</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T19:00:03+0300" data-timestamp="1787587203" data-date="24 Авг 2026" data-time="19:00" data-short="1ч" title="24 Авг 2026 в 19:00">Сегодня в 19:00</time></li>
+				</ul>
+			</div>
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<a href="/forum/forums/the-sims-3-ob-yekty-i-mody-izmenyayushchiye-igru.56/">The Sims 3: Объекты и моды, изменяющие игру</a>
+			</div>
+		</div>
+	</div>
+
+							</li>
+						
+							<li class="block-row">
+								
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			<a href="/forum/members/dzhanai.47419/" class="avatar avatar--xxs avatar--default avatar--default--image" data-user-id="47419" data-xf-init="member-tooltip">
+			<span class="avatar-u47419-s"></span> 
+		</a>
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			
+				<a href="/forum/threads/pravila-i-obsuzhdeniye-ul-traekstremal-nogo-apokalipsisa.3890/unread" ><span class="label label--skyBlue" dir="auto">TS4: Challenge</span><span class="label-append">&nbsp;</span>Правила и обсуждение ультраэкстремального апокалипсиса</a>
+    
+    
+        <span class="sv-user-activity--viewer-count">(33 просм.)</span>
+    
+
+			
+
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<ul class="listInline listInline--bullet">
+					<li>От: Джанай</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T18:56:57+0300" data-timestamp="1787587017" data-date="24 Авг 2026" data-time="18:56" data-short="1ч" title="24 Авг 2026 в 18:56">Сегодня в 18:56</time></li>
 				</ul>
 			</div>
 			<div class="contentRow-minor contentRow-minor--hideLinks">
@@ -10041,13 +10103,13 @@ document.addEventListener('ajax:complete', function(e) {
 								
 	<div class="contentRow">
 		<div class="contentRow-figure">
-			<a href="/forum/members/alanna2202.668/" class="avatar avatar--xxs" data-user-id="668" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/668.jpg?1488906026"  alt="Alanna2202" class="avatar-u668-s" width="48" height="48" loading="lazy" /> 
+			<a href="/forum/members/nnnnatali.12583/" class="avatar avatar--xxs" data-user-id="12583" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/12/12583.jpg?1577881337"  alt="NNNNatali" class="avatar-u12583-s" width="48" height="48" loading="lazy" /> 
 		</a>
 		</div>
 		<div class="contentRow-main contentRow-main--close">
 			
-				<a href="/forum/threads/d-yavol-skaya-loshchina.6778/unread" ><span class="label label--primary" dir="auto">TS2 Мир:</span><span class="label-append">&nbsp;</span>Дьявольская лощина</a>
+				<a href="/forum/threads/obnovleniya-tekushchikh-versii-modov-i-khaknutykh-predmetov.482/unread" ><span class="label label--skyBlue" dir="auto">TS4: Моды и хаки</span><span class="label-append">&nbsp;</span>Обновления текущих версий модов и хакнутых предметов</a>
     
     
 
@@ -10055,102 +10117,12 @@ document.addEventListener('ajax:complete', function(e) {
 
 			<div class="contentRow-minor contentRow-minor--hideLinks">
 				<ul class="listInline listInline--bullet">
-					<li>От: Alanna2202</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T21:23:05+0300" data-timestamp="1787509385" data-date="23 Авг 2026" data-time="21:23" data-short="1ч" title="23 Авг 2026 в 21:23">Сегодня в 21:23</time></li>
+					<li>От: NNNNatali</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T16:06:24+0300" data-timestamp="1787576784" data-date="24 Авг 2026" data-time="16:06" data-short="4ч" title="24 Авг 2026 в 16:06">Сегодня в 16:06</time></li>
 				</ul>
 			</div>
 			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/nashi-miry.67/">Наши миры</a>
-			</div>
-		</div>
-	</div>
-
-							</li>
-						
-							<li class="block-row">
-								
-	<div class="contentRow">
-		<div class="contentRow-figure">
-			<a href="/forum/members/alanna2202.668/" class="avatar avatar--xxs" data-user-id="668" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/668.jpg?1488906026"  alt="Alanna2202" class="avatar-u668-s" width="48" height="48" loading="lazy" /> 
-		</a>
-		</div>
-		<div class="contentRow-main contentRow-main--close">
-			
-				<a href="/forum/threads/kakiye-konkursy-my-by-khoteli-provesti.1213/unread" >Какие конкурсы мы бы хотели провести</a>
-    
-    
-
-			
-
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<ul class="listInline listInline--bullet">
-					<li>От: Alanna2202</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T17:11:30+0300" data-timestamp="1787494290" data-date="23 Авг 2026" data-time="17:11" data-short="5ч" title="23 Авг 2026 в 17:11">Сегодня в 17:11</time></li>
-				</ul>
-			</div>
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/konkursy-i-igry.139/">Конкурсы и игры</a>
-			</div>
-		</div>
-	</div>
-
-							</li>
-						
-							<li class="block-row">
-								
-	<div class="contentRow">
-		<div class="contentRow-figure">
-			<a href="/forum/members/kleo-scanti.657/" class="avatar avatar--xxs" data-user-id="657" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/657.jpg?1701724405"  alt="Kleo Scanti" class="avatar-u657-s" width="48" height="48" loading="lazy" /> 
-		</a>
-		</div>
-		<div class="contentRow-main contentRow-main--close">
-			
-				<a href="/forum/threads/ochudnozem-ye.564/unread" ><span class="label label--primary" dir="auto">TS4 Мир:</span><span class="label-append">&nbsp;</span>Очудноземье</a>
-    
-    
-
-			
-
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<ul class="listInline listInline--bullet">
-					<li>От: Kleo Scanti</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T12:31:57+0300" data-timestamp="1787477517" data-date="23 Авг 2026" data-time="12:31" data-short="9ч" title="23 Авг 2026 в 12:31">Сегодня в 12:31</time></li>
-				</ul>
-			</div>
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/nashi-miry.67/">Наши миры</a>
-			</div>
-		</div>
-	</div>
-
-							</li>
-						
-							<li class="block-row">
-								
-	<div class="contentRow">
-		<div class="contentRow-figure">
-			<a href="/forum/members/nataliya_k.27750/" class="avatar avatar--xxs" data-user-id="27750" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/27/27750.jpg?1610014096"  alt="Nataliya_k" class="avatar-u27750-s" width="48" height="48" loading="lazy" /> 
-		</a>
-		</div>
-		<div class="contentRow-main contentRow-main--close">
-			
-				<a href="/forum/threads/ul-tra-shokoladnyi-apokalipsis.6764/unread" ><span class="label label--skyBlue" dir="auto">TS4: Challenge</span><span class="label-append">&nbsp;</span>Ультра Шоколадный Апокалипсис</a>
-    
-    
-
-			
-
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<ul class="listInline listInline--bullet">
-					<li>От: Nataliya_k</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T11:15:07+0300" data-timestamp="1787472907" data-date="23 Авг 2026" data-time="11:15" data-short="11ч" title="23 Авг 2026 в 11:15">Сегодня в 11:15</time></li>
-				</ul>
-			</div>
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/the-sims-4-challenges-apokalipsis.148/">The Sims 4: Challenges - Апокалипсис</a>
+				<a href="/forum/forums/the-sims-4-ob-yekty-i-mody-izmenyayushchiye-igru.22/">The Sims 4: Объекты и моды, изменяющие игру</a>
 			</div>
 		</div>
 	</div>
@@ -10170,17 +10142,111 @@ document.addEventListener('ajax:complete', function(e) {
 				<a href="/forum/threads/uea-supersim-tsep-pererozhdenii.6715/unread" ><span class="label label--skyBlue" dir="auto">TS4: Challenge</span><span class="label-append">&nbsp;</span>УЭА + Суперсим). Цепь перерождений</a>
     
     
+        <span class="sv-user-activity--viewer-count">(4 просм.)</span>
+    
 
 			
 
 			<div class="contentRow-minor contentRow-minor--hideLinks">
 				<ul class="listInline listInline--bullet">
 					<li>От: Джанай</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T10:49:55+0300" data-timestamp="1787471395" data-date="23 Авг 2026" data-time="10:49" data-short="11ч" title="23 Авг 2026 в 10:49">Сегодня в 10:49</time></li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T12:42:19+0300" data-timestamp="1787564539" data-date="24 Авг 2026" data-time="12:42" data-short="7ч" title="24 Авг 2026 в 12:42">Сегодня в 12:42</time></li>
 				</ul>
 			</div>
 			<div class="contentRow-minor contentRow-minor--hideLinks">
 				<a href="/forum/forums/the-sims-4-challenges-apokalipsis.148/">The Sims 4: Challenges - Апокалипсис</a>
+			</div>
+		</div>
+	</div>
+
+							</li>
+						
+							<li class="block-row">
+								
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			<a href="/forum/members/nnnnatali.12583/" class="avatar avatar--xxs" data-user-id="12583" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/12/12583.jpg?1577881337"  alt="NNNNatali" class="avatar-u12583-s" width="48" height="48" loading="lazy" /> 
+		</a>
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			
+				<a href="/forum/threads/navyki-simov.262/unread" ><span class="label label--skyBlue" dir="auto">TS4: Моды и хаки</span><span class="label-append">&nbsp;</span>Навыки симов</a>
+    
+    
+
+			
+
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<ul class="listInline listInline--bullet">
+					<li>От: NNNNatali</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T10:29:24+0300" data-timestamp="1787556564" data-date="24 Авг 2026" data-time="10:29" data-short="9ч" title="24 Авг 2026 в 10:29">Сегодня в 10:29</time></li>
+				</ul>
+			</div>
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<a href="/forum/forums/the-sims-4-ob-yekty-i-mody-izmenyayushchiye-igru.22/">The Sims 4: Объекты и моды, изменяющие игру</a>
+			</div>
+		</div>
+	</div>
+
+							</li>
+						
+							<li class="block-row">
+								
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			<a href="/forum/members/charrys.14769/" class="avatar avatar--xxs" data-user-id="14769" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/14/14769.jpg?1591818322"  alt="Charrys" class="avatar-u14769-s" width="48" height="48" loading="lazy" /> 
+		</a>
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			
+				<a href="/forum/threads/ul-tra-shokoladnyi-apokalipsis.6764/unread" ><span class="label label--skyBlue" dir="auto">TS4: Challenge</span><span class="label-append">&nbsp;</span>Ультра Шоколадный Апокалипсис</a>
+    
+    
+        <span class="sv-user-activity--viewer-count">(3 просм.)</span>
+    
+
+			
+
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<ul class="listInline listInline--bullet">
+					<li>От: Charrys</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T10:18:04+0300" data-timestamp="1787555884" data-date="24 Авг 2026" data-time="10:18" data-short="10ч" title="24 Авг 2026 в 10:18">Сегодня в 10:18</time></li>
+				</ul>
+			</div>
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<a href="/forum/forums/the-sims-4-challenges-apokalipsis.148/">The Sims 4: Challenges - Апокалипсис</a>
+			</div>
+		</div>
+	</div>
+
+							</li>
+						
+							<li class="block-row">
+								
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			<a href="/forum/members/maggiemanor.6125/" class="avatar avatar--xxs" data-user-id="6125" data-xf-init="member-tooltip">
+			<img src="/forum/data/avatars/s/6/6125.jpg?1781852130"  alt="MaggieManor" class="avatar-u6125-s" width="48" height="48" loading="lazy" /> 
+		</a>
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			
+				<a href="/forum/threads/happy-birthday.1847/unread" >Happy Birthday!!!</a>
+    
+    
+
+			
+
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<ul class="listInline listInline--bullet">
+					<li>От: MaggieManor</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T09:59:50+0300" data-timestamp="1787554790" data-date="24 Авг 2026" data-time="09:59" data-short="10ч" title="24 Авг 2026 в 09:59">Сегодня в 09:59</time></li>
+				</ul>
+			</div>
+			<div class="contentRow-minor contentRow-minor--hideLinks">
+				<a href="/forum/forums/boltalka.34/">Болталка</a>
 			</div>
 		</div>
 	</div>
@@ -10200,66 +10266,6 @@ document.addEventListener('ajax:complete', function(e) {
 				<a href="/forum/threads/uea-novoye-nachalo-myurrei.6756/unread" ><span class="label label--skyBlue" dir="auto">TS4: Challenge</span><span class="label-append">&nbsp;</span>УЭА. Новое начало: Мюррей</a>
     
     
-
-			
-
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<ul class="listInline listInline--bullet">
-					<li>От: Cherry Whiteness</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T10:19:10+0300" data-timestamp="1787469550" data-date="23 Авг 2026" data-time="10:19" data-short="12ч" title="23 Авг 2026 в 10:19">Сегодня в 10:19</time></li>
-				</ul>
-			</div>
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/the-sims-4-challenges-apokalipsis.148/">The Sims 4: Challenges - Апокалипсис</a>
-			</div>
-		</div>
-	</div>
-
-							</li>
-						
-							<li class="block-row">
-								
-	<div class="contentRow">
-		<div class="contentRow-figure">
-			<a href="/forum/members/felelya.11032/" class="avatar avatar--xxs" data-user-id="11032" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/11/11032.jpg?1568836232"  alt="felelya" class="avatar-u11032-s" width="48" height="48" loading="lazy" /> 
-		</a>
-		</div>
-		<div class="contentRow-main contentRow-main--close">
-			
-				<a href="/forum/threads/tsivilizatsiya-x.4044/unread" ><span class="label label--primary" dir="auto">TS4 Мир:</span><span class="label-append">&nbsp;</span>Цивилизация X</a>
-    
-    
-
-			
-
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<ul class="listInline listInline--bullet">
-					<li>От: felelya</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T10:07:02+0300" data-timestamp="1787468822" data-date="23 Авг 2026" data-time="10:07" data-short="12ч" title="23 Авг 2026 в 10:07">Сегодня в 10:07</time></li>
-				</ul>
-			</div>
-			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/nashi-miry.67/">Наши миры</a>
-			</div>
-		</div>
-	</div>
-
-							</li>
-						
-							<li class="block-row">
-								
-	<div class="contentRow">
-		<div class="contentRow-figure">
-			<a href="/forum/members/29715000.91/" class="avatar avatar--xxs" data-user-id="91" data-xf-init="member-tooltip">
-			<img src="/forum/data/avatars/s/0/91.jpg?1681189686"  alt="29715000" class="avatar-u91-s" width="48" height="48" loading="lazy" /> 
-		</a>
-		</div>
-		<div class="contentRow-main contentRow-main--close">
-			
-				<a href="/forum/threads/interaktivnyi-proyekt-randomnyi-n-yukrest.4205/post-430513" ><span class="label label--primary" dir="auto">TS4 Мир:</span><span class="label-append">&nbsp;</span>Интерактивный проект &quot;Рандомный Ньюкрест&quot;</a>
-    
-    
         <span class="sv-user-activity--viewer-count">(2 просм.)</span>
     
 
@@ -10267,12 +10273,12 @@ document.addEventListener('ajax:complete', function(e) {
 
 			<div class="contentRow-minor contentRow-minor--hideLinks">
 				<ul class="listInline listInline--bullet">
-					<li>От: 29715000</li>
-					<li><time  class="u-dt" dir="auto" datetime="2026-08-23T07:39:49+0300" data-timestamp="1787459989" data-date="23 Авг 2026" data-time="07:39" data-short="14ч" title="23 Авг 2026 в 07:39">Сегодня в 07:39</time></li>
+					<li>От: Cherry Whiteness</li>
+					<li><time  class="u-dt" dir="auto" datetime="2026-08-24T09:12:32+0300" data-timestamp="1787551952" data-date="24 Авг 2026" data-time="09:12" data-short="11ч" title="24 Авг 2026 в 09:12">Сегодня в 09:12</time></li>
 				</ul>
 			</div>
 			<div class="contentRow-minor contentRow-minor--hideLinks">
-				<a href="/forum/forums/nashi-miry.67/">Наши миры</a>
+				<a href="/forum/forums/the-sims-4-challenges-apokalipsis.148/">The Sims 4: Challenges - Апокалипсис</a>
 			</div>
 		</div>
 	</div>
@@ -10293,68 +10299,62 @@ document.addEventListener('ajax:complete', function(e) {
 				<ul class="listHeap">
 					
 						<li>
-							<a href="/forum/members/chechevichka_.58770/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="58770" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u58770-s"></span> 
+							<a href="/forum/members/atalira.18907/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="18907" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u18907-s"></span> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/genisef.57586/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="57586" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u57586-s"></span> 
+							<a href="/forum/members/eva-miren.10414/" class="avatar avatar--s" data-user-id="10414" data-xf-init="member-tooltip" img="true">
+			<img src="/forum/data/avatars/s/10/10414.jpg?1553346812" srcset="/forum/data/avatars/m/10/10414.jpg?1553346812 2x" alt="eva.miren" class="avatar-u10414-s" width="48" height="48" loading="lazy" /> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/kskanevaa.62079/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="62079" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u62079-s"></span> 
+							<a href="/forum/members/flyen.62878/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="62878" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u62878-s"></span> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/mexanuk.59252/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="59252" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u59252-s"></span> 
+							<a href="/forum/members/lizzaatrect.58857/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="58857" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u58857-s"></span> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/nerominnn.58016/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="58016" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u58016-s"></span> 
+							<a href="/forum/members/lunar_stream.60678/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="60678" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u60678-s"></span> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/nowaki.54573/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="54573" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u54573-s"></span> 
+							<a href="/forum/members/sashabear.61909/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="61909" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u61909-s"></span> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/valleri.59083/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="59083" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u59083-s"></span> 
+							<a href="/forum/members/snata.6712/" class="avatar avatar--s" data-user-id="6712" data-xf-init="member-tooltip" img="true">
+			<img src="/forum/data/avatars/s/6/6712.jpg?1579634320" srcset="/forum/data/avatars/m/6/6712.jpg?1579634320 2x" alt="SNata" class="avatar-u6712-s" width="48" height="48" loading="lazy" /> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/vellemira.63055/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="63055" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u63055-s"></span> 
+							<a href="/forum/members/aleksandrarakh.57380/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="57380" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u57380-s"></span> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/vishenka.61381/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="61381" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u61381-s"></span> 
+							<a href="/forum/members/al-fina.52802/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="52802" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u52802-s"></span> 
 		</a>
 						</li>
 					
 						<li>
-							<a href="/forum/members/nikaolettabond.56114/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="56114" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u56114-s"></span> 
-		</a>
-						</li>
-					
-						<li>
-							<a href="/forum/members/yunsku.59710/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="59710" data-xf-init="member-tooltip" img="true">
-			<span class="avatar-u59710-s"></span> 
+							<a href="/forum/members/bulya-babulya.43777/" class="avatar avatar--s avatar--default avatar--default--image" data-user-id="43777" data-xf-init="member-tooltip" img="true">
+			<span class="avatar-u43777-s"></span> 
 		</a>
 						</li>
 					
@@ -10374,12 +10374,12 @@ document.addEventListener('ajax:complete', function(e) {
 
 			<dl class="pairs pairs--justified count--messages">
 				<dt>Сообщения</dt>
-				<dd>411.605</dd>
+				<dd>410.419</dd>
 			</dl>
 
 			<dl class="pairs pairs--justified count--users">
 				<dt>Пользователи</dt>
-				<dd>24.030</dd>
+				<dd>24.031</dd>
 			</dl>
 
 			<dl class="pairs pairs--justified">
@@ -10389,7 +10389,7 @@ document.addEventListener('ajax:complete', function(e) {
 		
 <dl class="pairs pairs--justified">
 	<dt>Репутация</dt>
-	<dd>21.890</dd>
+	<dd>21.895</dd>
 </dl>
 </div>
 	</div>
@@ -10417,77 +10417,77 @@ document.addEventListener('ajax:complete', function(e) {
 		
 
 		<div class="shareButtons shareButtons--iconic" data-xf-init="share-buttons" data-page-url="" data-page-title="" data-page-desc="" data-page-image="">
-			<span class="u-anchorTarget" id="_xfUid-1-1787513285"></span>
+			<span class="u-anchorTarget" id="_xfUid-1-1787592395"></span>
 
 			
 
 			<div class="shareButtons-buttons">
 				
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--facebook" href="#_xfUid-1-1787513285" data-href="https://www.facebook.com/sharer.php?u={url}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--facebook" href="#_xfUid-1-1787592395" data-href="https://www.facebook.com/sharer.php?u={url}">
 							<i class="fa--xf fab fa-facebook-f "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/brands.svg?v=1787083605#facebook-f"></use></svg></i>
 							<span>Facebook</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--twitter" href="#_xfUid-1-1787513285" data-href="https://x.com/intent/tweet?url={url}&amp;text={title}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--twitter" href="#_xfUid-1-1787592395" data-href="https://x.com/intent/tweet?url={url}&amp;text={title}">
 							<i class="fa--xf fab fa-x "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-hidden="true" ><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></i>
 							<span>X</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--bluesky" href="#_xfUid-1-1787513285" data-href="https://bsky.app/intent/compose?text={url}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--bluesky" href="#_xfUid-1-1787592395" data-href="https://bsky.app/intent/compose?text={url}">
 							<i class="fa--xf fab fa-bluesky "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" role="img" aria-hidden="true" ><path d="M407.8 294.7c-3.3-.4-6.7-.8-10-1.3c3.4 .4 6.7 .9 10 1.3zM288 227.1C261.9 176.4 190.9 81.9 124.9 35.3C61.6-9.4 37.5-1.7 21.6 5.5C3.3 13.8 0 41.9 0 58.4S9.1 194 15 213.9c19.5 65.7 89.1 87.9 153.2 80.7c3.3-.5 6.6-.9 10-1.4c-3.3 .5-6.6 1-10 1.4C74.3 308.6-9.1 342.8 100.3 464.5C220.6 589.1 265.1 437.8 288 361.1c22.9 76.7 49.2 222.5 185.6 103.4c102.4-103.4 28.1-156-65.8-169.9c-3.3-.4-6.7-.8-10-1.3c3.4 .4 6.7 .9 10 1.3c64.1 7.1 133.6-15.1 153.2-80.7C566.9 194 576 75 576 58.4s-3.3-44.7-21.6-52.9c-15.8-7.1-40-14.9-103.2 29.8C385.1 81.9 314.1 176.4 288 227.1z"/></svg></i>
 							<span>Bluesky</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--linkedin" href="#_xfUid-1-1787513285" data-href="https://www.linkedin.com/sharing/share-offsite/?url={url}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--linkedin" href="#_xfUid-1-1787592395" data-href="https://www.linkedin.com/sharing/share-offsite/?url={url}">
 							<i class="fa--xf fab fa-linkedin "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/brands.svg?v=1787083605#linkedin"></use></svg></i>
 							<span>LinkedIn</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--reddit" href="#_xfUid-1-1787513285" data-href="https://reddit.com/submit?url={url}&amp;title={title}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--reddit" href="#_xfUid-1-1787592395" data-href="https://reddit.com/submit?url={url}&amp;title={title}">
 							<i class="fa--xf fab fa-reddit-alien "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/brands.svg?v=1787083605#reddit-alien"></use></svg></i>
 							<span>Reddit</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--pinterest" href="#_xfUid-1-1787513285" data-href="https://pinterest.com/pin/create/bookmarklet/?url={url}&amp;description={title}&amp;media={image}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--pinterest" href="#_xfUid-1-1787592395" data-href="https://pinterest.com/pin/create/bookmarklet/?url={url}&amp;description={title}&amp;media={image}">
 							<i class="fa--xf fab fa-pinterest-p "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/brands.svg?v=1787083605#pinterest-p"></use></svg></i>
 							<span>Pinterest</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--tumblr" href="#_xfUid-1-1787513285" data-href="https://www.tumblr.com/widgets/share/tool?canonicalUrl={url}&amp;title={title}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--tumblr" href="#_xfUid-1-1787592395" data-href="https://www.tumblr.com/widgets/share/tool?canonicalUrl={url}&amp;title={title}">
 							<i class="fa--xf fab fa-tumblr "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/brands.svg?v=1787083605#tumblr"></use></svg></i>
 							<span>Tumblr</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--whatsApp" href="#_xfUid-1-1787513285" data-href="https://api.whatsapp.com/send?text={title}&nbsp;{url}">
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--whatsApp" href="#_xfUid-1-1787592395" data-href="https://api.whatsapp.com/send?text={title}&nbsp;{url}">
 							<i class="fa--xf fab fa-whatsapp "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/brands.svg?v=1787083605#whatsapp"></use></svg></i>
 							<span>WhatsApp</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--email" href="#_xfUid-1-1787513285" data-href="mailto:?subject={title}&amp;body={url}">
+						<a class="shareButtons-button shareButtons-button--email" href="#_xfUid-1-1787592395" data-href="mailto:?subject={title}&amp;body={url}">
 							<i class="fa--xf far fa-envelope "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/regular.svg?v=1787083605#envelope"></use></svg></i>
 							<span>Электронная почта</span>
 						</a>
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--share is-hidden" href="#_xfUid-1-1787513285"
+						<a class="shareButtons-button shareButtons-button--share is-hidden" href="#_xfUid-1-1787592395"
 							data-xf-init="web-share"
 							data-title="" data-text="" data-url=""
 							data-hide=".shareButtons-button:not(.shareButtons-button--share)">
@@ -10498,7 +10498,7 @@ document.addEventListener('ajax:complete', function(e) {
 					
 
 					
-						<a class="shareButtons-button shareButtons-button--link is-hidden" href="#_xfUid-1-1787513285" data-clipboard="{url}">
+						<a class="shareButtons-button shareButtons-button--link is-hidden" href="#_xfUid-1-1787592395" data-clipboard="{url}">
 							<i class="fa--xf far fa-link "><svg xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" ><use href="/forum/data/local/icons/regular.svg?v=1787083605#link"></use></svg></i>
 							<span>Ссылка</span>
 						</a>
@@ -10725,12 +10725,12 @@ document.addEventListener('ajax:complete', function(e) {
 		},
 		sidebar: {
             enabled: '1',
-			link: '/forum/uix/toggle-sidebar.json?t=1787513285%2Cb4577f757db45042d95d99071b73e5e6',
+			link: '/forum/uix/toggle-sidebar.json?t=1787592395%2Cba188f7effb01e1e7651e14fd02c5515',
             state: '',
 		},
         sidebarNav: {
             enabled: '',
-			link: '/forum/uix/toggle-sidebar-navigation.json?t=1787513285%2Cb4577f757db45042d95d99071b73e5e6',
+			link: '/forum/uix/toggle-sidebar-navigation.json?t=1787592395%2Cba188f7effb01e1e7651e14fd02c5515',
             state: '',
 		},
 		fab: {
@@ -10745,12 +10745,12 @@ document.addEventListener('ajax:complete', function(e) {
 		},
         nodesCollapse: {
             enabled: '1',
-			link: '/forum/uix/toggle-category.json?t=1787513285%2Cb4577f757db45042d95d99071b73e5e6',
+			link: '/forum/uix/toggle-category.json?t=1787592395%2Cba188f7effb01e1e7651e14fd02c5515',
 			state: '',
         },
 		widthToggle: {
 			enabled: '1',
-			link: '/forum/uix/toggle-width.json?t=1787513285%2Cb4577f757db45042d95d99071b73e5e6',
+			link: '/forum/uix/toggle-width.json?t=1787592395%2Cba188f7effb01e1e7651e14fd02c5515',
 			state: 'fluid',
 		},
 	}

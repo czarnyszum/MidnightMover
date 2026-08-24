@@ -12,36 +12,53 @@ import Control.Monad.State
 import Control.Monad.IO.Class
 
 import Data.Aeson
+import Data.Char (toLower)
+import Data.Maybe (fromMaybe)
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
 
+import System.Environment (lookupEnv)
+
 import Test.WebDriver
 import Test.WebDriver.Commands
 import Test.WebDriver.Config
+import Test.WebDriver.JSON (ignoreReturn)
 
 import Antibot
 import Ctx
 
-pubbCap :: Capabilities
-pubbCap = defaultCaps
+-- | Read a boolean from the environment (1/true/yes).
+mmEnvFlag :: String -> IO Bool
+mmEnvFlag key = do
+  mv <- lookupEnv key
+  case mv of
+    Just v -> return (map toLower v `elem` ["1", "true", "yes"])
+    Nothing -> return False
+
+pubbCap :: Bool -> Capabilities
+pubbCap headless = defaultCaps
  { browser = firefox
   , additionalCaps =
       [ "pageLoadStrategy" .= ("eager" :: Text)
       , "moz:firefoxOptions" .= object
-          [ "prefs" .= object
-              [ "javascript.enabled" .= False
-              ]
-          ]
+          ( [ "prefs" .= object
+                [ "javascript.enabled" .= False
+                ]
+            ]
+            ++ [ "args" .= (["-headless"] :: [Text]) | headless ]
+          )
       ]
   }
 
--- | Default WebDriver configuration using ChromeDriver
-punbbConfig :: WDConfig
-punbbConfig = defaultConfig
+-- | WebDriver configuration. Default base path is selenium-server
+--   ("/wd/hub"); a standalone geckodriver serves at the root, so pass "".
+punbbConfig :: String -> Bool -> WDConfig
+punbbConfig basePath headless = defaultConfig
   { wdHost = "localhost"
   , wdPort = 4444
-  , wdCapabilities = pubbCap
+  , wdBasePath = basePath
+  , wdCapabilities = pubbCap headless
   }
 
 savePageAsHtml :: FilePath -> WD ()
@@ -98,10 +115,12 @@ triggerProcessForm :: WD ()
 triggerProcessForm = do
   loadOnlyProcessFormScript
   -- Execute process_form via JavaScript to populate hidden fields
-  -- without actually submitting the form
-  executeJS [] 
+  -- without actually submitting the form.
+  -- NB: ignoreReturn - the script returns null, and the webdriver lib's
+  -- aeson cannot parse null as ().
+  ignoreReturn $ executeJS []
     "var form = document.getElementById('post');\
-    \process_form(form);" :: WD ()
+    \process_form(form);"
 
 
   
@@ -179,9 +198,11 @@ copyToBunker
     => String -> String -> [Text] -> m ()
 copyToBunker login password msgs =
   do
+    basePath <- liftIO $ fromMaybe "/wd/hub" <$> lookupEnv "MM_WD_BASE_PATH"
+    headless <- liftIO $ mmEnvFlag "MM_HEADLESS"
     let
       base = T.pack bunkerUrl
-    liftIO $ runSession punbbConfig $ do
+    liftIO $ runSession (punbbConfig basePath headless) $ do
 
       loginPunBB base (T.pack login) (T.pack password)    
 

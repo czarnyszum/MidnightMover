@@ -45,3 +45,6 @@ tramp
 
 # local cabal state
 .cabal-local/
+
+# downloaded selenium toolchain (firefox, geckodriver, JRE, selenium jar)
+tools/

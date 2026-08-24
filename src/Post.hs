@@ -45,6 +45,9 @@ data PostElement =
   | PostFormated Format [PostElement]
   | PostDice Text Text
   | PostSpoiler Text [PostElement]
+  | PostTable [[Post]]
+  | PostSize Int [PostElement]
+  | PostFont Text [PostElement]
 
 isFormated :: PostElement -> Bool
 isFormated (PostFormated _ _) = True
@@ -91,6 +94,9 @@ instance Show PostElement where
   show (PostFormated f post) = "Format" ++ show f ++ "[" ++ (concatMap show post) ++ "]"
   show (PostLink src text) = "Link[" ++  (T.unpack text) ++ ": " ++ (T.unpack src) ++ "]"
   show (PostYouTube src)= "YouTube[" ++ (T.unpack src) ++ "]"
+  show (PostTable rows) = "Table[" ++ concatMap (concatMap (concatMap show)) rows ++ "]"
+  show (PostSize n post) = "Size" ++ show n ++ "[" ++ concatMap show post ++ "]"
+  show (PostFont f post) = "Font[" ++ T.unpack f ++ " " ++ concatMap show post ++ "]"
 
 {-
 [color=black][/color]
@@ -130,6 +136,14 @@ toBBC (PostFormated FormatU post) = let x = toBBCMap post in T.concat ["[u]", x,
 toBBC (PostFormated FormatS post) = let x = toBBCMap post in T.concat ["[s]", x, "[/s]"]
 toBBC (PostLink src text) = T.concat ["[url=", src, "]", text, "[/url]"]
 toBBC (PostYouTube src) = T.concat ["[video]", src, "[/video]"]
+toBBC (PostTable rows) =
+  let
+    row r = T.concat ["[tr]", T.concat (map cell r), "[/tr]"]
+    cell p = T.concat ["[td]", toBBCMap p, "[/td]"]
+  in
+    T.concat ["[table]", T.concat (map row rows), "[/table]"]
+toBBC (PostSize n post) = let x = toBBCMap post in T.concat ["[size=", T.pack (show n), "]", x, "[/size]"]
+toBBC (PostFont f post) = let x = toBBCMap post in T.concat ["[font=", f, "]", x, "[/font]"]
    
  
 type Post = [PostElement]
@@ -195,6 +209,50 @@ hasColor c = do
   guard $ not $ T.null colorValue
   return colorValue
 
+-- | "font-size: 18px" -> Just 18 (the bunker renders [size=N] as N px).
+hasFontSize :: Cursor -> Maybe Int
+hasFontSize c = do
+  style <- getAttr "style" c
+  let
+    decls = map T.strip (T.splitOn ";" style)
+  sizeDecl <- find ("font-size:" `T.isPrefixOf`) decls
+  let
+    sizeValue = T.strip . T.drop (T.length "font-size:") $ sizeDecl
+    digits = T.takeWhile (\ch -> ch >= '0' && ch <= '9') sizeValue
+  guard $ not $ T.null digits
+  readMaybe (T.unpack digits)
+
+-- | "font-family: Verdana" (quotes stripped) -> Just "Verdana".
+hasFontFamily :: Cursor -> Maybe Text
+hasFontFamily c = do
+  style <- getAttr "style" c
+  let
+    decls = map T.strip (T.splitOn ";" style)
+  fontDecl <- find ("font-family:" `T.isPrefixOf`) decls
+  let
+    fontValue = T.strip . T.drop (T.length "font-family:") $ fontDecl
+    stripped = T.filter (\ch -> ch /= '\'' && ch /= '"') fontValue
+  guard $ not $ T.null stripped
+  return stripped
+
+-- | XF2 tables: <table><tr><td>…</td>…</tr></table> (cells may contain
+--   formatted content). Renders as [table][tr][td]…[/td][/tr][/table],
+--   which the target forum understands.
+extractTable :: Cursor -> Post
+extractTable c =
+  let
+    rows = c $// element "tr"
+  in
+    [PostTable (map extractTableRow rows)]
+
+extractTableRow :: Cursor -> [Post]
+extractTableRow r =
+  let
+    tds = r $/ element "td"
+    ths = r $/ element "th"
+  in
+    map extractPost (if null tds then ths else tds)
+
 extractElement :: Element -> Cursor -> Post
 extractElement el c                      
   | tag == "script" = []
@@ -207,7 +265,10 @@ extractElement el c
   | tag == "s" = [PostFormated FormatS (extractPost c)]
   | tag == "span" && hasStyle "text-decoration: line-through" c = [PostFormated FormatS (extractPost c)]
   | tag == "span" && isJust (hasColor c) = [PostColor (fromJust $ hasColor c) (extractPost c) ] 
+  | tag == "span" && isJust (hasFontSize c) = [PostSize (fromJust $ hasFontSize c) (extractPost c)]
+  | tag == "span" && isJust (hasFontFamily c) = [PostFont (fromJust $ hasFontFamily c) (extractPost c)]
   | tag == "img" = extractImage c
+  | tag == "table" = extractTable c
   | tag == "blockquote" && hasClass "bbCodeBlock--quote" c = extractQuote c
   | tag == "div" && hasClass "bbCodeQuote" c = extractQuote c -- XF1 legacy
   | tag == "div" && hasClass "quoteExpand" c = []
@@ -274,25 +335,39 @@ extractDiceValue c = T.concat (c $// element "span" >=> check (hasClass "dice_nu
 extractDice :: Cursor -> Post
 extractDice c = [PostDice (extractDiceValue c) (extractDiceText c)]
     
+-- | Make a relative src absolute against the source forum.
+absolutizeUrl :: Text -> Text
+absolutizeUrl src
+  | "http" `T.isPrefixOf` src = src
+  | "/" `T.isPrefixOf` src = T.concat ["https://simsmix.ru", src]
+  | otherwise = src
+
 extractImage :: Cursor -> Post
-extractImage c =
-  let
-    -- XF2 wraps images in div.bbImageWrapper > img.bbImage; the img carries the
-    -- real URL in data-url (proxy.php URLs have a relative src but a full
-    -- data-url). Smilies are img.smilie with a relative src and an alt text.
-    mUrl =
-      case getAttr "data-url" c of
-        Just u | "http" `T.isPrefixOf` u -> Just u
-        _ -> getAttr "src" c
-  in
-    case mUrl of
-      Just src
-        | "http" `T.isPrefixOf` src -> [PostImageGlobal src]
-        | otherwise ->
-            case getAttr "alt" c of
-              Just ty -> [PostImageLocal ty]
-              Nothing -> [PostImageLocal src]
-      Nothing -> []
+extractImage c
+  -- Smilies: the target forum has a different smiley set, so emit the smiley
+  -- image URL instead of the text code (which would not render there).
+  | hasClass "smilie" c =
+      case getAttr "src" c of
+        Just src -> [PostImageGlobal (absolutizeUrl src)]
+        Nothing -> []
+  | otherwise =
+      let
+        -- XF2 wraps images in div.bbImageWrapper > img.bbImage; the img carries
+        -- the real URL in data-url (proxy.php URLs have a relative src but a
+        -- full data-url).
+        mUrl =
+          case getAttr "data-url" c of
+            Just u | "http" `T.isPrefixOf` u -> Just u
+            _ -> getAttr "src" c
+      in
+        case mUrl of
+          Just src
+            | "http" `T.isPrefixOf` src -> [PostImageGlobal src]
+            | otherwise ->
+                case getAttr "alt" c of
+                  Just ty -> [PostImageLocal ty]
+                  Nothing -> [PostImageLocal src]
+          Nothing -> []
 
 extractSpoiler :: Cursor -> Post
 extractSpoiler c =

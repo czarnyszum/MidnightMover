@@ -28,6 +28,7 @@
 | `src/Antibot.hs` | Находит inline-скрипт `process_form` в `<head>` и выполняет его, чтобы сгенерировать антибот-токены. |
 | `src/TlsManager.hs` | Создание TLS `Manager` (отключена проверка сертификатов; `NoEMS`). |
 | `user.txt` | JSON: логин/пароль SimsMix, список тем (`threads`), фильтр авторов (`userFilter`), режим (`output`). **В git не коммитится.** |
+| `secret/mm.json` | Учётные данные бункера (gamestories): JSON для поля `output` (`["tx", "<пароль>"]`) и подсказка про selenium-server. **В git не коммитится.** |
 | `desc.json` | Список сохранённых файлов постов (пути вида `./posts/post-<id>-<автор>.txt`). |
 | `posts/` | Каталог с сохранёнными постами (создаётся автоматически; файлы `post-*.txt` игнорируются git). |
 | `response` | Дамп тела ответа логина SimsMix (перезаписывается при каждом запуске; закоммичен как отладочный артефакт). |
@@ -156,6 +157,10 @@ cabal run MidnightMover
 | `div.dice_outer` + `span.dice_number` | `PostDice` | `текст: значение` |
 | `div`/`p` со `style="text-align: center"` | `PostCentered` | `[align=center]…[/align]` |
 | `span` со `style="color: …"` | `PostColor` | `[color=…]…[/color]` |
+| `span` со `style="font-size: Npx"` | `PostSize` | `[size=N]` (бункер трактует `[size=N]` как N px) |
+| `span` со `style="font-family: X"` | `PostFont` | `[font=X]` |
+| `table` / `tr` / `td` (XF2, класс `brtb_item_table`) | `PostTable` | `[table][tr][td]…[/td][/tr][/table]` |
+| `img.smilie` | `PostImageGlobal` | `[img]абсолютный URL смайла[/img]` |
 | `b`, `i`, `u`, `s` | `PostFormated` | `[b]…[/b]` и т.п. |
 | `a[href]` | `PostLink` | `[url=href]текст[/url]` |
 | `iframe` | `PostYouTube` | `[video]src[/video]` |
@@ -166,11 +171,22 @@ cabal run MidnightMover
 Особенности текущей разметки, учтённые в коде:
 * Картинки обёрнуты в `div.bbImageWrapper`; реальный URL берётся из
   `img[data-url]` (у proxy-ссылок `src="/forum/proxy.php?image=…"` относительный).
+* Смайлы (`img.smilie`) превращаются в `[img]` с абсолютным URL — у бункера
+  свой набор смайлов, и текстовые коды вроде `:sims_sims4:` там не рендерятся.
+* Таблицы (`<table class="brtb_item_table">` — в посте 282681 «пантеон
+  демиургов») конвертируются в `[table][tr][td]…[/td][/tr][/table]`; целевой
+  форум этот тег понимает (проверено пробным постом).
 * Внутри цитат контент лежит в `div.bbCodeBlock-expandContent`
   (скрипт-патч lightbox и ссылка «Нажмите для раскрытия…» отбрасываются).
 * Внутри постов встречаются `<script>` (JSON фраз / патчи) — отбрасываются.
 * Пустые (whitespace-only) текстовые узлы не порождают строк; итоговый файл
   обрезается по краям.
+
+Проверка рендеринга на бункере (пробный пост): `[table]`, `[tr]`, `[td]`,
+`[s]`, `[font=X]`, `[hr]`, `[video]`, `[color=…]`, `[size=N]` (N — px)
+поддерживаются; `[size=18px]` и `[list]` — НЕ поддерживаются (выводятся как
+текст), поэтому `font-size: Npx` маппится в `[size=N]`, а списки остаются
+плоскими текстом.
 
 ### Фильтр «это пост истории или комментарий» (`isValidPost`)
 
@@ -188,18 +204,9 @@ cabal run MidnightMover
 Старый форум показывал **10 постов на страницу**, новый (XF2) — **20**.
 Содержимое темы то же самое (≈5463 поста, последняя страница 274).
 Старые номера страниц, зашитые в код, переведены в новые делением пополам:
-
-| старый номер (10/стр) | новый номер (20/стр) |
-|---|---|
-| 1 | 1 |
-| 141 | 71 |
-| 502 | 251 |
-| 503 | 252 |
-| 505 | 253 |
-| 507 | 254 |
-| 518 | 259 |
-| 522 | 261 |
-| 532 | 266 |
+141→71, 502→251, 503→252, 505→253, 507→254, 518→259, 522→261, 532→266.
+Сейчас (задача «скан первых 40 страниц») список в `Ctx.hs` выставлен как
+`[2 .. 40]` — т.е. страницы 1..40 темы.
 
 Список живёт в `Ctx.hs` (`getMessages` и `move`), рядом комментарий.
 Тема `threads !! 0` всегда обрабатывается первой (страница 1). Номер последней
@@ -222,19 +229,65 @@ cabal run MidnightMover
 
 `Main` (при `output = OutputBunker login password`) читает `desc.json`, читает
 все файлы и вызывает `Bunker.copyToBunker login password msgs`.
+**Учётные данные бункера** (логин `tx`) лежат в `secret/mm.json`
+(формат: строка JSON для поля `output` + строка-подсказка
+`selenium-server --port 4444`).
 
 Антибот-схема PunBB (`gamestories.clanboard.ru`):
 1. `loginPunBB` — открыть `login.php`, заполнить `fld1`/`fld2`, нажать `login`.
-2. Открыть страницу ответа `post.php?tid=22` (id темы захардкожен).
+   (форма уходит на `login.php?action=in`; браузер делает это сам по action формы)
+2. Открыть страницу ответа `post.php?tid=22` (id темы захардкожен; целевая тема —
+   `viewtopic.php?id=22`, «Ньюкрест (архив)», там уже есть пост-анонс от 29715000).
 3. `Antibot.loadOnlyProcessFormScript` — найти в `<head>` inline-скрипт с
    `process_form` и выполнить его (JS в браузере Firefox при этом отключён —
    `javascript.enabled = False` в капабилити).
 4. `triggerProcessForm` — вызвать `process_form(form)` для заполнения скрытых
    полей в `div#formkey` и `div#formetc`.
 5. `postMessage` — вписать текст в `textarea[name=req_message]`, ещё раз
-   вызвать `process_form`, нажать `submit`.
+   вызвать `process_form`, нажать `submit`. Первое сообщение уходит через
+   полный редактор `post.php?tid=22`, последующие — через быстрый ответ
+   на странице темы (там тот же `form id="post"`, `req_message`, `formkey`/`formetc`
+   и `process_form` в `<head>`; `openPage` внутри `postMessage` закомментирован
+   намеренно).
 
-Для работы нужен запущенный WebDriver на `localhost:4444` (Firefox).
+Для работы нужен WebDriver на `localhost:4444`. Настройки читаются из окружения
+(см. `Bunker.punbbConfig`):
+* `MM_WD_BASE_PATH` — базовый путь WebDriver. По умолчанию `/wd/hub`
+  (selenium-server). Для standalone geckodriver задать пустым: `MM_WD_BASE_PATH=""`.
+* `MM_HEADLESS=1` — добавить `-headless` в `moz:firefoxOptions` (для окружений
+  без дисплея).
+
+### Проверенная локальная связка (Debian-песочница)
+
+Библиотека `webdriver-0.12.0.1` говорит по **legacy JSON Wire протоколу**
+(`POST /session` с `desiredCapabilities`), а современный geckodriver (≥0.30)
+принимает только W3C (`capabilities`). Поэтому связка
+**webdriver → selenium-server** (переводчик) работает, а напрямую к
+geckodriver — нет. Проверено:
+
+* `selenium-server-standalone-3.141.59.jar` (Java 17, Temurin JRE) + `geckodriver`
+  на PATH + `-Dwebdriver.firefox.bin=…` + Firefox (headless) → legacy `/wd/hub/session`
+  отвечает, всё работает. Selenium 4.x legacy НЕ поддерживает
+  (`HTTP method not allowed` на `/wd/hub/session`).
+* Запуск: `java -Dwebdriver.gecko.driver=…/geckodriver
+  -Dwebdriver.firefox.bin=…/firefox/firefox -jar selenium-server-standalone-3.jar
+  -port 4444` (geckodriver и firefox — в `tools/`, каталог в `.gitignore`).
+
+### Грабли: `executeJS` и aeson
+
+`executeJS … :: WD ()` падает с `BadJSON "parsing () failed, expected Array,
+but encountered Null"`, когда JS возвращает `null` (в этой версии aeson
+`()` разбирается только из массива). Поэтому вызов `process_form` обёрнут в
+`ignoreReturn $ executeJS …` (см. `Bunker.triggerProcessForm`) — как и советует
+документация библиотеки.
+
+### Проверка после заливки
+
+После прогона стоит сверить, что все файлы из `desc.json` реально уехали на
+форум: сравнить текст постов темы с локальными файлами (с учётом того, что
+форум рендерит BBCode в HTML). В тестовом прогоне 68 постов два не ушли
+(сервер их отклонил), их дозалили вторым прогоном с временным `desc.json`
+только с этими двумя файлами.
 
 ---
 
@@ -250,8 +303,13 @@ cabal run MidnightMover
 * В `Ctx.hs` печатается cookie jar при каждой загрузке страницы
   (`liftIO $ print (cookieJar req)`) — шумно, но безвредно.
 * Страницы 502+ из старого списка сейчас редиректят на последнюю страницу (274) —
-  поэтому список переведён на новые номера (см. таблицу выше).
+  поэтому список переведён на новые номера, а сейчас выставлен на `[2 .. 40]`
+  (скан первых 40 страниц).
 * `stack.yaml`/`stack.yaml.lock` в репозитории — от локальной сборки через
   Stack на NixOS; основной путь сборки — cabal/flake.
 * Для сборки в песочнице с read-only `~/.cabal` используется
   `CABAL_DIR=.cabal-local` + `--offline` (симлинки на индекс и store).
+* Скачанные браузеры/драйверы (Firefox, geckodriver, JRE, selenium jar) лежат в
+  `tools/` (в `.gitignore`), чтобы можно было перезапустить заливку в песочнице.
+* `secret/mm.json` — учётные данные бункера (поле `output` для `user.txt`);
+  каталог `secret/` в `.gitignore`.
