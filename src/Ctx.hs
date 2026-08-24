@@ -20,7 +20,7 @@ import qualified Data.ByteString.Lazy as BL
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.Encoding as T
-import Data.Maybe (catMaybes)
+import Data.Maybe (catMaybes, fromMaybe)
 import Data.Time
 
 import GHC.Generics (Generic)
@@ -58,6 +58,7 @@ data User = User
   , _userThreads  :: [String]
   , _userFilter   :: [String]
   , _userOutput   :: Output
+  , _userPages    :: Maybe (Int, Int) -- ^ (from, to) — интервал страниц темы, напр. [1, 269]
   } deriving (Show)
 makeLenses ''User
 
@@ -69,7 +70,12 @@ instance FromJSON User where
     threads    <- o .: "threads"
     output     <- o .: "output"
     users      <- o .: "userFilter"
-    return $ User login password threads users output
+    pages      <- o .:? "pages"
+    mPages <- case pages of
+      Just [a, b] -> return (Just (a, b))
+      Just _      -> fail "pages must be a two-element array [from, to]"
+      Nothing     -> return Nothing
+    return $ User login password threads users output mPages
 
 -- Читает User из JSON-файла basePath/user.txt
 readUser :: String -> IO (Maybe User)
@@ -310,6 +316,14 @@ move user =
     let
       threads = view userThreads user
       thread0 = threads !! 0
+      (pFrom, pTo) = fromMaybe (1, 40) (view userPages user)
+      pager y x = y ++ "page-" ++ (show x)
+      -- страницы темы из конфига user.txt ("pages": [from, to]); страница 1 —
+      -- это сам URL темы
+      pageUrl y p
+        | p <= 1 = y
+        | otherwise = pager y p
+      pages = [pageUrl thread0 p | p <- [pFrom .. pTo]]
     login user
     cursor <- getPageCursor thread0
     let
@@ -317,11 +331,8 @@ move user =
     case maybePageNumber of
      Just n ->
        do
-        let
-          pager y x = y ++ "page-" ++ (show x)
-          -- scan the first 40 pages of the thread (page 1 = thread0)
-          pages = thread0 : map (pager thread0) ([2 .. 40] :: [Int])
-        liftIO . putStrLn $ "Total: " ++ (show n)
+        liftIO . putStrLn $ "Scanning pages " ++ show pFrom ++ ".." ++ show pTo
+                      ++ " (thread has " ++ show n ++ " pages)"
         mapM_ (processPage user) pages
      Nothing -> liftIO . putStrLn $ "Не нашел счетчик страниц"
 
@@ -331,6 +342,14 @@ getMessages user =
     let
       threads = view userThreads user
       thread0 = threads !! 0
+      (pFrom, pTo) = fromMaybe (1, 40) (view userPages user)
+      pager y x = y ++ "page-" ++ (show x)
+      -- страницы темы из конфига user.txt ("pages": [from, to]); страница 1 —
+      -- это сам URL темы
+      pageUrl y p
+        | p <= 1 = y
+        | otherwise = pager y p
+      pages = [pageUrl thread0 p | p <- [pFrom .. pTo]]
     login user
     cursor <- getPageCursor thread0
     let
@@ -338,11 +357,8 @@ getMessages user =
     case lastPage of
      Just n ->
        do
-        let
-          pager y x = y ++ "page-" ++ (show x)
-          -- scan the first 40 pages of the thread (page 1 = thread0)
-          pages = thread0 : map (pager thread0) ([2 .. 40] :: [Int])
-        liftIO . putStrLn $ "Total: " ++ (show n)
+        liftIO . putStrLn $ "Scanning pages " ++ show pFrom ++ ".." ++ show pTo
+                      ++ " (thread has " ++ show n ++ " pages)"
         msgs <- mapM (getPageMessages user) pages
         return (nub $ join msgs)
      Nothing ->
