@@ -1,5 +1,7 @@
 # -*- mode: gitignore; -*-
 
+secret/
+
 result
 user.txt
 post-*.txt
