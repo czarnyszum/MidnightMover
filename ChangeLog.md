@@ -51,3 +51,9 @@
   `<iframe>`; `hasMediaEmbed` parses the JSON array and emits `[video]`.
   Fixes 4 posts whose videos were missing (284917, 290503, 294003, 294762);
   verified post 284917 renders a real YouTube iframe on the bunker.
+* New output mode `OutputFull` (login, password) in `user.txt`: combines
+  OutputFile and OutputBunker in one run (scrape -> save -> post).
+* New flag `"allPosts": true` in `user.txt`: disables the isValidPost check
+  while keeping the userFilter author filter active.
+* Configurable page interval `"pages": [from, to]` in `user.txt`
+  (default [1, 40]); getMessages/move build the page list from it.

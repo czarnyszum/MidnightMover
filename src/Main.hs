@@ -86,6 +86,22 @@ main = do
                       Nothing -> return ()    
               _ <- runAppM job ctx
               return ()
+          OutputFull login password ->
+            do
+              print (login, password)
+              let
+                job =
+                  do
+                    -- 1) сканируем тему и сохраняем посты локально (как OutputFile)
+                    msgs <- getMessages u
+                    let
+                      desc = Desc msgs
+                    liftIO $ writeDesc "." desc
+                    -- 2) читаем сохранённые файлы и постим их на бункер (как OutputBunker)
+                    contents <- mapM (liftIO . T.readFile) msgs
+                    copyToBunker login password contents
+              _ <- runAppM job ctx
+              return ()
         putStrLn "End"  
         
         

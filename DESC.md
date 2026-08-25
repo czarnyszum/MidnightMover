@@ -76,9 +76,15 @@ cabal run MidnightMover
 * `userFilter` — авторы, посты которых переносятся (остальные пропускаются).
 * `pages` (необязательно) — интервал страниц темы для сканирования, напр.
   `"pages": [1, 269]` (страница 1 — это сам URL темы). По умолчанию `[1, 40]`.
+* `allPosts` (необязательно) — `true` отключает проверку `isValidPost`
+  («пост истории или комментарий»): сохраняются/постятся ВСЕ посты авторов из
+  `userFilter`. По умолчанию `false`.
 * `output`:
   * `{"tag": "OutputFile", "contents": null}` — режим 1 (сохранить в `posts/`).
   * `{"tag": "OutputBunker", "contents": [login, password]}` — режим 2 (постить в бункер).
+  * `{"tag": "OutputFull", "contents": [login, password]}` — режим 3: OutputFile +
+    OutputBunker за один прогон (сканирует тему, сохраняет посты, пишет
+    `desc.json` и постит всё на бункер).
 
 Внимание: логин/пароль в `user.txt` — **секрет**, файл в `.gitignore`.
 

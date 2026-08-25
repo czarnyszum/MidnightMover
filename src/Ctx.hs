@@ -49,7 +49,11 @@ import Post
 import TlsManager 
 
 
-data Output = OutputFile | OutputBunker String String deriving (Eq, Ord, Show, Generic)
+data Output
+  = OutputFile                     -- сохранить посты локально (posts/, desc.json)
+  | OutputBunker String String     -- постить сохранённые посты на бункер (login, password)
+  | OutputFull String String       -- OutputFile + OutputBunker за один прогон (login, password)
+  deriving (Eq, Ord, Show, Generic)
 instance FromJSON Output
 
 data User = User
@@ -59,6 +63,7 @@ data User = User
   , _userFilter   :: [String]
   , _userOutput   :: Output
   , _userPages    :: Maybe (Int, Int) -- ^ (from, to) — интервал страниц темы, напр. [1, 269]
+  , _userAllPosts :: Bool             -- ^ true: не применять isValidPost (брать все посты авторов из userFilter)
   } deriving (Show)
 makeLenses ''User
 
@@ -71,11 +76,12 @@ instance FromJSON User where
     output     <- o .: "output"
     users      <- o .: "userFilter"
     pages      <- o .:? "pages"
+    allPosts   <- o .:? "allPosts"
     mPages <- case pages of
       Just [a, b] -> return (Just (a, b))
       Just _      -> fail "pages must be a two-element array [from, to]"
       Nothing     -> return Nothing
-    return $ User login password threads users output mPages
+    return $ User login password threads users output mPages (fromMaybe False allPosts)
 
 -- Читает User из JSON-файла basePath/user.txt
 readUser :: String -> IO (Maybe User)
@@ -246,14 +252,15 @@ processMessage user (p, u, c) =
     let
       postname = T.unpack p
       username = T.unpack u
-      filename = postname ++ "-" ++  username      
+      filename = postname ++ "-" ++  username
+      takeAll  = view userAllPosts user
     if username `elem` (view userFilter user)
     then
       do
         let
           post = extractPost c
           (bs, bi, bd) = isValidPost post
-        if bd || (bs && bi)
+        if takeAll || bd || (bs && bi)
         then
           do 
             savePost filename post
@@ -278,14 +285,15 @@ getPageMessage user (p, u, c) =
     let
       postname = T.unpack p
       username = T.unpack u
-      filename = postname ++ "-" ++  username      
+      filename = postname ++ "-" ++  username
+      takeAll  = view userAllPosts user
     if username `elem` (view userFilter user)
     then
       do
         let
           post = extractPost c
           (bs, bi, bd) = isValidPost post
-        if bd || (bs && bi)
+        if takeAll || bd || (bs && bi)
         then 
           do
             liftIO $ putStrLn $ filename ++ " выводим"
